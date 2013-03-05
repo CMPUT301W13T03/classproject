@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/button_add_recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_search_recipes"
+        android:layout_alignRight="@+id/button_view_ingredients"
+        android:layout_centerVertical="true"
+        android:text="Add Recipe" />
+
+    <Button
+        android:id="@+id/button_search_recipes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_add_recipe"
+        android:layout_alignLeft="@+id/button_view_ingredients"
+        android:layout_alignRight="@+id/button_view_ingredients"
+        android:text="Search Recipes" />
+
+    <Button
+        android:id="@+id/button_view_ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_add_recipe"
+        android:layout_centerHorizontal="true"
+        android:text="View Ingredients" />
+
+</RelativeLayout>

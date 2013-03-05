@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.c301.t03_recipes"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="ca.c301.t03_recipes.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ca.c301.t03_recipes.AddRecipeActivity"
+            android:label="@string/title_activity_add_recipe" >
+        </activity>
+        <activity
+            android:name="ca.c301.t03_recipes.SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name="ca.c301.t03_recipes.ViewRecipeActivity"
+            android:label="@string/title_activity_view_recipe" >
+        </activity>
+        <activity
+            android:name="ca.c301.t03_recipes.IngredientListActivity"
+            android:label="@string/title_activity_ingredient_list" >
+        </activity>
+        <activity
+            android:name="ca.c301.t03_recipes.EditRecipeActivity"
+            android:label="@string/title_activity_edit_recipe" >
+        </activity>
+        <activity
+            android:name="ca.c301.t03_recipes.PhotoActivity"
+            android:label="@string/title_activity_photo" >
+        </activity>
+    </application>
+
+</manifest>
