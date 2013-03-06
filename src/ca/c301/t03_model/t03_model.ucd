@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="t03_model" size="1817,1004" id="ca.c301.t03_model" metadata="uml2-1.0" initialized="true" scrolledY="-20" tag="1000" key="32303037303533312D31303030205430332D726563697065732F5A616368">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.1" name="DataManager" location="795,480" size="127,29" id="ca.c301.t03_model/DataManager" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_model/Recipe@recipes+ca.c301.t03_model/DataManager@dataManager" source="//@children.0" target="//@children.4" targetEnd="//@children.0/@sourceConnections.0/@children.1" label="//@children.0/@sourceConnections.0/@children.2" sourceEnd="//@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="dataManager" location="63,29" id="ca.c301.t03_model/Recipe@recipes+ca.c301.t03_model/DataManager@dataManager|ca.c301.t03_model/DataManager#dataManager" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipes" location="92,0" id="ca.c301.t03_model/Recipe@recipes+ca.c301.t03_model/DataManager@dataManager|ca.c301.t03_model/Recipe#recipes" multiplicityLabel="//@children.0/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.0/@children.1/@children.0" aggregationKind="Aggregration" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - recipes" location="865,609" size="46,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="847,609" size="4,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_model/VirtualPantry@virtualPantry+ca.c301.t03_model/DataManager@dataManager" source="//@children.0" target="//@children.6" targetEnd="//@children.0/@sourceConnections.1/@children.1" label="//@children.0/@sourceConnections.1/@children.2" sourceEnd="//@children.0/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="dataManager" location="117,29" id="ca.c301.t03_model/VirtualPantry@virtualPantry+ca.c301.t03_model/DataManager@dataManager|ca.c301.t03_model/DataManager#dataManager" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="virtualPantry" location="0,10" id="ca.c301.t03_model/VirtualPantry@virtualPantry+ca.c301.t03_model/DataManager@dataManager|ca.c301.t03_model/VirtualPantry#virtualPantry" multiplicityLabel="//@children.0/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.1/@children.1/@children.0" aggregationKind="Aggregration" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - virtualPantry" location="979,557" size="70,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1031,529" size="18,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="HTTPManager" location="480,270" size="132,29" id="ca.c301.t03_model/HTTPManager" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_model/RecipeManager@recipeManager+ca.c301.t03_model/HTTPManager@hTTPManager" source="//@children.1" target="//@children.5" targetEnd="//@children.1/@sourceConnections.0/@children.1" label="//@children.1/@sourceConnections.0/@children.2" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="hTTPManager" location="132,14" id="ca.c301.t03_model/RecipeManager@recipeManager+ca.c301.t03_model/HTTPManager@hTTPManager|ca.c301.t03_model/HTTPManager#hTTPManager" attachSource="true" multiplicityLabel="//@children.1/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.1/@sourceConnections.0/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - hTTPManager" location="619,263" size="76,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="619,291" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipeManager" location="0,14" id="ca.c301.t03_model/RecipeManager@recipeManager+ca.c301.t03_model/HTTPManager@hTTPManager|ca.c301.t03_model/RecipeManager#recipeManager"/>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0 //@children.4/@sourceConnections.0" name="Ingredient" location="1065,630" size="107,57" id="ca.c301.t03_model/Ingredient" runTimeClassModel="name">
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="ca.c301.t03_model/Ingredient#name"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.0" name="EmailHandler" location="1051,270" size="128,29" id="ca.c301.t03_model/EmailHandler" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.0" name="Recipe" location="766,630" size="173,265" id="ca.c301.t03_model/Recipe" runTimeClassModel="id,amounts,instructions,deleteIngredient(I),addIngredient(Lca.c301.t03_model.Ingredient;),setAmount(ILjava.lang.String;),name,getIngredient(I),Recipe(),setIngredient(ILca.c301.t03_model.Ingredient;),addAmount(Ljava.lang.String;),getAmount(I)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="150,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="amounts" id="ca.c301.t03_model/Recipe#amounts"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="id" id="ca.c301.t03_model/Recipe#id"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="instructions" id="ca.c301.t03_model/Recipe#instructions"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="ca.c301.t03_model/Recipe#name"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="106,144">
+      <children xsi:type="editmodel:MethodEditModel" name="Recipe" id="ca.c301.t03_model/Recipe#Recipe()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addAmount" id="ca.c301.t03_model/Recipe#addAmount(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addIngredient" id="ca.c301.t03_model/Recipe#addIngredient(Lca.c301.t03_model.Ingredient;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="deleteIngredient" id="ca.c301.t03_model/Recipe#deleteIngredient(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAmount" id="ca.c301.t03_model/Recipe#getAmount(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getIngredient" id="ca.c301.t03_model/Recipe#getIngredient(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setAmount" id="ca.c301.t03_model/Recipe#setAmount(ILjava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setIngredient" id="ca.c301.t03_model/Recipe#setIngredient(ILca.c301.t03_model.Ingredient;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_model/Ingredient@ingredients+ca.c301.t03_model/Recipe@recipe" source="//@children.4" target="//@children.2" targetEnd="//@children.4/@sourceConnections.0/@children.1" label="//@children.4/@sourceConnections.0/@children.2" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipe" location="173,28" id="ca.c301.t03_model/Ingredient@ingredients+ca.c301.t03_model/Recipe@recipe|ca.c301.t03_model/Recipe#recipe" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ingredients" location="0,28" id="ca.c301.t03_model/Ingredient@ingredients+ca.c301.t03_model/Recipe@recipe|ca.c301.t03_model/Ingredient#ingredients" multiplicityLabel="//@children.4/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.4/@sourceConnections.0/@children.1/@children.0" aggregationKind="Aggregration" navigable="true" orderingKind="1">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ingredients" location="995,637" size="63,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="1054,665" size="4,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_model/RecipePhoto@recipePhoto+ca.c301.t03_model/Recipe@recipe" source="//@children.4" target="//@children.8" targetEnd="//@children.4/@sourceConnections.1/@children.1" label="//@children.4/@sourceConnections.1/@children.2" sourceEnd="//@children.4/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipe" location="0,28" id="ca.c301.t03_model/RecipePhoto@recipePhoto+ca.c301.t03_model/Recipe@recipe|ca.c301.t03_model/Recipe#recipe" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipePhoto" location="95,14" id="ca.c301.t03_model/RecipePhoto@recipePhoto+ca.c301.t03_model/Recipe@recipe|ca.c301.t03_model/RecipePhoto#recipePhoto" multiplicityLabel="//@children.4/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.4/@sourceConnections.1/@children.1/@children.0" aggregationKind="Aggregration" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - recipePhoto" location="685,637" size="67,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="685,665" size="4,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0 //@children.7/@sourceConnections.0" name="RecipeManager" location="788,270" size="187,139" id="ca.c301.t03_model/RecipeManager" runTimeClassModel="getLocallySavedRecipeById(I),publishRecipeToWeb(Lca.c301.t03_model.Recipe;),getWebRecipes(),saveRecipe(Lca.c301.t03_model.Recipe;),emailRecipe(Ljava.lang.String;Lca.c301.t03_model.Recipe;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="164,90">
+      <children xsi:type="editmodel:MethodEditModel" name="emailRecipe" id="ca.c301.t03_model/RecipeManager#emailRecipe(Ljava.lang.String;Lca.c301.t03_model.Recipe;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLocallySavedRecipeById" id="ca.c301.t03_model/RecipeManager#getLocallySavedRecipeById(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getWebRecipes" id="ca.c301.t03_model/RecipeManager#getWebRecipes()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="publishRecipeToWeb" id="ca.c301.t03_model/RecipeManager#publishRecipeToWeb(Lca.c301.t03_model.Recipe;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="saveRecipe" id="ca.c301.t03_model/RecipeManager#saveRecipe(Lca.c301.t03_model.Recipe;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_model/EmailHandler@emailHandler+ca.c301.t03_model/RecipeManager@recipeManager" source="//@children.5" target="//@children.3" targetEnd="//@children.5/@sourceConnections.0/@children.1" label="//@children.5/@sourceConnections.0/@children.2" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipeManager" location="187,14" id="ca.c301.t03_model/EmailHandler@emailHandler+ca.c301.t03_model/RecipeManager@recipeManager|ca.c301.t03_model/RecipeManager#recipeManager" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="emailHandler" location="0,14" id="ca.c301.t03_model/EmailHandler@emailHandler+ca.c301.t03_model/RecipeManager@recipeManager|ca.c301.t03_model/EmailHandler#emailHandler" multiplicityLabel="//@children.5/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.5/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - emailHandler" location="973,304" size="71,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1026,276" size="18,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_model/DataManager@dataManager+ca.c301.t03_model/RecipeManager@recipeManager" source="//@children.5" target="//@children.0" targetEnd="//@children.5/@sourceConnections.1/@children.1" label="//@children.5/@sourceConnections.1/@children.2" sourceEnd="//@children.5/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipeManager" location="70,139" id="ca.c301.t03_model/DataManager@dataManager+ca.c301.t03_model/RecipeManager@recipeManager|ca.c301.t03_model/RecipeManager#recipeManager" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="dataManager" location="63,0" id="ca.c301.t03_model/DataManager@dataManager+ca.c301.t03_model/RecipeManager@recipeManager|ca.c301.t03_model/DataManager#dataManager" multiplicityLabel="//@children.5/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.5/@sourceConnections.1/@children.1/@children.0" aggregationKind="Aggregration" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - dataManager" location="865,459" size="73,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="833,459" size="18,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.1" name="VirtualPantry" location="1056,540" size="125,29" id="ca.c301.t03_model/VirtualPantry" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_model/Ingredient@ingredients+ca.c301.t03_model/VirtualPantry@virtualPantry" source="//@children.6" target="//@children.2" targetEnd="//@children.6/@sourceConnections.0/@children.1" label="//@children.6/@sourceConnections.0/@children.2" sourceEnd="//@children.6/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="virtualPantry" location="62,29" id="ca.c301.t03_model/Ingredient@ingredients+ca.c301.t03_model/VirtualPantry@virtualPantry|ca.c301.t03_model/VirtualPantry#virtualPantry" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ingredients" location="53,0" id="ca.c301.t03_model/Ingredient@ingredients+ca.c301.t03_model/VirtualPantry@virtualPantry|ca.c301.t03_model/Ingredient#ingredients" multiplicityLabel="//@children.6/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.6/@sourceConnections.0/@children.1/@children.0" aggregationKind="Aggregration" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ingredients" location="1125,609" size="63,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="1107,609" size="4,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.10/@sourceConnections.0 //@children.9/@sourceConnections.0 //@children.11/@sourceConnections.0" name="RecipeApplication" location="780,145" size="158,43" id="ca.c301.t03_recipes/RecipeApplication" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_model/RecipeManager@recipeManager+ca.c301.t03_recipes/RecipeApplication@recipeApplication" source="//@children.7" target="//@children.5" targetEnd="//@children.7/@sourceConnections.0/@children.1" label="//@children.7/@sourceConnections.0/@children.2" sourceEnd="//@children.7/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipeApplication" location="82,43" id="ca.c301.t03_model/RecipeManager@recipeManager+ca.c301.t03_recipes/RecipeApplication@recipeApplication|ca.c301.t03_recipes/RecipeApplication#recipeApplication" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipeManager" location="74,0" id="ca.c301.t03_model/RecipeManager@recipeManager+ca.c301.t03_recipes/RecipeApplication@recipeApplication|ca.c301.t03_model/RecipeManager#recipeManager" multiplicityLabel="//@children.7/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.7/@sourceConnections.0/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - recipeManager" location="869,249" size="82,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="837,249" size="18,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.1" name="RecipePhoto" location="555,644" size="123,29" id="ca.c301.t03_model/RecipePhoto" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="MainActivity" location="779,-15" size="160,81" id="ca.c301.t03_recipes/MainActivity" runTimeClassModel="onCreateOptionsMenu(Landroid.view.Menu;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,18">
+      <children xsi:type="editmodel:MethodEditModel" name="onCreateOptionsMenu" id="ca.c301.t03_recipes/MainActivity#onCreateOptionsMenu(Landroid.view.Menu;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="ca.c301.t03_recipes/RecipeApplication@recipeApplication+ca.c301.t03_recipes/MainActivity@mainActivity" source="//@children.9" target="//@children.7" targetEnd="//@children.9/@sourceConnections.0/@children.1" label="//@children.9/@sourceConnections.0/@children.2" sourceEnd="//@children.9/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="mainActivity" location="80,81" id="ca.c301.t03_recipes/RecipeApplication@recipeApplication+ca.c301.t03_recipes/MainActivity@mainActivity|ca.c301.t03_recipes/MainActivity#mainActivity" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipeApplication" location="79,0" id="ca.c301.t03_recipes/RecipeApplication@recipeApplication+ca.c301.t03_recipes/MainActivity@mainActivity|ca.c301.t03_recipes/RecipeApplication#recipeApplication" multiplicityLabel="//@children.9/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.9/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - recipeApplication" location="866,124" size="93,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="834,124" size="18,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="AddRecipeActivity" location="537,-15" size="160,81" id="ca.c301.t03_recipes/AddRecipeActivity" runTimeClassModel="onCreateOptionsMenu(Landroid.view.Menu;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,18">
+      <children xsi:type="editmodel:MethodEditModel" name="onCreateOptionsMenu" id="ca.c301.t03_recipes/AddRecipeActivity#onCreateOptionsMenu(Landroid.view.Menu;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="ca.c301.t03_recipes/RecipeApplication@recipeApplication+ca.c301.t03_recipes/AddRecipeActivity@addRecipeActivity" source="//@children.10" target="//@children.7" targetEnd="//@children.10/@sourceConnections.0/@children.1" label="//@children.10/@sourceConnections.0/@children.2" sourceEnd="//@children.10/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="addRecipeActivity" location="82,81" id="ca.c301.t03_recipes/RecipeApplication@recipeApplication+ca.c301.t03_recipes/AddRecipeActivity@addRecipeActivity|ca.c301.t03_recipes/AddRecipeActivity#addRecipeActivity" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipeApplication" location="10,0" id="ca.c301.t03_recipes/RecipeApplication@recipeApplication+ca.c301.t03_recipes/AddRecipeActivity@addRecipeActivity|ca.c301.t03_recipes/RecipeApplication#recipeApplication" multiplicityLabel="//@children.10/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.10/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - recipeApplication" location="797,124" size="93,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="765,124" size="18,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="IngredientListActivity" location="1031,-15" size="175,81" id="ca.c301.t03_recipes/IngredientListActivity" runTimeClassModel="onCreateOptionsMenu(Landroid.view.Menu;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,18">
+      <children xsi:type="editmodel:MethodEditModel" name="onCreateOptionsMenu" id="ca.c301.t03_recipes/IngredientListActivity#onCreateOptionsMenu(Landroid.view.Menu;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="ca.c301.t03_recipes/RecipeApplication@recipeApplication+ca.c301.t03_recipes/IngredientListActivity@ingredientListActivity" source="//@children.11" target="//@children.7" targetEnd="//@children.11/@sourceConnections.0/@children.1" label="//@children.11/@sourceConnections.0/@children.2" sourceEnd="//@children.11/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ingredientListActivity" location="85,81" id="ca.c301.t03_recipes/RecipeApplication@recipeApplication+ca.c301.t03_recipes/IngredientListActivity@ingredientListActivity|ca.c301.t03_recipes/IngredientListActivity#ingredientListActivity" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="recipeApplication" location="148,0" id="ca.c301.t03_recipes/RecipeApplication@recipeApplication+ca.c301.t03_recipes/IngredientListActivity@ingredientListActivity|ca.c301.t03_recipes/RecipeApplication#recipeApplication" multiplicityLabel="//@children.11/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.11/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - recipeApplication" location="828,124" size="93,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="935,124" size="18,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:NotepadEditModel" location="990,120" size="121,56" fontInfo="Arial-8-0" note="All activities access&#xD;&#xA; the model via &#xD;&#xA;RecipeApplication."/>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" showScope="All" properties="wireOptions=1;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

@@ -50,4 +50,28 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * @uml.property  name="recipeApplication"
+	 * @uml.associationEnd  inverse="mainActivity:ca.c301.t03_recipes.RecipeApplication"
+	 */
+	private RecipeApplication recipeApplication;
+
+	/**
+	 * Getter of the property <tt>recipeApplication</tt>
+	 * @return  Returns the recipeApplication.
+	 * @uml.property  name="recipeApplication"
+	 */
+	public RecipeApplication getRecipeApplication() {
+		return recipeApplication;
+	}
+
+	/**
+	 * Setter of the property <tt>recipeApplication</tt>
+	 * @param recipeApplication  The recipeApplication to set.
+	 * @uml.property  name="recipeApplication"
+	 */
+	public void setRecipeApplication(RecipeApplication recipeApplication) {
+		this.recipeApplication = recipeApplication;
+	}
+
 }
