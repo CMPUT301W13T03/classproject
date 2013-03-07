@@ -1,9 +1,14 @@
 package ca.c301.t03_model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class VirtualPantry {
+public class VirtualPantry implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2115920372295854756L;
 	/** 
 	 * @uml.property name="ingredients"
 	 * @uml.associationEnd multiplicity="(0 -1)" aggregation="shared" inverse="virtualPantry:ca.c301.t03_model.Ingredient"

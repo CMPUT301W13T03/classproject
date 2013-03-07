@@ -1,7 +1,13 @@
 package ca.c301.t03_model;
 
-public class Ingredient {
+import java.io.Serializable;
 
+public class Ingredient implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6601357183564369003L;
 	/**
 	 * @uml.property  name="name"
 	 */
