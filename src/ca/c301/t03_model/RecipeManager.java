@@ -26,6 +26,8 @@ public class RecipeManager {
 
 	/**
 		 */
+	//TODO: This method might get revised to getWebRecipesByName or something like that, since we don't
+	//want to pull the entire list every time ideally. Need to look closer at the webservice stuff
 	public Collection<Recipe> getWebRecipes() {
 		return null;
 	}
