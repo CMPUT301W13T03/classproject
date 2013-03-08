@@ -7,10 +7,10 @@ import android.content.Context;
 
 public class RecipeManager {
 
-	public RecipeManager(Context c)
-	{
+	public RecipeManager(Context c) {
 		dataManager = new DataManager(c);
 	}
+
 	/**
 	 * @uml.property name="hTTPManager"
 	 * @uml.associationEnd inverse="recipeManager:ca.c301.t03_model.HTTPManager"
@@ -48,7 +48,7 @@ public class RecipeManager {
 
 	/**
 				 */
-	public void saveRecipe(Recipe recipe,Context c) {
+	public void saveRecipe(Recipe recipe, Context c) {
 		dataManager.getRecipes().add(recipe);
 		dataManager.saveToFile(c);
 	}
@@ -68,7 +68,18 @@ public class RecipeManager {
 	/**
 		 */
 	public void deleteLocallySavedRecipeById(int id) {
-		
+
 	}
+
+	/**
+		 */
+	public ArrayList<Recipe> searchWebForRecipeByName(String name) {
+		return null;
+	}
+
+		
+		
+		public void takePhotoForRecipe(int recipeId){
+		}
 
 }

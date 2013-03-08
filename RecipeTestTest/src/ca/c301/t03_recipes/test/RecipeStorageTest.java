@@ -23,18 +23,48 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		// TODO Auto-generated constructor stub
 	}
 	
-
-	@Test
-	public void testAddRecipe() {
+	@Before
+	public void setUp() throws Exception{
 		//Delete any existing file.
 		getActivity().getFileStreamPath(DataManager.FILE_NAME).delete();
-		
+	}
+	@Test
+	public void testRetrieveRecipe() {
 		Recipe recipe = new Recipe(0, "Salad", "Put in some veggies brother.");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.saveRecipe(recipe, getActivity());
 		Recipe retrievedRecipe = manager.getLocallySavedRecipeById(0);
 		// Check same recipe is returned.
 		assertSame(retrievedRecipe, recipe);
+	}
+	@Test
+	public void testFileCreation()
+	{
+		RecipeManager manager = new RecipeManager(getActivity());
+		String filename = DataManager.FILE_NAME;
+		FileInputStream fin;
+
+		try {
+			fin = getActivity().openFileInput(filename);
+			getActivity().getFilesDir();
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			DataManager savedManager;
+			savedManager = (DataManager) ois.readObject();
+			assertNotNull(savedManager);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			fail("Recipe file not found.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("Error reading from file");
+		}
+	}
+	@Test
+	public void testSavedRecipe(){
+		Recipe recipe = new Recipe(0, "Salad", "Put in some veggies brother.");
+		RecipeManager manager = new RecipeManager(getActivity());
+		manager.saveRecipe(recipe, getActivity());
 
 		// Check file status
 		String filename = DataManager.FILE_NAME;
@@ -45,8 +75,6 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			getActivity().getFilesDir();
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			savedManager = (DataManager) ois.readObject();
-			assertNotNull(savedManager);
-			assertNotNull(savedManager.findRecipeByID(0));
 			assertEquals("Salad",savedManager.findRecipeByID(0).getName());
 			
 		} catch (FileNotFoundException e) {
@@ -56,5 +84,30 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			e.printStackTrace();
 			fail("Error reading from file");
 		}
+		
 	}
+	@Test
+	public void testDeleteRecipe(){
+		Recipe recipe = new Recipe(0, "Salad", "Put in some veggies brother.");
+		RecipeManager manager = new RecipeManager(getActivity());
+		manager.saveRecipe(recipe, getActivity());
+		
+		manager.deleteLocallySavedRecipeById(0);
+		assertNull(manager.getLocallySavedRecipeById(0));
+	}
+	@Test
+	public void testSaveAndRetrieveFromMany(){
+		Recipe recipe0 = new Recipe(0, "Salad", "Put in some veggies brother.");
+		Recipe recipe1 = new Recipe(1, "Cake", "Sugar and flour and baking.");
+		Recipe recipe2 = new Recipe(2, "Hot Dog", "Make a hot dog");
+
+		RecipeManager manager = new RecipeManager(getActivity());
+		manager.saveRecipe(recipe0, getActivity());
+		manager.saveRecipe(recipe1, getActivity());
+		manager.saveRecipe(recipe2, getActivity());
+		
+		assertSame(recipe2,manager.getLocallySavedRecipeById(2));	
+		
+	}
+	
 }
