@@ -1,9 +1,16 @@
 package ca.c301.t03_model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import android.content.Context;
 
 public class RecipeManager {
 
+	public RecipeManager(Context c)
+	{
+		dataManager = new DataManager(c);
+	}
 	/**
 	 * @uml.property name="hTTPManager"
 	 * @uml.associationEnd inverse="recipeManager:ca.c301.t03_model.HTTPManager"
@@ -15,7 +22,7 @@ public class RecipeManager {
 	 * @uml.associationEnd 
 	 *                     inverse="recipeManager:ca.c301.t03_model.EmailHandler"
 	 */
-	private EmailHandler photoManager;
+	private EmailHandler emailHandler;
 
 	/**
 	 * @uml.property name="dataManager"
@@ -26,8 +33,10 @@ public class RecipeManager {
 
 	/**
 		 */
-	//TODO: This method might get revised to getWebRecipesByName or something like that, since we don't
-	//want to pull the entire list every time ideally. Need to look closer at the webservice stuff
+	// TODO: This method might get revised to getWebRecipesByName or something
+	// like that, since we don't
+	// want to pull the entire list every time ideally. Need to look closer at
+	// the webservice stuff
 	public Collection<Recipe> getWebRecipes() {
 		return null;
 	}
@@ -39,7 +48,9 @@ public class RecipeManager {
 
 	/**
 				 */
-	public void saveRecipe(Recipe recipe) {
+	public void saveRecipe(Recipe recipe,Context c) {
+		dataManager.getRecipes().add(recipe);
+		dataManager.saveToFile(c);
 	}
 
 	/**
@@ -48,10 +59,16 @@ public class RecipeManager {
 	}
 
 	/**
-	 * @return 
-						 */
+	 * @return
+	 */
 	public Recipe getLocallySavedRecipeById(int id) {
-		return null;
+		return dataManager.findRecipeByID(id);
+	}
+
+	/**
+		 */
+	public void deleteLocallySavedRecipeById(int id) {
+		
 	}
 
 }

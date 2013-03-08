@@ -18,7 +18,7 @@ public class DataManager implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6085575872863551305L;
-	String FILE_NAME = "recipe_file";
+	public static String FILE_NAME = "recipe_file";
 	
 	/**
 	 * Constructor loads any existing DataManager from file.
@@ -39,6 +39,8 @@ public class DataManager implements Serializable{
 			catch(FileNotFoundException f)
 			{
 				//file not initialized is caught here.
+				this.recipes = new ArrayList<Recipe>();
+				saveToFile(c);
 			}
 			catch(Exception e)
 			{
@@ -53,14 +55,14 @@ public class DataManager implements Serializable{
 	 * @uml.property name="recipes"
 	 * @uml.associationEnd multiplicity="(0 -1)" aggregation="shared" inverse="dataManager:ca.c301.t03_model.Recipe"
 	 */
-	private Collection<Recipe> recipes;
+	private ArrayList<Recipe> recipes;
 
 	/**
 	 * Getter of the property <tt>recipes</tt>
 	 * @return  Returns the recipe.
 	 * @uml.property  name="recipes"
 	 */
-	public Collection<Recipe> getRecipes() {
+	public ArrayList<Recipe> getRecipes() {
 		return recipes;
 	}
 
@@ -69,7 +71,7 @@ public class DataManager implements Serializable{
 	 * @param recipes  The recipe to set.
 	 * @uml.property  name="recipes"
 	 */
-	public void setRecipes(Collection<Recipe> recipes) {
+	public void setRecipes(ArrayList<Recipe> recipes) {
 		this.recipes = recipes;
 	}
 
@@ -110,5 +112,14 @@ public class DataManager implements Serializable{
 			ioe.printStackTrace();
 		}
 	}
-
+	public Recipe findRecipeByID(int id)
+	{
+		for(int i = 0; i < recipes.size(); i++)
+		{
+			Recipe curRecipe = recipes.get(i);
+			if(curRecipe.getId() == id)
+				return curRecipe;
+		}
+		return null;
+	}
 }
