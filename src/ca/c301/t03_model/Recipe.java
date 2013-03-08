@@ -20,16 +20,17 @@ public class Recipe implements Serializable{
 	 * @uml.property  name="instructions"
 	 */
 	private String instructions;
-	/**
-	 * @uml.property  name="amounts"
-	 */
-	private ArrayList<String> amounts;
+
 	
 	public Recipe() {
 		this.name = "";
 		this.instructions = "";
 		this.ingredients = new ArrayList<Ingredient>();
-		this.amounts = new ArrayList<String>();
+	}
+	public Recipe(int id, String name, String instructions){
+		this.id = id;
+		this.name = name;
+		this.instructions = instructions;
 	}
 	
 	/**
@@ -48,20 +49,9 @@ public class Recipe implements Serializable{
 		return this.instructions;
 	}
 	
-	/**
-	 * @return
-	 * @uml.property  name="amounts"
-	 */
-	public ArrayList<String> getAmounts() {
-		return this.amounts;
-	}
-	
+
 	public Ingredient getIngredient(int i) {
 		return this.ingredients.get(i);
-	}
-	
-	public String getAmount(int i) {
-		return this.amounts.get(i);
 	}
 	
 	/**
@@ -84,21 +74,15 @@ public class Recipe implements Serializable{
 		this.ingredients.add(ingredient);
 	}
 	
-	public void addAmount(String amount) {
-		this.amounts.add(amount);
-	}
+
 	
 	public void setIngredient(int i, Ingredient ingredient) {
 		this.ingredients.set(i, ingredient);
 	}
 	
-	public void setAmount(int i, String amount) {
-		this.amounts.set(i, amount);
-	}
-	
+
 	public void deleteIngredient(int i) {
 		this.ingredients.remove(i);
-		this.amounts.remove(i);
 	}
 
 	/**

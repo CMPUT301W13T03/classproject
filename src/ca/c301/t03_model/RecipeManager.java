@@ -48,8 +48,10 @@ public class RecipeManager {
 	}
 
 	/**
+	 * @return 
 						 */
-	public void getLocallySavedRecipeById(int id) {
+	public Recipe getLocallySavedRecipeById(int id) {
+		return null;
 	}
 
 }
