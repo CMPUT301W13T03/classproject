@@ -1,18 +1,16 @@
 package ca.c301.t03_recipes.test;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 import ca.c301.t03_model.DataManager;
 import ca.c301.t03_model.Recipe;
+import ca.c301.t03_model.RecipeBook;
 import ca.c301.t03_model.RecipeManager;
 import ca.c301.t03_recipes.MainActivity;
 
@@ -29,11 +27,26 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		getActivity().getFileStreamPath(DataManager.FILE_NAME).delete();
 	}
 	@Test
-	public void testRetrieveRecipe() {
-		Recipe recipe = new Recipe(0, "Salad", "Put in some veggies brother.");
-		RecipeManager manager = new RecipeManager(getActivity());
+	public void testCreateRecipe(){
+		Recipe recipe = new Recipe("Name", "Instructions");
+		DataManager testDataManager = new DataManager(getActivity());
+		RecipeManager manager = new RecipeManager(testDataManager);
+		
 		manager.saveRecipe(recipe, getActivity());
+		Recipe savedRecipe = testDataManager.getRecipeBook().findRecipeByID(0);
+		
+		assertSame(savedRecipe,recipe);
+	}
+	@Test
+	public void testRetrieveRecipe() {
+		RecipeBook recipeBook = new RecipeBook();
+		Recipe recipe = new Recipe("Name", "Instructions");
+		DataManager dataManager = new DataManager(recipeBook, null, getActivity());
+		RecipeManager manager = new RecipeManager(dataManager);
+		
+		recipeBook.addRecipe(recipe);
 		Recipe retrievedRecipe = manager.getLocallySavedRecipeById(0);
+		
 		// Check same recipe is returned.
 		assertSame(retrievedRecipe, recipe);
 	}
@@ -62,7 +75,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	}
 	@Test
 	public void testSavedRecipe(){
-		Recipe recipe = new Recipe(0, "Salad", "Put in some veggies brother.");
+		Recipe recipe = new Recipe("Name", "Instructions");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.saveRecipe(recipe, getActivity());
 
@@ -75,7 +88,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			getActivity().getFilesDir();
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			savedManager = (DataManager) ois.readObject();
-			assertEquals("Salad",savedManager.findRecipeByID(0).getName());
+			assertEquals("Name",savedManager.getRecipeBook().findRecipeByID(0).getName());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -88,7 +101,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	}
 	@Test
 	public void testDeleteRecipe(){
-		Recipe recipe = new Recipe(0, "Salad", "Put in some veggies brother.");
+		Recipe recipe = new Recipe("Name", "Instructions");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.saveRecipe(recipe, getActivity());
 		
@@ -97,9 +110,9 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	}
 	@Test
 	public void testSaveAndRetrieveFromMany(){
-		Recipe recipe0 = new Recipe(0, "Salad", "Put in some veggies brother.");
-		Recipe recipe1 = new Recipe(1, "Cake", "Sugar and flour and baking.");
-		Recipe recipe2 = new Recipe(2, "Hot Dog", "Make a hot dog");
+		Recipe recipe0 = new Recipe("Name0", "Instructions0");
+		Recipe recipe1 = new Recipe("Name1", "Instructions1");
+		Recipe recipe2 = new Recipe("Name2", "Instructions2");
 
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.saveRecipe(recipe0, getActivity());

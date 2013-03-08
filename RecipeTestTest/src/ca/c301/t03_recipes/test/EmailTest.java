@@ -18,7 +18,7 @@ public class EmailTest extends IntentCatchingTemplate{
 	public void testSendEmail(){
 		caughtIntent = null;
 		RecipeManager manager = new RecipeManager(getActivity());
-		Recipe recipe = new Recipe(0,"Nachos","Cheese and nachos and baking");
+		Recipe recipe = new Recipe("Nachos","Cheese and nachos and baking");
 		manager.emailRecipe("null@null", recipe);
 		assertNotNull(caughtIntent);
 		assertTrue(caughtIntent.getAction() == android.content.Intent.ACTION_SEND);
@@ -31,7 +31,7 @@ public class EmailTest extends IntentCatchingTemplate{
 		String recipeInstruction = "Cheese and nachos and baking";
 		String emailAddress = "null@null";
 		
-		Recipe recipe = new Recipe(0,recipeName,recipeInstruction);
+		Recipe recipe = new Recipe(recipeName,recipeInstruction);
 		manager.emailRecipe(emailAddress, recipe);
 		
 		assertNotNull(caughtIntent);

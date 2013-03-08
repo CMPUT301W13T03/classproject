@@ -10,6 +10,10 @@ public class RecipeManager {
 	public RecipeManager(Context c) {
 		dataManager = new DataManager(c);
 	}
+	public RecipeManager(DataManager dataManager)
+	{
+		this.dataManager = dataManager;
+	}
 
 	/**
 	 * @uml.property name="hTTPManager"
@@ -49,7 +53,7 @@ public class RecipeManager {
 	/**
 				 */
 	public void saveRecipe(Recipe recipe, Context c) {
-		dataManager.getRecipes().add(recipe);
+		dataManager.getRecipeBook().addRecipe(recipe);
 		dataManager.saveToFile(c);
 	}
 
@@ -62,13 +66,13 @@ public class RecipeManager {
 	 * @return
 	 */
 	public Recipe getLocallySavedRecipeById(int id) {
-		return dataManager.findRecipeByID(id);
+		return dataManager.getRecipeBook().findRecipeByID(id);
 	}
 
 	/**
 		 */
 	public void deleteLocallySavedRecipeById(int id) {
-
+		dataManager.getRecipeBook().deleteRecipeByID(id);
 	}
 
 	/**
@@ -77,9 +81,19 @@ public class RecipeManager {
 		return null;
 	}
 
+	public void takePhotoForRecipe(int recipeId) {
+	}
+
+	/**
+			 */
+	public void addIngredientToPantry(Ingredient ingredient) {
+	}
+
 		
-		
-		public void takePhotoForRecipe(int recipeId){
+		/**
+		 */
+		public Ingredient getLocalIngredientById(int id){
+			return null;
 		}
 
 }

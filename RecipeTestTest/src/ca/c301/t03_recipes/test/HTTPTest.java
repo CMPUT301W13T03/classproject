@@ -16,7 +16,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	}
 	@Test
 	void testPublishRecipe(){
-		Recipe recipe = new Recipe(0, "Salad", "Put some vegetables in a bowl.");
+		Recipe recipe = new Recipe("Salad", "Put some vegetables in a bowl.");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe);
 		ArrayList<Recipe> webRecipeList = (ArrayList<Recipe>) manager.getWebRecipes();
@@ -34,8 +34,8 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	}
 	@Test
 	void testSearchForRecipe(){
-		Recipe recipe0 = new Recipe(0, "Salad", "Put some vegetables in a bowl.");
-		Recipe recipe1 = new Recipe(1, "Cookie", "Make a cookie");
+		Recipe recipe0 = new Recipe("Salad", "Put some vegetables in a bowl.");
+		Recipe recipe1 = new Recipe("Cookie", "Make a cookie");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe0);
 		manager.publishRecipeToWeb(recipe1);

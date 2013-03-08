@@ -15,7 +15,7 @@ public class PhotoTest extends IntentCatchingTemplate{
     @Test
     public void testPhotoIntent(){
     	RecipeManager manager = new RecipeManager(getActivity());
-    	Recipe recipe = new Recipe(0, "Name", "Instructions");
+    	Recipe recipe = new Recipe("Name", "Instructions");
     	manager.saveRecipe(recipe, getActivity());
     	
     	manager.takePhotoForRecipe(0);
