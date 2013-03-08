@@ -1,12 +1,16 @@
 package ca.c301.t03_recipes.test;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import ca.c301.t03_model.DataManager;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeManager;
@@ -18,9 +22,13 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		super(MainActivity.class);
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	@Test
 	public void testAddRecipe() {
+		//Delete any existing file.
+		getActivity().getFileStreamPath(DataManager.FILE_NAME).delete();
+		
 		Recipe recipe = new Recipe(0, "Salad", "Put in some veggies brother.");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.saveRecipe(recipe, getActivity());
@@ -34,6 +42,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		FileInputStream fin;
 		try {
 			fin = getActivity().openFileInput(filename);
+			getActivity().getFilesDir();
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			savedManager = (DataManager) ois.readObject();
 			assertNotNull(savedManager);
@@ -48,5 +57,4 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			fail("Error reading from file");
 		}
 	}
-
 }

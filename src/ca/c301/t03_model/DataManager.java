@@ -18,6 +18,7 @@ public class DataManager implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6085575872863551305L;
+	private static final String TAG = "DataManager";
 	public static String FILE_NAME = "recipe_file";
 	
 	/**
@@ -39,6 +40,7 @@ public class DataManager implements Serializable{
 			catch(FileNotFoundException f)
 			{
 				//file not initialized is caught here.
+				Log.i(TAG,"Making new file.");
 				this.recipes = new ArrayList<Recipe>();
 				saveToFile(c);
 			}
