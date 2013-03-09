@@ -18,7 +18,7 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 	void testGetIngredient()
 	{
 		RecipeManager manager = new RecipeManager(getActivity());
-		Ingredient ingredient = new Ingredient();
+		Ingredient ingredient = new Ingredient("Water");
 		ingredient.setId(0);
 		manager.addIngredientToPantry(ingredient);
 		Ingredient retIngredient = manager.getLocalIngredientById(0);

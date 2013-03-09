@@ -15,25 +15,29 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		super(MainActivity.class);
 	}
 	@Test
-	void testPublishRecipe(){
-		Recipe recipe = new Recipe("Salad", "Put some vegetables in a bowl.");
+	public void testPublishRecipe(){
+		Recipe recipe = new Recipe();
+		recipe.setId(18473);
+		recipe.setName("Cup of Water");
+		recipe.addIngredient("Water");
+		recipe.setInstructions("Put it in a cup, you idiot.");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe);
-		ArrayList<Recipe> webRecipeList = (ArrayList<Recipe>) manager.getWebRecipes();
-		assertTrue(findRecipeInList(webRecipeList, recipe));
+//		Recipe webRecipe = manager.getSingleRecipe(18473);
+//		assertSame(webRecipe, recipe);
 	}
-	void testBadConnection(){
+	public void testBadConnection(){
 		//TODO Need more implementation info (mock object?)
 		fail("Test not implemented");
 	}
 	@Test
-	void testSaveRecipeLocally(){
+	public void testSaveRecipeLocally(){
 		//TODO Need more implementation info (mock object?)
 		fail("Test not implemented");
 		
 	}
 	@Test
-	void testSearchForRecipe(){
+	public void testSearchForRecipe(){
 		Recipe recipe0 = new Recipe("Salad", "Put some vegetables in a bowl.");
 		Recipe recipe1 = new Recipe("Cookie", "Make a cookie");
 		RecipeManager manager = new RecipeManager(getActivity());
@@ -44,7 +48,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		assertTrue(findRecipeInList(results, recipe1));
 
 	}
-	boolean findRecipeInList(ArrayList<Recipe> recipeList, Recipe recipe)
+	public boolean findRecipeInList(ArrayList<Recipe> recipeList, Recipe recipe)
 	{
 		for(int i = 0; i < recipeList.size(); i++)
 		{

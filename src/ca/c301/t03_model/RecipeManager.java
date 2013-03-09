@@ -1,5 +1,6 @@
 package ca.c301.t03_model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -44,10 +45,23 @@ public class RecipeManager {
 	public Collection<Recipe> getWebRecipes() {
 		return null;
 	}
+	
+	public Recipe getSingleRecipe(int id) {
+		return httpManager.getRecipe(id);
+	}
 
 	/**
 			 */
 	public void publishRecipeToWeb(Recipe recipe) {
+		try {
+			httpManager.addRecipe(recipe);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

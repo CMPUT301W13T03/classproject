@@ -70,7 +70,8 @@ public class Recipe implements Serializable{
 		this.instructions = instructions;
 	}
 	
-	public void addIngredient(Ingredient ingredient) {
+	public void addIngredient(String name) {
+		Ingredient ingredient = new Ingredient(name);
 		this.ingredients.add(ingredient);
 	}
 	
