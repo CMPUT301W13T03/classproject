@@ -12,7 +12,8 @@ public class Ingredient implements Serializable{
 	 * @uml.property  name="name"
 	 */
 	
-	
+	public Ingredient(){
+	}
 	public Ingredient(String name){
 		this.name = name;
 	}
