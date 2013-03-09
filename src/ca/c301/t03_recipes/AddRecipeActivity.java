@@ -10,7 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class AddRecipeActivity extends Activity {
-
+ 
 	/** 
 	 * @uml.property name="recipeApplication"
 	 * @uml.associationEnd inverse="addRecipeActivity:ca.c301.t03_recipes.RecipeApplication"
