@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import android.test.ActivityInstrumentationTestCase2;
+import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeManager;
 import ca.c301.t03_recipes.MainActivity;
@@ -19,7 +20,8 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		Recipe recipe = new Recipe();
 		recipe.setId(18473);
 		recipe.setName("Cup of Water");
-		recipe.addIngredient("Water");
+		Ingredient water = new Ingredient("Water");
+		recipe.addIngredient(water);
 		recipe.setInstructions("Put it in a cup, you idiot.");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe);
