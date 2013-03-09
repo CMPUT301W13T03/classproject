@@ -54,7 +54,9 @@ public class AddRecipeActivity extends Activity {
         addIngredientButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                
+            	Intent intent = new Intent(AddRecipeActivity.this, AddIngredientActivity.class);
+            	
+                startActivity(intent);
             }
         });
 	}
