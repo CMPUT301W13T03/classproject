@@ -46,6 +46,10 @@
             android:name="ca.c301.t03_recipes.PhotoActivity"
             android:label="@string/title_activity_photo" >
         </activity>
+        <activity
+            android:name="ca.c301.t03_recipes.AddIngredientActivity"
+            android:label="@string/title_activity_add_ingredient" >
+        </activity>
     </application>
 
 </manifest>
