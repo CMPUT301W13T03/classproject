@@ -11,6 +11,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+/*
+ * TODO:
+ * Add tests for proper input
+ */
+
 public class AddRecipeActivity extends Activity {
  
 	/** 
@@ -18,6 +23,7 @@ public class AddRecipeActivity extends Activity {
 	 * @uml.associationEnd inverse="addRecipeActivity:ca.c301.t03_recipes.RecipeApplication"
 	 */
 	private RecipeApplication recipeApplication;
+	
 	private Recipe recipe;
 	
 	private EditText name;
@@ -39,6 +45,9 @@ public class AddRecipeActivity extends Activity {
             public void onClick(View arg0) {
             	recipe.setName(name.getText().toString());
             	recipe.setInstructions(instructions.getText().toString());
+            	
+            	((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+            	
             	finish();
             }
         });
@@ -56,6 +65,9 @@ public class AddRecipeActivity extends Activity {
             @Override
             public void onClick(View arg0) {
             	Intent intent = new Intent(AddRecipeActivity.this, AddIngredientActivity.class);
+            	
+            	intent.putExtra("recipe", recipe);  
+            	
                 startActivity(intent);
             }
         });
