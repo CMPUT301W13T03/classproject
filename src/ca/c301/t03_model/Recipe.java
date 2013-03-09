@@ -63,7 +63,7 @@ public class Recipe implements Serializable{
 	}
 	
 	/**
-	 * @param instructions
+	 * @param instruction
 	 * @uml.property  name="instructions"
 	 */
 	public void setInstructions(String instructions) {
