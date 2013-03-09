@@ -16,7 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.google.gson.Gson;
 
 public class HTTPManager {
-	// Http Connector
+	// http Connector
 	private HttpClient httpclient = new DefaultHttpClient();
 
 	// JSON Utilities
