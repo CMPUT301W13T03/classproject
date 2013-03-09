@@ -20,7 +20,7 @@ public final class R {
         public static final int button_delete=0x7f07000c;
         public static final int button_discard=0x7f070011;
         public static final int button_edit=0x7f070019;
-        public static final int button_save=0x7f070006;
+        public static final int button_save=0x7f070005;
         public static final int button_save_publish=0x7f070007;
         public static final int button_search=0x7f070014;
         public static final int button_search_recipes=0x7f07000f;
@@ -30,12 +30,12 @@ public final class R {
         public static final int checkBox_ingredients=0x7f070015;
         public static final int checkBox_offline=0x7f070017;
         public static final int checkBox_online=0x7f070016;
-        public static final int editText_amount=0x7f070003;
+        public static final int editText_amount=0x7f070006;
         public static final int editText_ingredient=0x7f070002;
         public static final int editText_ingredients=0x7f07000d;
         public static final int editText_instructions=0x7f070009;
         public static final int editText_search=0x7f070013;
-        public static final int editText_unit_type=0x7f070005;
+        public static final int editText_unit_type=0x7f070003;
         public static final int listViewIngredients=0x7f07001b;
         public static final int listView_ingredients=0x7f07000b;
         public static final int listView_results=0x7f070018;

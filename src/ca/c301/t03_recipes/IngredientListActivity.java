@@ -10,6 +10,12 @@ import android.widget.Button;
 
 public class IngredientListActivity extends Activity {
 
+	/**
+	 * @uml.property  name="recipeApplication"
+	 * @uml.associationEnd  inverse="ingredientListActivity:ca.c301.t03_recipes.RecipeApplication"
+	 */
+	private RecipeApplication recipeApplication;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,11 +36,4 @@ public class IngredientListActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_ingredient_list, menu);
 		return true;
 	}
-
-	/**
-	 * @uml.property  name="recipeApplication"
-	 * @uml.associationEnd  inverse="ingredientListActivity:ca.c301.t03_recipes.RecipeApplication"
-	 */
-	private RecipeApplication recipeApplication;
-
 }

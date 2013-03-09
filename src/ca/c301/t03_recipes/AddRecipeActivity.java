@@ -1,6 +1,5 @@
 package ca.c301.t03_recipes;
 
-import ca.c301.t03_model.*;
 import ca.c301.t03_recipes.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -17,8 +16,6 @@ public class AddRecipeActivity extends Activity {
 	 * @uml.associationEnd inverse="addRecipeActivity:ca.c301.t03_recipes.RecipeApplication"
 	 */
 	private RecipeApplication recipeApplication;
-	private Recipe recipe;
-	private Converter converter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +26,7 @@ public class AddRecipeActivity extends Activity {
         saveButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                finish();
+            	finish();
             }
         });
         
@@ -37,7 +34,16 @@ public class AddRecipeActivity extends Activity {
         savePublishButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                finish();
+            	finish();
+            }
+        });
+        
+        Button addIngredientButton = (Button) findViewById(R.id.button_add_ingredient);
+        addIngredientButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+            	Intent intent = new Intent(AddRecipeActivity.this, AddIngredientActivity.class);
+                startActivity(intent);
             }
         });
         
@@ -49,22 +55,6 @@ public class AddRecipeActivity extends Activity {
                 startActivity(intent);
             }
         });
-        
-        Button addIngredientButton = (Button) findViewById(R.id.button_add_ingredient);
-        addIngredientButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-            	Intent intent = new Intent(AddRecipeActivity.this, AddIngredientActivity.class);
-            	
-                startActivity(intent);
-            }
-        });
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		
 	}
 	
 	@Override
