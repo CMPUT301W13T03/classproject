@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_add_ingredient"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button_add_picture" >
+        android:layout_below="@+id/textView_name" >
 
     </ListView>
 
@@ -62,5 +62,23 @@
 
         <requestFocus />
     </EditText>
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_add_picture"
+        android:text="Name:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/editText_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView_name"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/textView_name"
+        android:ems="10" />
 
 </RelativeLayout>
