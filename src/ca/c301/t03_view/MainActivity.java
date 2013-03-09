@@ -1,5 +1,6 @@
-package ca.c301.t03_recipes;
+package ca.c301.t03_view;
 
+import ca.c301.t03_recipes.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
