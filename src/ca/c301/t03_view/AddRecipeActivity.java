@@ -1,5 +1,6 @@
 package ca.c301.t03_view;
 
+import ca.c301.t03_model.*;
 import ca.c301.t03_recipes.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -11,6 +12,14 @@ import android.widget.Button;
 
 public class AddRecipeActivity extends Activity {
 
+	/** 
+	 * @uml.property name="recipeApplication"
+	 * @uml.associationEnd inverse="addRecipeActivity:ca.c301.t03_view.RecipeApplication"
+	 */
+	private RecipeApplication recipeApplication;
+	private Recipe recipe;
+	private Converter converter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,16 +60,16 @@ public class AddRecipeActivity extends Activity {
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		
+	}
+	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_add_recipe, menu);
 		return true;
 	}
-
-	/** 
-	 * @uml.property name="recipeApplication"
-	 * @uml.associationEnd inverse="addRecipeActivity:ca.c301.t03_recipes.RecipeApplication"
-	 */
-	private RecipeApplication recipeApplication;
 
 }

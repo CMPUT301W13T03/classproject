@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
 
 	/**
 	 * @uml.property  name="recipeApplication"
-	 * @uml.associationEnd  inverse="mainActivity:ca.c301.t03_recipes.RecipeApplication"
+	 * @uml.associationEnd  inverse="mainActivity:ca.c301.t03_view.RecipeApplication"
 	 */
 	private RecipeApplication recipeApplication;
 
