@@ -54,7 +54,8 @@ public class RecipeManager {
 			 */
 	public void publishRecipeToWeb(Recipe recipe) {
 		try {
-			httpManager.addRecipe(recipe);
+			HTTPManager tempHTTPManager = new HTTPManager();
+			tempHTTPManager.addRecipe(recipe);
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
