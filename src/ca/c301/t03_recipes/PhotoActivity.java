@@ -1,20 +1,19 @@
-package ca.c301.t03_view;
+package ca.c301.t03_recipes;
 
 import ca.c301.t03_recipes.R;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class EditRecipeActivity extends Activity {
+public class PhotoActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_edit_recipe);
+		setContentView(R.layout.activity_photo);
 		
 		Button saveButton = (Button) findViewById(R.id.button_save);
         saveButton.setOnClickListener(new OnClickListener() {
@@ -24,28 +23,19 @@ public class EditRecipeActivity extends Activity {
             }
         });
         
-        Button deleteButton = (Button) findViewById(R.id.button_delete);
-        deleteButton.setOnClickListener(new OnClickListener() {
+        Button discardButton = (Button) findViewById(R.id.button_discard);
+        discardButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-            	finish();
+            	
             }
         });
         
-        Button addPictureButton = (Button) findViewById(R.id.button_add_picture);
-        addPictureButton.setOnClickListener(new OnClickListener() {
+        Button takePhotoButton = (Button) findViewById(R.id.button_take_photo);
+        takePhotoButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(EditRecipeActivity.this, PhotoActivity.class);
-                startActivity(intent);
-            }
-        });
-        
-        Button addIngredientButton = (Button) findViewById(R.id.button_add_ingredient);
-        addIngredientButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                
+            	
             }
         });
 	}
@@ -53,7 +43,7 @@ public class EditRecipeActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_edit_recipe, menu);
+		getMenuInflater().inflate(R.menu.activity_photo, menu);
 		return true;
 	}
 

@@ -1,4 +1,4 @@
-package ca.c301.t03_view;
+package ca.c301.t03_recipes;
 
 import android.app.Application;
 import ca.c301.t03_model.RecipeManager;

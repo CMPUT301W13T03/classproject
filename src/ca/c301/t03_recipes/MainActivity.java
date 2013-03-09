@@ -1,4 +1,4 @@
-package ca.c301.t03_view;
+package ca.c301.t03_recipes;
 
 import ca.c301.t03_recipes.R;
 import android.os.Bundle;
