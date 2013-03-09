@@ -33,7 +33,7 @@ public class IngredientListActivity extends Activity {
 
 	/**
 	 * @uml.property  name="recipeApplication"
-	 * @uml.associationEnd  inverse="ingredientListActivity:ca.c301.t03_view.RecipeApplication"
+	 * @uml.associationEnd  inverse="ingredientListActivity:ca.c301.t03_recipes.RecipeApplication"
 	 */
 	private RecipeApplication recipeApplication;
 
