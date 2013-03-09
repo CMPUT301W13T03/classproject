@@ -24,7 +24,7 @@ public class DataManager implements Serializable{
 	/**
 	 * Constructor loads any existing DataManager from file.
 	 */
-	DataManager(Context c){
+	public DataManager(Context c){
 		
 		try{
 			DataManager savedManager;
@@ -34,14 +34,15 @@ public class DataManager implements Serializable{
 			
 			//Copy properties into this object. Remember to change this
 			// if properties are added or removed (basically a copy constructor).
-			this.recipes = savedManager.getRecipes();
+			this.recipeBook = savedManager.getRecipeBook();
 			this.virtualPantry = savedManager.getVirtualPantry();
 			}
 			catch(FileNotFoundException f)
 			{
 				//file not initialized is caught here.
 				Log.i(TAG,"Making new file.");
-				this.recipes = new ArrayList<Recipe>();
+				this.recipeBook = new RecipeBook();
+				this.virtualPantry = new VirtualPantry();
 				saveToFile(c);
 			}
 			catch(Exception e)
@@ -52,29 +53,17 @@ public class DataManager implements Serializable{
 		
 		
 	}
-
-	/** 
-	 * @uml.property name="recipes"
-	 * @uml.associationEnd multiplicity="(0 -1)" aggregation="shared" inverse="dataManager:ca.c301.t03_model.Recipe"
-	 */
-	private ArrayList<Recipe> recipes;
-
 	/**
-	 * Getter of the property <tt>recipes</tt>
-	 * @return  Returns the recipe.
-	 * @uml.property  name="recipes"
+	 * Constructor creates DataManager with existing values.
+	 * @param book
+	 * @param pantry
+	 * @param c
 	 */
-	public ArrayList<Recipe> getRecipes() {
-		return recipes;
-	}
-
-	/**
-	 * Setter of the property <tt>recipes</tt>
-	 * @param recipes  The recipe to set.
-	 * @uml.property  name="recipes"
-	 */
-	public void setRecipes(ArrayList<Recipe> recipes) {
-		this.recipes = recipes;
+	public DataManager(RecipeBook book, VirtualPantry pantry, Context c){
+		this.recipeBook = book;
+		this.virtualPantry = pantry;
+		saveToFile(c);
+		
 	}
 
 	/** 
@@ -114,14 +103,28 @@ public class DataManager implements Serializable{
 			ioe.printStackTrace();
 		}
 	}
-	public Recipe findRecipeByID(int id)
-	{
-		for(int i = 0; i < recipes.size(); i++)
-		{
-			Recipe curRecipe = recipes.get(i);
-			if(curRecipe.getId() == id)
-				return curRecipe;
-		}
-		return null;
+
+	/**
+	 * @uml.property  name="recipeBook"
+	 * @uml.associationEnd  aggregation="shared" inverse="dataManager:ca.c301.t03_model.RecipeBook"
+	 */
+	private RecipeBook recipeBook;
+
+	/**
+	 * Getter of the property <tt>recipeBook</tt>
+	 * @return  Returns the recipeBook.
+	 * @uml.property  name="recipeBook"
+	 */
+	public RecipeBook getRecipeBook() {
+		return recipeBook;
+	}
+
+	/**
+	 * Setter of the property <tt>recipeBook</tt>
+	 * @param recipeBook  The recipeBook to set.
+	 * @uml.property  name="recipeBook"
+	 */
+	public void setRecipeBook(RecipeBook recipeBook) {
+		this.recipeBook = recipeBook;
 	}
 }

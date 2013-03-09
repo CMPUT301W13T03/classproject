@@ -7,10 +7,14 @@ import android.content.Context;
 
 public class RecipeManager {
 
-	public RecipeManager(Context c)
-	{
+	public RecipeManager(Context c) {
 		dataManager = new DataManager(c);
 	}
+	public RecipeManager(DataManager dataManager)
+	{
+		this.dataManager = dataManager;
+	}
+
 	/**
 	 * @uml.property name="hTTPManager"
 	 * @uml.associationEnd inverse="recipeManager:ca.c301.t03_model.HTTPManager"
@@ -48,8 +52,8 @@ public class RecipeManager {
 
 	/**
 				 */
-	public void saveRecipe(Recipe recipe,Context c) {
-		dataManager.getRecipes().add(recipe);
+	public void saveRecipe(Recipe recipe, Context c) {
+		dataManager.getRecipeBook().addRecipe(recipe);
 		dataManager.saveToFile(c);
 	}
 
@@ -62,13 +66,34 @@ public class RecipeManager {
 	 * @return
 	 */
 	public Recipe getLocallySavedRecipeById(int id) {
-		return dataManager.findRecipeByID(id);
+		return dataManager.getRecipeBook().findRecipeByID(id);
 	}
 
 	/**
 		 */
 	public void deleteLocallySavedRecipeById(int id) {
-		
+		dataManager.getRecipeBook().deleteRecipeByID(id);
 	}
+
+	/**
+		 */
+	public ArrayList<Recipe> searchWebForRecipeByName(String name) {
+		return null;
+	}
+
+	public void takePhotoForRecipe(int recipeId) {
+	}
+
+	/**
+			 */
+	public void addIngredientToPantry(Ingredient ingredient) {
+	}
+
+		
+		/**
+		 */
+		public Ingredient getLocalIngredientById(int id){
+			return null;
+		}
 
 }
