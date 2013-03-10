@@ -67,7 +67,7 @@ public class SearchActivity extends Activity {
                 			ids.add(recipes.get(i).getId());
                 		}
                 		
-                		displayResults();
+                		displayLocalResults();
                     }
                 }
             }
@@ -103,12 +103,12 @@ public class SearchActivity extends Activity {
         			ids.add(recipes.get(i).getId());
         		}
         		
-        		displayResults();
+        		displayLocalResults();
             }
         }
 	}
 	
-	private void displayResults() {
+	private void displayLocalResults() {
 		String[] displayList = converter.convertRecipeList(ids, (RecipeApplication) getApplication());
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1, displayList);
