@@ -123,7 +123,12 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			e.printStackTrace();
 		}
 		
-		manager.deleteLocallySavedRecipeById(0);
+		try {
+			manager.deleteLocallySavedRecipeById(0, getActivity());
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertNull(manager.getLocallySavedRecipeById(0));
 	}
 	@Test

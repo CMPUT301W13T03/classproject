@@ -83,7 +83,12 @@ public class EditRecipeActivity extends Activity {
             	returnIntent.putExtra("del",1);
             	setResult(RESULT_OK,returnIntent);
             	
-            	((RecipeApplication) getApplication()).getRecipeManager().deleteLocallySavedRecipeById(id);
+            	try {
+					((RecipeApplication) getApplication()).getRecipeManager().deleteLocallySavedRecipeById(id, getApplicationContext());
+				} catch (FullFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             	
             	finish();
             }

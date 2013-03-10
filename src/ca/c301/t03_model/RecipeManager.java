@@ -107,8 +107,9 @@ public class RecipeManager {
 	 * To delete a locally saved recipe with a given id
 	 * @param id Is the id of the recipe to be deleted
 	 */
-	public void deleteLocallySavedRecipeById(int id) {
+	public void deleteLocallySavedRecipeById(int id, Context c) throws FullFileException {
 		dataManager.getRecipeBook().deleteRecipeByID(id);
+		dataManager.saveToFile(c);
 	}
 
 	/**
