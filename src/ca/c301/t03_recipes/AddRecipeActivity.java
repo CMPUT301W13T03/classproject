@@ -180,9 +180,6 @@ public class AddRecipeActivity extends Activity {
 			        }
 				}
 		    }
-		    if (resultCode == RESULT_CANCELED) {    
-		         // No Action 
-		    }
 		}
 	}
 
