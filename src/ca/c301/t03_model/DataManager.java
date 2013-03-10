@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -43,12 +44,22 @@ public class DataManager implements Serializable{
 				Log.i(TAG,"Making new file.");
 				this.recipeBook = new RecipeBook();
 				this.virtualPantry = new VirtualPantry();
-				saveToFile(c);
-			}
-			catch(Exception e)
-			{
+				try {
+					saveToFile(c);
+				} catch (FullFileException e) {
+					e.printStackTrace();
+				}
+			} catch (StreamCorruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 		
 		
 		
@@ -62,7 +73,12 @@ public class DataManager implements Serializable{
 	public DataManager(RecipeBook book, VirtualPantry pantry, Context c){
 		this.recipeBook = book;
 		this.virtualPantry = pantry;
-		saveToFile(c);
+		try {
+			saveToFile(c);
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -92,16 +108,23 @@ public class DataManager implements Serializable{
 	/**
 	 * Should be called whenever a change is made to the data in DataManager
 	 * @param c
+	 * @throws FullFileException 
 	 */
-	public void saveToFile(Context c) {
+	public void saveToFile(Context c) throws FullFileException {
 		try {
 			FileOutputStream fout = c.openFileOutput(FILE_NAME,Context.MODE_WORLD_READABLE);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 			oos.writeObject(this);
 			oos.close();
 		} catch (IOException ioe) {
+			if(exceptionIsFullFile(ioe))
+				throw new FullFileException();
 			ioe.printStackTrace();
 		}
+	}
+
+	protected boolean exceptionIsFullFile(IOException ioe) {
+		return (ioe.getMessage().equals("No space left on device"));
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import android.R;
 import android.content.Context;
 
 public class RecipeManager {
@@ -11,23 +12,10 @@ public class RecipeManager {
 	public RecipeManager(Context c) {
 		dataManager = new DataManager(c);
 	}
-	public RecipeManager(DataManager dataManager)
-	{
+
+	public RecipeManager(DataManager dataManager) {
 		this.dataManager = dataManager;
 	}
-
-	/**
-	 * @uml.property name="hTTPManager"
-	 * @uml.associationEnd inverse="recipeManager:ca.c301.t03_model.HTTPManager"
-	 */
-	private HTTPManager httpManager;
-
-	/**
-	 * @uml.property name="emailHandler"
-	 * @uml.associationEnd 
-	 *                     inverse="recipeManager:ca.c301.t03_model.EmailHandler"
-	 */
-	private EmailHandler emailHandler;
 
 	/**
 	 * @uml.property name="dataManager"
@@ -45,7 +33,7 @@ public class RecipeManager {
 	public Collection<Recipe> getWebRecipes() {
 		return null;
 	}
-	
+
 	public Recipe getSingleRecipe(int id) {
 		HTTPManager tempHTTPManager = new HTTPManager();
 		return tempHTTPManager.getRecipe(id);
@@ -67,8 +55,9 @@ public class RecipeManager {
 	}
 
 	/**
+	 * @throws FullFileException 
 				 */
-	public void saveRecipe(Recipe recipe, Context c) {
+	public void saveRecipe(Recipe recipe, Context c) throws FullFileException {
 		dataManager.getRecipeBook().addRecipe(recipe);
 		dataManager.saveToFile(c);
 	}
@@ -76,6 +65,8 @@ public class RecipeManager {
 	/**
 					 */
 	public void emailRecipe(String emailAddress, Recipe recipe) {
+		EmailHandler emailer = new EmailHandler();
+		emailer.sendRecipe(emailAddress, recipe);
 	}
 
 	/**
@@ -98,6 +89,10 @@ public class RecipeManager {
 	}
 
 	public void takePhotoForRecipe(int recipeId) {
+		Camera camera = new Camera();
+		RecipePhoto photo = camera.takePhoto();
+		Recipe recipe = dataManager.getRecipeBook().findRecipeByID(recipeId);
+		recipe.addPhoto(photo);
 	}
 
 	/**
@@ -105,11 +100,10 @@ public class RecipeManager {
 	public void addIngredientToPantry(Ingredient ingredient) {
 	}
 
-		
-		/**
+	/**
 		 */
-		public Ingredient getLocalIngredientById(int id){
-			return null;
-		}
+	public Ingredient getLocalIngredientById(int id) {
+		return null;
+	}
 
 }

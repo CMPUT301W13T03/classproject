@@ -45,8 +45,8 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe0);
 		manager.publishRecipeToWeb(recipe1);
-		
 		ArrayList<Recipe> results = manager.searchWebForRecipeByName("Cookie");
+		assertNotNull(results);
 		assertTrue(findRecipeInList(results, recipe1));
 
 	}

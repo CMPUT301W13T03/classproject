@@ -2,13 +2,16 @@ package ca.c301.t03_recipes.test;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.c301.t03_model.DataManager;
+import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeBook;
 import ca.c301.t03_model.RecipeManager;
@@ -32,7 +35,12 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		DataManager testDataManager = new DataManager(getActivity());
 		RecipeManager manager = new RecipeManager(testDataManager);
 		
-		manager.saveRecipe(recipe, getActivity());
+		try {
+			manager.saveRecipe(recipe, getActivity());
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Recipe savedRecipe = testDataManager.getRecipeBook().findRecipeByID(0);
 		
 		assertSame(savedRecipe,recipe);
@@ -77,7 +85,12 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	public void testSavedRecipe(){
 		Recipe recipe = new Recipe("Name", "Instructions");
 		RecipeManager manager = new RecipeManager(getActivity());
-		manager.saveRecipe(recipe, getActivity());
+		try {
+			manager.saveRecipe(recipe, getActivity());
+		} catch (FullFileException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Check file status
 		String filename = DataManager.FILE_NAME;
@@ -103,7 +116,12 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	public void testDeleteRecipe(){
 		Recipe recipe = new Recipe("Name", "Instructions");
 		RecipeManager manager = new RecipeManager(getActivity());
-		manager.saveRecipe(recipe, getActivity());
+		try {
+			manager.saveRecipe(recipe, getActivity());
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		manager.deleteLocallySavedRecipeById(0);
 		assertNull(manager.getLocallySavedRecipeById(0));
@@ -115,11 +133,41 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		Recipe recipe2 = new Recipe("Name2", "Instructions2");
 
 		RecipeManager manager = new RecipeManager(getActivity());
-		manager.saveRecipe(recipe0, getActivity());
-		manager.saveRecipe(recipe1, getActivity());
-		manager.saveRecipe(recipe2, getActivity());
+		
+		try {
+			manager.saveRecipe(recipe0, getActivity());
+			manager.saveRecipe(recipe1, getActivity());
+			manager.saveRecipe(recipe2, getActivity());
+		} catch (FullFileException e) {
+			e.printStackTrace();
+		}
 		
 		assertSame(recipe2,manager.getLocallySavedRecipeById(2));	
+		
+	}
+	@Test
+	public void testFullFile(){
+		boolean exceptionCaught = false;
+		Recipe recipe = new Recipe("Name", "Instructions");
+		FullDataManager dataManager = new FullDataManager(getActivity());
+		RecipeManager manager = new RecipeManager(dataManager);
+		try {
+			manager.saveRecipe(recipe, getActivity());
+		} catch (FullFileException e) {
+			exceptionCaught = true;
+		}
+		assertTrue(exceptionCaught);
+	}
+	class FullDataManager extends DataManager{
+		public FullDataManager(Context c) {
+			super(c);
+		}
+		private static final long serialVersionUID = 3710965338088278651L;
+		@Override
+		protected boolean exceptionIsFullFile(IOException e)
+		{
+			return true;
+		}
 		
 	}
 	

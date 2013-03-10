@@ -154,5 +154,9 @@ public class Recipe implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+	public void addPhoto(RecipePhoto photo) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
