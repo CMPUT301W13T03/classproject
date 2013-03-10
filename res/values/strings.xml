@@ -11,5 +11,6 @@
     <string name="title_activity_edit_recipe">EditRecipeActivity</string>
     <string name="title_activity_photo">PhotoActivity</string>
     <string name="title_activity_add_ingredient">AddIngredientActivity</string>
+    <string name="title_activity_edit_ingredient">EditIngredientActivity</string>
 
 </resources>

@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 /*
@@ -67,6 +66,13 @@ public class AddRecipeActivity extends Activity {
         savePublishButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
+            	recipe.setName(name.getText().toString());
+            	recipe.setInstructions(instructions.getText().toString());
+            	
+            	((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+            	
+            	// ADD CODE TO POST RECIPE TO WEB HERE
+            	
             	finish();
             }
         });
@@ -101,20 +107,28 @@ public class AddRecipeActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		if (recipe.getIngredients().isEmpty() != true) {
-			String[] displayList = converter.convertList(recipe.getIngredients());
+		String[] displayList = converter.convertList(recipe.getIngredients());
 			
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, displayList);
-			ingredientsList.setAdapter(adapter);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, displayList);
+		ingredientsList.setAdapter(adapter);
 			
-			ingredientsList.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View view, int index, long id) {
-				
-				}
-			});
+		ingredientsList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int index, long id) {
+				Intent intent = new Intent(AddRecipeActivity.this, EditIngredientActivity.class);
+					
+				Bundle data = new Bundle();
+				data.putInt("index", index);
+				data.putString("name", recipe.getIngredient(index).getName());
+				data.putDouble("amount", recipe.getIngredient(index).getAmount());
+				data.putString("unit", recipe.getIngredient(index).getUnitOfMeasurement());
+					
+				intent.putExtras(data);
+					
+	            startActivityForResult(intent, 1);
+			}
+		});
 			
-		}
         
 	}
 	
@@ -123,20 +137,31 @@ public class AddRecipeActivity extends Activity {
 
 		if (requestCode == 1) {
 
-			if(resultCode == RESULT_OK){      
-		        String ingName = data.getStringExtra("name");
-		        Double ingAmount = data.getDoubleExtra("amount", 0.00);
-		        String ingUnit = data.getStringExtra("unit");
-		        
-		        Ingredient ingredient = new Ingredient();
-		        ingredient.setName(ingName);
-		        ingredient.setAmount(ingAmount);
-		        ingredient.setUnitOfMeasurement(ingUnit);
-		        
-		        recipe.addIngredient(ingredient);
+			if(resultCode == RESULT_OK){
+				
+				if (data.getIntExtra("del", 0) == 1) {
+					recipe.deleteIngredient(data.getIntExtra("index", 0));
+				}
+				else {
+					String ingName = data.getStringExtra("name");
+			        Double ingAmount = data.getDoubleExtra("amount", 0.00);
+			        String ingUnit = data.getStringExtra("unit");
+			        
+			        Ingredient ingredient = new Ingredient();
+			        ingredient.setName(ingName);
+			        ingredient.setAmount(ingAmount);
+			        ingredient.setUnitOfMeasurement(ingUnit);
+			        
+			        if (data.getIntExtra("type", 0) == 0) {
+			        	recipe.addIngredient(ingredient);
+			        }
+			        else {
+			        	recipe.setIngredient(data.getIntExtra("index", 0), ingredient);
+			        }
+				}
 		    }
 		    if (resultCode == RESULT_CANCELED) {    
-		         //Write your code on no result return 
+		         // No Action 
 		    }
 		}
 	}

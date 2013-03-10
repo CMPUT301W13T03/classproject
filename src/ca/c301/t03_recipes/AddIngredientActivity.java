@@ -43,6 +43,8 @@ public class AddIngredientActivity extends Activity {
             	returnIntent.putExtra("name",name.getText().toString());
             	returnIntent.putExtra("amount",Double.valueOf(amount.getText().toString()));
             	returnIntent.putExtra("unit",unit.getText().toString());
+            	returnIntent.putExtra("type",0);
+            	returnIntent.putExtra("del",0);
             	setResult(RESULT_OK,returnIntent); 
             	
             	finish();
