@@ -148,9 +148,7 @@ public class AddRecipeActivity extends Activity {
 					
 	            startActivityForResult(intent, 1);
 			}
-		});
-			
-        
+		});        
 	}
 	
 	/**

@@ -141,5 +141,9 @@ public class RecipeManager {
 	public Ingredient getLocalIngredientById(int id) {
 		return null;
 	}
+	
+	public ArrayList<Recipe> getRecipes() {
+		return dataManager.getRecipeBook().getRecipes();
+	}
 
 }

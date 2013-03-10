@@ -67,4 +67,7 @@ public class RecipeBook implements Serializable{
 		curID++;
 	}
 
+	public ArrayList<Recipe> getRecipes() {
+		return recipes;
+	}
 }
