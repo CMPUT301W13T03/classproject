@@ -50,6 +50,10 @@
             android:name="ca.c301.t03_recipes.AddIngredientActivity"
             android:label="@string/title_activity_add_ingredient" >
         </activity>
+        <activity
+            android:name="ca.c301.t03_recipes.EditIngredientActivity"
+            android:label="@string/title_activity_edit_ingredient" >
+        </activity>
     </application>
 
 </manifest>

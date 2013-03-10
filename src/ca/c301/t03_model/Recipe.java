@@ -2,7 +2,6 @@ package ca.c301.t03_model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
 
 /**
@@ -89,14 +88,14 @@ public class Recipe implements Serializable{
 	 * @uml.property  name="ingredients"
 	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" aggregation="shared" inverse="recipe:ca.c301.t03_model.Ingredient"
 	 */
-	private List<Ingredient> ingredients;
+	private ArrayList<Ingredient> ingredients;
 
 	/**
 	 * Getter of the property <tt>ingredients</tt>
 	 * @return  Returns the ingredients.
 	 * @uml.property  name="ingredients"
 	 */
-	public List<Ingredient> getIngredients() {
+	public ArrayList<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
@@ -105,7 +104,7 @@ public class Recipe implements Serializable{
 	 * @param ingredients  The ingredients to set.
 	 * @uml.property  name="ingredients"
 	 */
-	public void setIngredients(List<Ingredient> ingredients) {
+	public void setIngredients(ArrayList<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 

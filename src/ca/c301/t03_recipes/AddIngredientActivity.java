@@ -3,6 +3,7 @@ package ca.c301.t03_recipes;
 import ca.c301.t03_model.Ingredient;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,7 +17,7 @@ import android.widget.EditText;
 
 public class AddIngredientActivity extends Activity {
 
-	Ingredient ingredient;
+	private Ingredient ingredient;
 	
 	private EditText name;
 	private EditText amount;
@@ -37,9 +38,15 @@ public class AddIngredientActivity extends Activity {
         saveButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-            	ingredient.setName(name.getText().toString());
-            	ingredient.setAmount(Double.valueOf(amount.getText().toString()));
-            	ingredient.setUnitOfMeasurement(unit.getText().toString());
+            	
+            	Intent returnIntent = new Intent();
+            	returnIntent.putExtra("name",name.getText().toString());
+            	returnIntent.putExtra("amount",Double.valueOf(amount.getText().toString()));
+            	returnIntent.putExtra("unit",unit.getText().toString());
+            	returnIntent.putExtra("type",0);
+            	returnIntent.putExtra("del",0);
+            	setResult(RESULT_OK,returnIntent); 
+            	
             	finish();
             }
         });
