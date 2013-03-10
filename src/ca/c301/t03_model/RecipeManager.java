@@ -146,4 +146,9 @@ public class RecipeManager {
 		return dataManager.getRecipeBook().getRecipes();
 	}
 
+	public void saveWebRecipeByID(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

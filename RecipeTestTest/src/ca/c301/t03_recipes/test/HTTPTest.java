@@ -26,7 +26,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe);
 		Recipe webRecipe = manager.getSingleRecipe(18473);
-		assertSame(webRecipe, recipe);
+		assertSame(webRecipe, recipe); //won't work
 	}
 	public void testBadConnection(){
 		//TODO Need more implementation info (mock object?)
@@ -34,8 +34,18 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	}
 	@Test
 	public void testSaveRecipeLocally(){
-		//TODO Need more implementation info (mock object?)
-		fail("Test not implemented");
+		Recipe recipe = new Recipe("Name","Instructions");
+		recipe.setId(1900);
+		RecipeManager manager = new RecipeManager(getActivity());
+		
+		manager.publishRecipeToWeb(recipe);
+		manager.saveWebRecipeByID(1900);
+		
+		//id would be 0 because its the first one saved.
+		Recipe savedRecipe = manager.getLocallySavedRecipeById(0);
+		assertNotNull(savedRecipe);
+		assertEquals(savedRecipe.getName(),"Name");
+		assertEquals(savedRecipe.getInstructions(),"Instructions");
 		
 	}
 	@Test
