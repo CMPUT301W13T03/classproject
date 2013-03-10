@@ -67,24 +67,7 @@ public class SearchActivity extends Activity {
                 			ids.add(recipes.get(i).getId());
                 		}
                 		
-                		String[] displayList = converter.convertRecipeList(ids, (RecipeApplication) getApplication());
-                		
-                		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1, displayList);
-                		recipeList.setAdapter(adapter);
-                		
-                		recipeList.setOnItemClickListener(new OnItemClickListener() {
-                			@Override
-                			public void onItemClick(AdapterView<?> arg0, View view, int index, long id) {
-                				Intent intent = new Intent(SearchActivity.this, ViewRecipeActivity.class);
-                					
-                				Bundle data = new Bundle();
-                				data.putInt("id", ids.get(index));
-                					
-                				intent.putExtras(data);
-                					
-                	            startActivity(intent);
-                			}
-                		}); 
+                		displayResults();
                     }
                 }
             }
@@ -120,26 +103,30 @@ public class SearchActivity extends Activity {
         			ids.add(recipes.get(i).getId());
         		}
         		
-        		String[] displayList = converter.convertRecipeList(ids, (RecipeApplication) getApplication());
-        		
-        		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1, displayList);
-        		recipeList.setAdapter(adapter);
-        		
-        		recipeList.setOnItemClickListener(new OnItemClickListener() {
-        			@Override
-        			public void onItemClick(AdapterView<?> arg0, View view, int index, long id) {
-        				Intent intent = new Intent(SearchActivity.this, ViewRecipeActivity.class);
-        					
-        				Bundle data = new Bundle();
-        				data.putInt("id", ids.get(index));
-        					
-        				intent.putExtras(data);
-        					
-        	            startActivity(intent);
-        			}
-        		}); 
+        		displayResults();
             }
         }
+	}
+	
+	private void displayResults() {
+		String[] displayList = converter.convertRecipeList(ids, (RecipeApplication) getApplication());
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1, displayList);
+		recipeList.setAdapter(adapter);
+		
+		recipeList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int index, long id) {
+				Intent intent = new Intent(SearchActivity.this, ViewRecipeActivity.class);
+					
+				Bundle data = new Bundle();
+				data.putInt("id", ids.get(index));
+					
+				intent.putExtras(data);
+					
+	            startActivity(intent);
+			}
+		}); 
 	}
 	
 }
