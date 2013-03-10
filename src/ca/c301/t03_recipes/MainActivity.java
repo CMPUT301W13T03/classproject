@@ -10,7 +10,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
-
+	
+	/**
+	 * Is responsible for creating the view of the activity,
+	 * Buttons are set here
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

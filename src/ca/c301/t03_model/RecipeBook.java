@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class RecipeBook implements Serializable{
 
+	/**
+	 * Constructor with no arguments
+	 */
 	public RecipeBook()
 	{
 		recipes = new ArrayList<Recipe>();
@@ -22,6 +25,11 @@ public class RecipeBook implements Serializable{
 	//RecipeBook assigns id's.
 	int curID;
 	
+	/**
+	 * To return a recipe which has a given id
+	 * @param id Is the id of the recipe to be returned
+	 * @return Returns the recipe with the given id
+	 */
 	public Recipe findRecipeByID(int id)
 	{
 		for(int i = 0; i < recipes.size(); i++)
@@ -32,6 +40,11 @@ public class RecipeBook implements Serializable{
 		}
 		return null;
 	}
+	
+	/**
+	 * To delete a recipe which has a given id
+	 * @param id Is the id of the recipe to be deleted
+	 */
 	public void deleteRecipeByID(int id)
 	{
 		for(int i = 0; i < recipes.size(); i++)
@@ -41,6 +54,11 @@ public class RecipeBook implements Serializable{
 				recipes.remove(i);
 		}
 	}
+	
+	/**
+	 * To add a given recipe to this recipeBook
+	 * @param recipe Is the recipe to be added
+	 */
 	public void addRecipe(Recipe recipe)
 	{
 		recipes.add(recipe);

@@ -23,6 +23,11 @@ public class AddIngredientActivity extends Activity {
 	private EditText amount;
 	private EditText unit;
 	
+
+	/**
+	 * Is responsible for creating the view of the activity,
+	 * Edit texts and buttons are set here
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

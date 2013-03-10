@@ -24,6 +24,7 @@ public class DataManager implements Serializable{
 	
 	/**
 	 * Constructor loads any existing DataManager from file.
+	 * @param c The Android context for the DataManager
 	 */
 	public DataManager(Context c){
 		
@@ -66,9 +67,9 @@ public class DataManager implements Serializable{
 	}
 	/**
 	 * Constructor creates DataManager with existing values.
-	 * @param book
-	 * @param pantry
-	 * @param c
+	 * @param book Is the existing RecipeBook
+	 * @param pantry Is the existing VirtualPantry
+	 * @param c Is the Android context
 	 */
 	public DataManager(RecipeBook book, VirtualPantry pantry, Context c){
 		this.recipeBook = book;
@@ -107,7 +108,7 @@ public class DataManager implements Serializable{
 	}
 	/**
 	 * Should be called whenever a change is made to the data in DataManager
-	 * @param c
+	 * @param c The Android context
 	 * @throws FullFileException 
 	 */
 	public void saveToFile(Context c) throws FullFileException {

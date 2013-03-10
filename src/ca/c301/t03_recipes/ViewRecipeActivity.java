@@ -11,6 +11,10 @@ import android.widget.Button;
 
 public class ViewRecipeActivity extends Activity {
 
+	/**
+	 * Is responsible for creating the view of the activity,
+	 * Buttons are set here
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

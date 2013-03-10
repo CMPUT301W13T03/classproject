@@ -12,12 +12,12 @@ import ca.c301.t03_recipes.MainActivity;
 
 public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
-	IngredientsTest()
+	public IngredientsTest()
 	{
 		super(MainActivity.class);
 	}
 	@Test
-	void testSaveIngredient()
+	public void testSaveIngredient()
 	{
 		DataManager dataManager = new DataManager(getActivity());
 		RecipeManager manager = new RecipeManager(dataManager);
@@ -32,7 +32,7 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		
 	}
 	@Test
-	void testGetIngredient()
+	public void testGetIngredient()
 	{
 		DataManager dataManager = new DataManager(getActivity());
 		RecipeManager manager = new RecipeManager(dataManager);

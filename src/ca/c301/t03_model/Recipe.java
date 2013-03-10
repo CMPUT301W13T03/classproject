@@ -1,5 +1,6 @@
 package ca.c301.t03_model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,12 +21,20 @@ public class Recipe implements Serializable{
 	 */
 	private String instructions;
 
-	
+	/**
+	 * Constructor with no given arguments, name and instructions will be empty strings
+	 */
 	public Recipe() {
 		this.name = "";
 		this.instructions = "";
 		this.ingredients = new ArrayList<Ingredient>();
 	}
+	
+	/**
+	 * Constructor with name and instruction arguments
+	 * @param name Is the name of the recipe
+	 * @param instructions Is the instructions as a String
+	 */
 	public Recipe(String name, String instructions){
 		this.id = id;
 		this.name = name;
@@ -33,7 +42,8 @@ public class Recipe implements Serializable{
 	}
 	
 	/**
-	 * @return
+	 * Getter of the property <tt>name</tt>
+	 * @return Returns the name of this recipe
 	 * @uml.property  name="name"
 	 */
 	public String getName() {
@@ -41,20 +51,26 @@ public class Recipe implements Serializable{
 	}
 	
 	/**
-	 * @return
+	 * Getter of the property <tt>instructions</tt>
+	 * @return Returns the instructions of this recipe
 	 * @uml.property  name="instructions"
 	 */
 	public String getInstructions() {
 		return this.instructions;
 	}
 	
-
+	/**
+	 * Getter for the ingredient at index i
+	 * @param i Is the index of the ingredient to be returned
+	 * @return Returns the ingredient at the specified index
+	 */
 	public Ingredient getIngredient(int i) {
 		return this.ingredients.get(i);
 	}
 	
 	/**
-	 * @param name
+	 * Setter for the recipe's name
+	 * @param name Is the name to be saved for this recipe
 	 * @uml.property  name="name"
 	 */
 	public void setName(String name) {
@@ -62,24 +78,35 @@ public class Recipe implements Serializable{
 	}
 	
 	/**
-	 * @param instruction
+	 * Setter for the instructions of this recipe
+	 * @param instructions Is the instructions to be set
 	 * @uml.property  name="instructions"
 	 */
 	public void setInstructions(String instructions) {
 		this.instructions = instructions;
 	}
 	
+	/**
+	 * To add an ingredient to this recipe
+	 * @param name Is the ingredient to be added
+	 */
 	public void addIngredient(Ingredient ingredient) {
 		this.ingredients.add(ingredient);
 	}
 	
-
-	
+	/**
+	 * Sets the ingredient at a given index i to a given argument
+	 * @param i Is the index of the ingredient to be set
+	 * @param ingredient Is the ingredient to be set
+	 */
 	public void setIngredient(int i, Ingredient ingredient) {
 		this.ingredients.set(i, ingredient);
 	}
 	
-
+	/**
+	 * Deletes the ingredient at a given index
+	 * @param i Is the index of the ingredient to be deleted
+	 */
 	public void deleteIngredient(int i) {
 		this.ingredients.remove(i);
 	}
@@ -154,6 +181,11 @@ public class Recipe implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	/**
+	 * To add a photo to a recipe
+	 * @param photo Is the photo to be added
+	 */
 	public void addPhoto(RecipePhoto photo) {
 		// TODO Auto-generated method stub
 		

@@ -33,14 +33,23 @@ public class VirtualPantry implements Serializable{
 		ingredient = ingredients;
 	}
 
+	/**
+	 * To get the ingredient at the given index?
+	 * @param i Is the index of the ingredient
+	 */
 	public Ingredient findIngredient(int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * To add an ingredient to the Virtual Pantry
+	 * @param ingredient2 Is the ingredient to be added
+	 */
 	public void addIngredient(Ingredient ingredient2) {
 		// TODO Auto-generated method stub
-		
+		ingredient.add(ingredient2);
+		//Do we need another CurID, just like in RecipeBook?
 	}
 
 }

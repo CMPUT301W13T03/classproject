@@ -1,5 +1,6 @@
 package ca.c301.t03_model;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 public class Ingredient implements Serializable{
@@ -12,11 +13,20 @@ public class Ingredient implements Serializable{
 	 * @uml.property  name="name"
 	 */
 	
+	/**
+	 * Constructor with no given arguments
+	 */
 	public Ingredient(){
 	}
+	
+	/**
+	 * Constructor using a given name
+	 * @param name Is the name of the ingredient
+	 */
 	public Ingredient(String name){
 		this.name = name;
 	}
+	
 	private String name;
 
 	/**

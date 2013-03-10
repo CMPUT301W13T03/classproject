@@ -29,6 +29,7 @@ public class HTTPManager {
 
 	/**
 	 * Consumes the POST/Insert operation of the service
+	 * @param recipe Is the recipe to be published to the webservice
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
@@ -75,7 +76,11 @@ public class HTTPManager {
 		}
 		//May possibly need to deallocate more resources here. No 4.0 implementation of releaseconnection();
 	}
-
+	
+	/**
+	 * Consumes the Get operation of the service
+	 * @param id Is the ID of the recipe to be retrieved
+	 */
 	public Recipe getRecipe(int id){
 		Recipe recipe = null;
 		try{
@@ -111,7 +116,12 @@ public class HTTPManager {
 		return recipe;
 	}
 
-	String getEntityContent(HttpResponse response) throws IOException {
+	/**
+	 * Gets the contents of an http response as a String
+	 * @param response Is the http response to be read
+	 * @throws IOException 
+	 */
+	public String getEntityContent(HttpResponse response) throws IOException {
 		BufferedReader br = new BufferedReader(
 				new InputStreamReader((response.getEntity().getContent())));
 		String output;

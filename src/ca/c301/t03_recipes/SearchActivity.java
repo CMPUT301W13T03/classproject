@@ -7,6 +7,9 @@ import android.view.Menu;
 
 public class SearchActivity extends Activity {
 
+	/**
+	 * Is responsible for creating the view of the activity,
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

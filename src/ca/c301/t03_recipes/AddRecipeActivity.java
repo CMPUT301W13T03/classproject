@@ -1,6 +1,7 @@
 package ca.c301.t03_recipes;
 
 import ca.c301.t03_model.Converter;
+import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_recipes.R;
@@ -37,6 +38,11 @@ public class AddRecipeActivity extends Activity {
 	private EditText instructions;
 	private ListView ingredientsList;
 	
+
+	/**
+	 * Is responsible for creating the view of the activity,
+	 * Edit texts and buttons are set here
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,7 +62,12 @@ public class AddRecipeActivity extends Activity {
             	recipe.setName(name.getText().toString());
             	recipe.setInstructions(instructions.getText().toString());
             	
-            	((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+            	try {
+            		((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+            	}
+            	catch (FullFileException e) {
+            		e.printStackTrace();
+            	}
             	
             	finish();
             }
@@ -69,8 +80,12 @@ public class AddRecipeActivity extends Activity {
             	recipe.setName(name.getText().toString());
             	recipe.setInstructions(instructions.getText().toString());
             	
-            	((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
-            	
+            	try {
+            		((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+            	}
+            	catch (FullFileException e) {
+            		e.printStackTrace();
+            	}
             	// ADD CODE TO POST RECIPE TO WEB HERE
             	
             	finish();
@@ -103,6 +118,12 @@ public class AddRecipeActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * Is called when this activity resumes
+	 * Updates an ArrayAdapter to show list of ingredients
+	 * If any ingredient is clicked, starts the EditIngredientActivity,
+	 * and intends to get a return result from that activity
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -132,6 +153,11 @@ public class AddRecipeActivity extends Activity {
         
 	}
 	
+	/**
+	 * Called when returning from another activity
+	 * Depending on what the result was from that activity,
+	 * It can delete an ingredient, modify an ingredient, or do nothing
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 

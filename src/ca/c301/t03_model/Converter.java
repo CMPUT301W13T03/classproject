@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class Converter {
 
+	/**
+	 * To convert an ArrayList<Ingredient> of ingredients into an array of Strings
+	 * @param ingredients Is the ArrayList to convert
+	 * @return Returns an array of Strings which contains the ingredients information
+	 */
 	public String[] convertList(ArrayList<Ingredient> ingredients) {
 		
 		ArrayList<String> stringList = new ArrayList<String>();

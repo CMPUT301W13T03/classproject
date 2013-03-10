@@ -16,6 +16,10 @@ public class IngredientListActivity extends Activity {
 	 */
 	private RecipeApplication recipeApplication;
 	
+	/**
+	 * Is responsible for creating the view of the activity,
+	 * A buttons is set here
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
