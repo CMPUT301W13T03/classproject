@@ -2,14 +2,14 @@ package ca.c301.t03_model;
 
 import java.util.ArrayList;
 
-public class Converter {
+public class DisplayConverter {
 
 	/**
 	 * To convert an ArrayList<Ingredient> of ingredients into an array of Strings
 	 * @param ingredients Is the ArrayList to convert
 	 * @return Returns an array of Strings which contains the ingredients information
 	 */
-	public String[] convertList(ArrayList<Ingredient> ingredients) {
+	public String[] convertIngredientsList(ArrayList<Ingredient> ingredients) {
 		
 		ArrayList<String> stringList = new ArrayList<String>();
 		

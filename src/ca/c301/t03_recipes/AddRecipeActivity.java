@@ -1,6 +1,6 @@
 package ca.c301.t03_recipes;
 
-import ca.c301.t03_model.Converter;
+import ca.c301.t03_model.DisplayConverter;
 import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
@@ -32,7 +32,7 @@ public class AddRecipeActivity extends Activity {
 	private RecipeApplication recipeApplication;
 	
 	private Recipe recipe;
-	private Converter converter;
+	private DisplayConverter converter;
 	
 	private EditText name;
 	private EditText instructions;
@@ -49,7 +49,7 @@ public class AddRecipeActivity extends Activity {
 		setContentView(R.layout.activity_add_recipe);
 		
 		recipe = new Recipe();
-		converter = new Converter();
+		converter = new DisplayConverter();
 		
 		name = (EditText) findViewById(R.id.editText_name);
 		instructions = (EditText) findViewById(R.id.editText_instructions);
@@ -128,7 +128,7 @@ public class AddRecipeActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		String[] displayList = converter.convertList(recipe.getIngredients());
+		String[] displayList = converter.convertIngredientsList(recipe.getIngredients());
 			
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, displayList);
 		ingredientsList.setAdapter(adapter);
