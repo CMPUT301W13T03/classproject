@@ -142,15 +142,11 @@ public class AddRecipeActivity extends Activity {
 				if (data.getIntExtra("del", 0) == 1) {
 					recipe.deleteIngredient(data.getIntExtra("index", 0));
 				}
-				else {
-					String ingName = data.getStringExtra("name");
-			        Double ingAmount = data.getDoubleExtra("amount", 0.00);
-			        String ingUnit = data.getStringExtra("unit");
-			        
+				else {			        
 			        Ingredient ingredient = new Ingredient();
-			        ingredient.setName(ingName);
-			        ingredient.setAmount(ingAmount);
-			        ingredient.setUnitOfMeasurement(ingUnit);
+			        ingredient.setName(data.getStringExtra("name"));
+			        ingredient.setAmount(data.getDoubleExtra("amount", 0.00));
+			        ingredient.setUnitOfMeasurement(data.getStringExtra("unit"));
 			        
 			        if (data.getIntExtra("type", 0) == 0) {
 			        	recipe.addIngredient(ingredient);
