@@ -47,7 +47,8 @@ public class RecipeManager {
 	}
 	
 	public Recipe getSingleRecipe(int id) {
-		return httpManager.getRecipe(id);
+		HTTPManager tempHTTPManager = new HTTPManager();
+		return tempHTTPManager.getRecipe(id);
 	}
 
 	/**
