@@ -79,6 +79,11 @@ public class RecipeManager {
 		dataManager.getRecipeBook().addRecipe(recipe);
 		dataManager.saveToFile(c);
 	}
+	
+	public void setRecipe(int id, Recipe recipe, Context c) throws FullFileException {
+		dataManager.getRecipeBook().setRecipeByID(id, recipe);
+		dataManager.saveToFile(c);
+	}
 
 	/**
 	 * To email a given recipe to a given email
@@ -141,14 +146,14 @@ public class RecipeManager {
 	public Ingredient getLocalIngredientById(int id) {
 		return null;
 	}
-	
+
 	public ArrayList<Recipe> getRecipes() {
 		return dataManager.getRecipeBook().getRecipes();
 	}
 
 	public void saveWebRecipeByID(int i) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

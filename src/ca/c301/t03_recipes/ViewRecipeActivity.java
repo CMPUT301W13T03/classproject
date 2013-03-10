@@ -40,7 +40,6 @@ public class ViewRecipeActivity extends Activity {
 		id = data.getInt("id");
 		
 		converter = new DisplayConverter();
-		recipe = new Recipe();
 		
 		ingredientsList = (ListView) findViewById(R.id.listView_ingredients);
 		
@@ -115,7 +114,7 @@ public class ViewRecipeActivity extends Activity {
 			if(resultCode == RESULT_OK){
 				
 				if (data.getIntExtra("del", 0) == 1) {
-					
+					finish();
 				}
 			}
 		}

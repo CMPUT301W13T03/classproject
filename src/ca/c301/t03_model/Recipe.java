@@ -134,6 +134,10 @@ public class Recipe implements Serializable{
 	public void setIngredients(ArrayList<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
+	
+	public void copyIngredients(ArrayList<Ingredient> ingredients) {
+		this.ingredients.addAll(ingredients);
+	}
 
 	/**
 	 * @uml.property  name="recipePhoto"

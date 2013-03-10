@@ -55,6 +55,16 @@ public class RecipeBook implements Serializable{
 		}
 	}
 	
+	public void setRecipeByID(int id, Recipe recipe)
+	{
+		for(int i = 0; i < recipes.size(); i++)
+		{
+			Recipe curRecipe = recipes.get(i);
+			if(curRecipe.getId() == id)
+				recipes.set(i, recipe);
+		}
+	}
+	
 	/**
 	 * To add a given recipe to this recipeBook
 	 * @param recipe Is the recipe to be added
