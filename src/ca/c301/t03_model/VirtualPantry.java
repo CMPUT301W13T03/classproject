@@ -33,4 +33,14 @@ public class VirtualPantry implements Serializable{
 		ingredient = ingredients;
 	}
 
+	public Ingredient findIngredient(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addIngredient(Ingredient ingredient2) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
