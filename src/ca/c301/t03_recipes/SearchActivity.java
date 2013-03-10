@@ -41,8 +41,8 @@ public class SearchActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		//recipes = ((RecipeApplication) getApplication()).getRecipeManager().getRecipes();
-		/*
+		recipes = ((RecipeApplication) getApplication()).getRecipeManager().getRecipes();
+		
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		
 		for (int i = 0; i < recipes.size(); i++) {
@@ -52,7 +52,7 @@ public class SearchActivity extends Activity {
 		String[] displayList = converter.convertRecipeList(ids, (RecipeApplication) getApplication());
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, displayList);
-		recipeList.setAdapter(adapter);*/
+		recipeList.setAdapter(adapter);
 	}
 	
 }

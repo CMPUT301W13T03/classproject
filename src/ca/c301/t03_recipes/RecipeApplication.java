@@ -25,8 +25,9 @@ public class RecipeApplication extends Application{
 	 * @param recipeManager  The recipeManager to set.
 	 * @uml.property  name="recipeManager"
 	 */
-	public void setRecipeManager(RecipeManager recipeManager) {
-		this.recipeManager = recipeManager;
+	public void setRecipeManager() {
+		this.recipeManager = new RecipeManager(getApplicationContext());
 	}
 
+	
 }

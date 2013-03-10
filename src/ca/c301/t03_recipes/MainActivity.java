@@ -20,6 +20,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		recipeApplication = (RecipeApplication) getApplication();
+		recipeApplication.setRecipeManager();
+		
 		Button addRecipeButton = (Button) findViewById(R.id.button_add_recipe);
         addRecipeButton.setOnClickListener(new OnClickListener() {
             @Override
