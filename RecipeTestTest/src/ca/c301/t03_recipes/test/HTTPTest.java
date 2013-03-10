@@ -26,7 +26,9 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe);
 		Recipe webRecipe = manager.getSingleRecipe(18473);
-		assertSame(webRecipe, recipe); //won't work
+		assertEquals(webRecipe.getName(), recipe.getName());
+		assertEquals(webRecipe.getIngredient(0).getName(), recipe.getIngredient(0).getName());
+		assertEquals(webRecipe.getIngredient(0).getAmount(), recipe.getIngredient(0).getAmount());
 	}
 	public void testBadConnection(){
 		//TODO Need more implementation info (mock object?)

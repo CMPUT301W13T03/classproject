@@ -17,6 +17,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -35,7 +37,7 @@ public class HTTPManager {
 	 */
 	public void addRecipe(Recipe recipe) throws IllegalStateException, IOException{
 		// TODO httpPost is currently directed at the testing server, will need to change to "http://cmput301.softwareprocess.es:8080/CMPUT301W13T03/"
-		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/"+recipe.getId());
+		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/recipezzz/"+recipe.getId());
 		StringEntity stringEntity = null;
 		try {
 			stringEntity = new StringEntity(gson.toJson(recipe));
@@ -57,15 +59,9 @@ public class HTTPManager {
 			e.printStackTrace();
 		}
 
-//		String status = response.getStatusLine().toString();
-//		System.out.println(status);
+		//		String status = response.getStatusLine().toString();
+		//		System.out.println(status);
 		HttpEntity entity = response.getEntity();
-		BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
-		String output;
-		System.err.println("Output from Server -> ");
-		while ((output = br.readLine()) != null) {
-			System.err.println(output);
-		}
 
 		try {
 			// May need if statement, check isStreaming();
@@ -76,7 +72,7 @@ public class HTTPManager {
 		}
 		//May possibly need to deallocate more resources here. No 4.0 implementation of releaseconnection();
 	}
-	
+
 	/**
 	 * Consumes the Get operation of the service
 	 * @param id Is the ID of the recipe to be retrieved
@@ -84,16 +80,17 @@ public class HTTPManager {
 	public Recipe getRecipe(int id){
 		Recipe recipe = null;
 		try{
-			HttpGet getRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/"+id+"?pretty=1");//S4bRPFsuSwKUDSJImbCE2g?pretty=1
+			HttpGet getRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/recipezzz/"+id);//S4bRPFsuSwKUDSJImbCE2g?pretty=1
 
 			getRequest.addHeader("Accept","application/json");
 
 			HttpResponse response = httpclient.execute(getRequest);
 
-//			String status = response.getStatusLine().toString();
-//			System.out.println(status);
+			//			String status = response.getStatusLine().toString();
+			//			System.out.println(status);
 
 			String json = getEntityContent(response);
+			Log.i("HTTPManager", json);
 
 			// We have to tell GSON what type we expect
 			Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<Recipe>>(){}.getType();
@@ -104,6 +101,7 @@ public class HTTPManager {
 			if(response.getEntity() != null){
 				response.getEntity().consumeContent();
 			}
+			Log.i("HTTPManager", recipe.getName());
 
 		} catch (ClientProtocolException e) {
 
