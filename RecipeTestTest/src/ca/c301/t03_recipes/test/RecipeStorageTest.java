@@ -19,6 +19,7 @@ import ca.c301.t03_recipes.MainActivity;
 
 public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
+	private final static String TEST_FILE_NAME = "recipe_test_file";
 	public RecipeStorageTest() {
 		super(MainActivity.class);
 		// TODO Auto-generated constructor stub
@@ -27,12 +28,12 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	@Before
 	public void setUp() throws Exception{
 		//Delete any existing file.
-		getActivity().getFileStreamPath(DataManager.FILE_NAME).delete();
+		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
 	}
 	@Test
 	public void testCreateRecipe(){
 		Recipe recipe = new Recipe("Name", "Instructions");
-		DataManager testDataManager = new DataManager(getActivity());
+		DataManager testDataManager = new DataManager(getActivity(),TEST_FILE_NAME);
 		RecipeManager manager = new RecipeManager(testDataManager);
 		
 		try {
@@ -49,7 +50,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	public void testRetrieveRecipe() {
 		RecipeBook recipeBook = new RecipeBook();
 		Recipe recipe = new Recipe("Name", "Instructions");
-		DataManager dataManager = new DataManager(recipeBook, null, getActivity());
+		DataManager dataManager = new DataManager(recipeBook, null, getActivity(),TEST_FILE_NAME);
 		RecipeManager manager = new RecipeManager(dataManager);
 		
 		recipeBook.addRecipe(recipe);
@@ -61,12 +62,13 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	@Test
 	public void testFileCreation()
 	{
-		RecipeManager manager = new RecipeManager(getActivity());
-		String filename = DataManager.FILE_NAME;
+		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
+		RecipeManager manager = new RecipeManager(dataManager);
+		
 		FileInputStream fin;
 
 		try {
-			fin = getActivity().openFileInput(filename);
+			fin = getActivity().openFileInput(TEST_FILE_NAME);
 			getActivity().getFilesDir();
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			DataManager savedManager;
@@ -84,7 +86,8 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	@Test
 	public void testSavedRecipe(){
 		Recipe recipe = new Recipe("Name", "Instructions");
-		RecipeManager manager = new RecipeManager(getActivity());
+		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
+		RecipeManager manager = new RecipeManager(dataManager);
 		try {
 			manager.saveRecipe(recipe, getActivity());
 		} catch (FullFileException e1) {
@@ -93,11 +96,10 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		}
 
 		// Check file status
-		String filename = DataManager.FILE_NAME;
 		DataManager savedManager;
 		FileInputStream fin;
 		try {
-			fin = getActivity().openFileInput(filename);
+			fin = getActivity().openFileInput(TEST_FILE_NAME);
 			getActivity().getFilesDir();
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			savedManager = (DataManager) ois.readObject();
@@ -115,7 +117,8 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	@Test
 	public void testDeleteRecipe(){
 		Recipe recipe = new Recipe("Name", "Instructions");
-		RecipeManager manager = new RecipeManager(getActivity());
+		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
+		RecipeManager manager = new RecipeManager(dataManager);
 		try {
 			manager.saveRecipe(recipe, getActivity());
 		} catch (FullFileException e) {
@@ -137,7 +140,8 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		Recipe recipe1 = new Recipe("Name1", "Instructions1");
 		Recipe recipe2 = new Recipe("Name2", "Instructions2");
 
-		RecipeManager manager = new RecipeManager(getActivity());
+		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
+		RecipeManager manager = new RecipeManager(dataManager);
 		
 		try {
 			manager.saveRecipe(recipe0, getActivity());
@@ -154,7 +158,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	public void testFullFile(){
 		boolean exceptionCaught = false;
 		Recipe recipe = new Recipe("Name", "Instructions");
-		FullDataManager dataManager = new FullDataManager(getActivity());
+		FullDataManager dataManager = new FullDataManager(getActivity(),TEST_FILE_NAME);
 		RecipeManager manager = new RecipeManager(dataManager);
 		try {
 			manager.saveRecipe(recipe, getActivity());
@@ -166,6 +170,9 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	class FullDataManager extends DataManager{
 		public FullDataManager(Context c) {
 			super(c);
+		}
+		public FullDataManager(MainActivity activity, String testFileName) {
+			super(activity,testFileName);
 		}
 		private static final long serialVersionUID = 3710965338088278651L;
 		@Override
