@@ -74,8 +74,6 @@ public class AddRecipeActivity extends Activity {
                 		e.printStackTrace();
                 	}
                 	
-                	// ADD CODE TO POST RECIPE TO WEB HERE
-                	
                 	finish();
             	}
             }
