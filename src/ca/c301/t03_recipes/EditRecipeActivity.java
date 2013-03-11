@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class EditRecipeActivity extends Activity {
@@ -60,21 +61,25 @@ public class EditRecipeActivity extends Activity {
         saveButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-            	Intent returnIntent = new Intent();
-            	returnIntent.putExtra("del",0);
-            	setResult(RESULT_OK,returnIntent);
             	
-            	recipe.setName(name.getText().toString());
-            	recipe.setInstructions(instructions.getText().toString());
-            	
-            	try {
-					((RecipeApplication) getApplication()).getRecipeManager().setRecipe(id, recipe, getApplicationContext());
-				} catch (FullFileException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            	
-            	finish();
+            	if (!name.getText().toString().equals("") && !instructions.getText().toString().equals("") &&
+            			!recipe.getIngredients().isEmpty()) {
+            		Intent returnIntent = new Intent();
+                	returnIntent.putExtra("del",0);
+                	setResult(RESULT_OK,returnIntent);
+                	
+                	recipe.setName(name.getText().toString());
+                	recipe.setInstructions(instructions.getText().toString());
+                	
+                	try {
+    					((RecipeApplication) getApplication()).getRecipeManager().setRecipe(id, recipe, getApplicationContext());
+    				} catch (FullFileException e) {
+    					Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
+    					e.printStackTrace();
+    				}
+                	
+                	finish();
+            	}
             }
         });
         
@@ -89,8 +94,8 @@ public class EditRecipeActivity extends Activity {
             	try {
 					((RecipeApplication) getApplication()).getRecipeManager().deleteLocallySavedRecipeById(id, getApplicationContext());
 				} catch (FullFileException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+					Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
 				}
             	
             	finish();

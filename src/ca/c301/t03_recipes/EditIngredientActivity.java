@@ -50,16 +50,20 @@ private Ingredient ingredient;
             @Override
             public void onClick(View arg0) {
             	
-            	Intent returnIntent = new Intent();
-            	returnIntent.putExtra("name",name.getText().toString());
-            	returnIntent.putExtra("amount",Double.valueOf(amount.getText().toString()));
-            	returnIntent.putExtra("unit",unit.getText().toString());
-            	returnIntent.putExtra("type",1);
-            	returnIntent.putExtra("index", index);
-            	returnIntent.putExtra("del",0);
-            	setResult(RESULT_OK,returnIntent); 
-            	
-            	finish();
+            	if (!name.getText().toString().equals("") && !amount.getText().toString().equals("") &&
+            			!unit.getText().toString().equals("")) {
+            		
+            		Intent returnIntent = new Intent();
+                	returnIntent.putExtra("name",name.getText().toString());
+                	returnIntent.putExtra("amount",Double.valueOf(amount.getText().toString()));
+                	returnIntent.putExtra("unit",unit.getText().toString());
+                	returnIntent.putExtra("type",1);
+                	returnIntent.putExtra("index", index);
+                	returnIntent.putExtra("del",0);
+                	setResult(RESULT_OK,returnIntent); 
+                	
+                	finish();
+            	}
             }
         });
         

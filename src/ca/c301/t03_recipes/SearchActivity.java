@@ -53,12 +53,7 @@ public class SearchActivity extends Activity {
                     
                 }
             	if (offlineCheck.isChecked()) {
-                    if ( keyword.getText().toString().equals("") ) {
-                    	/*
-                		 * TODO:
-                		 * - implement search keywords
-                		 */
-                		
+                    if ( keyword.getText().toString().equals("") ) {                		
                 		ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalAll();
                 		
                     }
@@ -88,23 +83,15 @@ public class SearchActivity extends Activity {
             
         }
     	if (offlineCheck.isChecked()) {
-            if ( 1 == 1 ) {
-            	/*
-        		 * TODO:
-        		 * - implement search keywords
-        		 * 
-        		 */
-        		
-        		recipes = ((RecipeApplication) getApplication()).getRecipeManager().getRecipes();
-        		
-        		ids = new ArrayList<Integer>();
-        		
-        		for (int i = 0; i < recipes.size(); i++) {
-        			ids.add(recipes.get(i).getId());
-        		}
-        		
-        		displayLocalResults();
+            if ( keyword.getText().toString().equals("") ) {        		
+            	ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalAll();
             }
+            
+            else {
+            	ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
+            }
+            
+            displayLocalResults();
         }
 	}
 	

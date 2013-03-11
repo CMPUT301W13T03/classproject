@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 /*
  * TODO:
@@ -59,17 +60,24 @@ public class AddRecipeActivity extends Activity {
         saveButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-            	recipe.setName(name.getText().toString());
-            	recipe.setInstructions(instructions.getText().toString());
             	
-            	try {
-            		((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+            	if (!name.getText().toString().equals("") && !instructions.getText().toString().equals("") &&
+            			!recipe.getIngredients().isEmpty()) {
+            		
+            		recipe.setName(name.getText().toString());
+                	recipe.setInstructions(instructions.getText().toString());
+                	
+                	try {
+                		((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+                	}
+                	catch (FullFileException e) {
+                		e.printStackTrace();
+                	}
+                	
+                	// ADD CODE TO POST RECIPE TO WEB HERE
+                	
+                	finish();
             	}
-            	catch (FullFileException e) {
-            		e.printStackTrace();
-            	}
-            	
-            	finish();
             }
         });
         
@@ -77,18 +85,24 @@ public class AddRecipeActivity extends Activity {
         savePublishButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-            	recipe.setName(name.getText().toString());
-            	recipe.setInstructions(instructions.getText().toString());
             	
-            	try {
-            		((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+            	if (!name.getText().toString().equals("") && !instructions.getText().toString().equals("") &&
+            			!recipe.getIngredients().isEmpty()) {
+            		
+            		recipe.setName(name.getText().toString());
+                	recipe.setInstructions(instructions.getText().toString());
+                	
+                	try {
+                		((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+                	}
+                	catch (FullFileException e) {
+                		e.printStackTrace();
+                	}
+                	
+                	// ADD CODE TO POST RECIPE TO WEB HERE
+                	
+                	finish();
             	}
-            	catch (FullFileException e) {
-            		e.printStackTrace();
-            	}
-            	// ADD CODE TO POST RECIPE TO WEB HERE
-            	
-            	finish();
             }
         });
         
