@@ -1,5 +1,8 @@
 package ca.c301.t03_model;
 
+/**
+ * Handles elastic search results
+ */
 public class ElasticSearchResponse<T> {
     String _index;
     String _type;

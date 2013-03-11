@@ -2,7 +2,9 @@ package ca.c301.t03_model;
 
 import java.io.Serializable;
 
-
+/**
+ * Handles storage of photos for recipes - NOT IMPLEMENTED
+ */
 public class RecipePhoto implements Serializable{
 
 	/**

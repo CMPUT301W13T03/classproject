@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author  Zach
+ * Recipe object used to store name, instructions, and ingredients
  */
 public class Recipe implements Serializable{
 	
@@ -135,6 +135,10 @@ public class Recipe implements Serializable{
 		this.ingredients = ingredients;
 	}
 	
+	/**
+	 * Copies ingredients list to current recipe
+	 * @param ingredients	The ingredients list to be copied
+	 */
 	public void copyIngredients(ArrayList<Ingredient> ingredients) {
 		this.ingredients.addAll(ingredients);
 	}

@@ -3,6 +3,9 @@ package ca.c301.t03_model;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Ingredient object used in both recipes and virtual pantry to store name, amount, and unit of measurement
+ */
 public class Ingredient implements Serializable{
 
 	/**

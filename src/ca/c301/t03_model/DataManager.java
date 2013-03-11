@@ -14,15 +14,23 @@ import java.util.Collection;
 import android.content.Context;
 import android.util.Log;
 
+/**
+ * Handles all input/output required for the application
+ */
 public class DataManager implements Serializable {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 6085575872863551305L;
 	private static final String TAG = "DataManager";
 	public static String DEFAULT_FILE_NAME = "recipe_file";
 	private String fileName;
 
+	/**
+	 * Constructor that takes a file name
+	 * @param c
+	 * 			Application context
+	 * @param fileName
+	 * 			Name of file for storage
+	 */
 	public DataManager(Context c, String fileName) {
 		this.fileName = fileName;
 		loadFromFile(c);
@@ -47,7 +55,7 @@ public class DataManager implements Serializable {
 	 * @param pantry
 	 *            Is the existing VirtualPantry
 	 * @param c
-	 *            Is the Android context
+	 *            Is the Application context
 	 * @param fileName 
 	 */
 	public DataManager(RecipeBook book, VirtualPantry pantry, Context c, String fileName) {
@@ -63,6 +71,11 @@ public class DataManager implements Serializable {
 
 	}
 
+	/**
+	 * Loads recipes and virtual pantry from locally saved file
+	 * @param c
+	 *            Is the application context
+	 */
 	private void loadFromFile(Context c) {
 		try {
 			DataManager savedManager;
@@ -146,6 +159,13 @@ public class DataManager implements Serializable {
 		}
 	}
 
+	/**
+	 * Handles full device exceptions
+	 * @param ioe
+	 * 				Exception code
+	 * @return
+	 * 				Boolean - true if no space is left
+	 */
 	protected boolean exceptionIsFullFile(IOException ioe) {
 		return (ioe.getMessage().equals("No space left on device"));
 	}

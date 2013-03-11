@@ -135,6 +135,9 @@ public class SearchActivity extends Activity {
         }
 	}
 	
+	/**
+	 * Displays results from local search in the list view
+	 */
 	private void displayLocalResults() {
 		String[] displayList = converter.convertRecipeList(ids, (RecipeApplication) getApplication());
 		
@@ -155,6 +158,10 @@ public class SearchActivity extends Activity {
 			}
 		}); 
 	}
+	
+	/**
+	 * Displays results from a web search in the list view
+	 */
 	private void displayWebResults() {
 		String[] displayList = converter.convertRecipeList(recipes);
 		

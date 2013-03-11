@@ -40,12 +40,14 @@ public class RecipeManager {
 	 */
 	private DataManager dataManager;
 
-	/**
-		 */
 	// TODO: This method might get revised to getWebRecipesByName or something
 	// like that, since we don't
 	// want to pull the entire list every time ideally. Need to look closer at
 	// the webservice stuff
+	/**
+	 * Getter of web recipes - NOT IMPLEMENTED
+	 * @return
+	 */
 	public Collection<Recipe> getWebRecipes() {
 		return null;
 	}
@@ -75,6 +77,12 @@ public class RecipeManager {
 			tempHTTPManager.addRecipe(recipe, URL);
 	}
 	
+	/**
+	 * Publish failed recipe - testing purposes
+	 * @param recipe Is the recipe o be published
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public void publishToFail(Recipe recipe) throws ClientProtocolException, IOException{
 	HTTPManager tempHTTPManager = new HTTPManager();
 	tempHTTPManager.addToInvalid(recipe);
@@ -91,6 +99,13 @@ public class RecipeManager {
 		dataManager.saveToFile(c);
 	}
 	
+	/**
+	 * To set a given recipe with a given ID
+	 * @param id Is the ID that new recipe is to be set at
+	 * @param recipe Is the recipe to be set
+	 * @param c Is the application context
+	 * @throws FullFileException
+	 */
 	public void setRecipe(int id, Recipe recipe, Context c) throws FullFileException {
 		dataManager.getRecipeBook().setRecipeByID(id, recipe);
 		dataManager.saveToFile(c);
@@ -164,11 +179,18 @@ public class RecipeManager {
 		return null;
 	}
 
+	/**
+	 * To get all local recipes
+	 * @return Returns ArrayList of all local recipes
+	 */
 	public ArrayList<Recipe> getRecipes() {
 		return dataManager.getRecipeBook().getRecipes();
 	}
 
-	
+	/**
+	 * Locally searches, returning IDs of all local recipes
+	 * @return Returns Arraylist<Integer> of IDs of all local recipes
+	 */
 	public ArrayList<Integer> searchLocalAll() {
 		
 		ArrayList<Recipe> recipes = this.getRecipes();
@@ -181,6 +203,11 @@ public class RecipeManager {
 		return ids;
 	}
 	
+	/**
+	 * Locally searches by keyword, returning IDs of all matching recipes
+	 * @param keyword Is the keyword used in the search
+	 * @return Returns Arraylist<Integer> of IDs of all local recipes with names containing the keyword
+	 */
 	public ArrayList<Integer> searchLocalKeyword(String keyword) {
 		
 		ArrayList<Recipe> recipes = this.getRecipes();

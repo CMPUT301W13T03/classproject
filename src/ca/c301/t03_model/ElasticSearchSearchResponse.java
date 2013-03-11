@@ -3,6 +3,9 @@ package ca.c301.t03_model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Handles elastic search results
+ */
 public class ElasticSearchSearchResponse<T> {
     int took;
     boolean timed_out;

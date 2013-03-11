@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import ca.c301.t03_recipes.RecipeApplication;
 
+/**
+ * Class containing functions required to convert data for display in list views
+ */
 public class DisplayConverter {
 
 	/**
@@ -24,6 +27,14 @@ public class DisplayConverter {
 		
 		return outArray;
 	}
+	
+	/**
+	 * To convert an ArrayList<Recipe> of recipes into an array of Strings for display
+	 * @param recipes
+	 * 		recipe ArrayList to be converted
+	 * @return
+	 * 		Array containing recipe names
+	 */
 	public String[] convertRecipeList(ArrayList<Recipe> recipes){
 		
 		ArrayList<String> stringList = new ArrayList<String>();
@@ -36,6 +47,16 @@ public class DisplayConverter {
 		
 		return outArray;	
 		}
+	
+	/**
+	 * To convert an ArrayList<Integer> of recipe IDs into an array of Strings for display
+	 * @param id
+	 * 		ArrayList of recipe IDs to be converted
+	 * @param app
+	 * 		Application context
+	 * @return
+	 * 		Array containing recipe names
+	 */
  	public String[] convertRecipeList(ArrayList<Integer> id, RecipeApplication app) {
 		
 		ArrayList<String> stringList = new ArrayList<String>();

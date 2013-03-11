@@ -3,11 +3,11 @@ package ca.c301.t03_model;
 import java.io.Serializable;
 import java.util.Collection;
 
+/**
+ * Contains functions relating to virtual pantry - NOT IMPLEMENTED
+ */
 public class VirtualPantry implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2115920372295854756L;
 	/** 
 	 * @uml.property name="ingredients"

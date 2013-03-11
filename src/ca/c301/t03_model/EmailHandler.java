@@ -1,5 +1,8 @@
 package ca.c301.t03_model;
 
+/**
+ * Handles email operations - NOT IMPLEMENTED
+ */
 public class EmailHandler {
 
 	/**

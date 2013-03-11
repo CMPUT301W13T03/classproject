@@ -23,6 +23,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Contains functions that handle all web related functionality
+ */
 public class HTTPManager {
 	// http Connector
 	private HttpClient httpclient = new DefaultHttpClient();
@@ -68,6 +71,11 @@ public class HTTPManager {
 		//May possibly need to deallocate more resources here. No 4.0 implementation of releaseconnection();
 	}
 
+	/**
+	 * Sets ID of recipe to given ID
+	 * @param id
+	 * 		id provided
+	 */
 	public void setID(int id) throws IllegalStateException, IOException{
 		// TODO httpPost is currently directed at the testing server, will need to change to "http://cmput301.softwareprocess.es:8080/CMPUT301W13T03/"
 		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/iterator/0");
@@ -107,6 +115,13 @@ public class HTTPManager {
 		//May possibly need to deallocate more resources here. No 4.0 implementation of releaseconnection();
 	}
 
+	/**
+	 * Gets ID from recipe posted online
+	 * @return
+	 * 		ID from recipe posted online
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	private int getID() throws ClientProtocolException, IOException {
 		int id = 0;
 		HttpGet getRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/iterator/0");
@@ -162,6 +177,15 @@ public class HTTPManager {
 		return recipe;
 	}
 
+	/**
+	 * Searches web for provided keyword
+	 * @param str
+	 * 		Provided keyword for search
+	 * @return
+	 * 		Matchin recipes stored in an ArrayList of recipes
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public ArrayList<Recipe> searchRecipes(String str) throws ClientProtocolException, IOException {
 		ArrayList<Recipe> results = new ArrayList<Recipe>();
 		HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/recipezzz/_search?pretty=1&q=" +
@@ -202,6 +226,13 @@ public class HTTPManager {
 		return json;
 	}
 
+	/**
+	 * Adds given recipe to invalid
+	 * @param recipe
+	 * 		Provided recipe to add to invalid
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	public void addToInvalid(Recipe recipe) throws ClientProtocolException, IOException{
 		HttpPost httpPost = new HttpPost("http://asdoiahspdsdfewdfssdfvcvergedfsljkl.softwareprocess.es:8080/testing/recipezzz/"+recipe.getId());
 		StringEntity stringEntity = null;
