@@ -3,6 +3,8 @@ package ca.c301.t03_model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ca.c301.t03_recipes.RecipeApplication;
 
@@ -176,8 +178,14 @@ public class RecipeManager {
 		ArrayList<Recipe> recipes = this.getRecipes();
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		
+		Pattern pattern = Pattern.compile(".*" + keyword + ".*", Pattern.CASE_INSENSITIVE);
+		Matcher matcher;
+		
 		for (int i = 0; i < recipes.size(); i++) {
-			ids.add(recipes.get(i).getId());
+			matcher = pattern.matcher(recipes.get(i).getName());
+			if (matcher.find()) {
+				ids.add(recipes.get(i).getId());
+			}
 		}
 		
 		return ids;
