@@ -40,7 +40,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	}
 	public void testBadConnection(){
 		//TODO Need more implementation info (mock object?)
-		fail("Test not implemented");
+		fail("Test not implemented yet");
 	}
 	@Test
 	public void testSaveRecipeLocally(){
