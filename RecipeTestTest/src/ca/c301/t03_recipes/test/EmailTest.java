@@ -11,8 +11,8 @@ public class EmailTest extends IntentCatchingTemplate{
 	public EmailTest() {
 		super(MainActivity.class);
 	}
-	/**
-	 * Test to see if any intent is sent.
+	/*
+	 * Test to see if any intent is sent to send an email.
 	 */
 	@Test
 	public void testSendEmail(){
@@ -24,6 +24,10 @@ public class EmailTest extends IntentCatchingTemplate{
 		assertTrue(caughtIntent.getAction() == android.content.Intent.ACTION_SEND);
 
 	}
+	/*
+	 * Test to make sure the intent for sending emails is correctly formatted and
+	 * contains data from the recipe in some form.
+	 */
 	@Test
 	public void testEmailFormat(){
 		RecipeManager manager = new RecipeManager(getActivity());

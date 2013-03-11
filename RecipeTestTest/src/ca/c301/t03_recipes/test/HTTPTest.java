@@ -16,18 +16,24 @@ import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeManager;
 import ca.c301.t03_recipes.MainActivity;
-
+/*
+ * Tests dealing with web specific operations.
+ */
 public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	private final static String TEST_FILE_NAME = "http_test_file";
-
+	
 	public HTTPTest(){
 		super(MainActivity.class);
 	}
+	
+	//Delete testfile before each test.
 	@Before
 	public void setUp() throws Exception{
 		//Delete any existing file.
 		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
 	}
+	//Test to make sure publishing and retrieving recipes from the web works correctly. Must be done all in
+	//one test.
 	@Test
 	public void testPublishRecipe() throws IllegalStateException, IOException{
 		Recipe recipe = new Recipe();
@@ -43,6 +49,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		assertEquals(webRecipe.getIngredient(0).getName(), recipe.getIngredient(0).getName());
 		assertEquals(webRecipe.getIngredient(0).getAmount(), recipe.getIngredient(0).getAmount());
 	}
+	// Test to make sure error where the application is unable to connect to the internet is handled properly.
 	public void testBadConnection(){
 		//TODO Need more implementation info (mock object?)
 		Recipe recipe = new Recipe ("Burger", "Cook a Burger");
@@ -58,6 +65,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 			return;
 		}
 	}
+	//Test to make sure a recipe can be downloaded from the web and saved locally.
 	@Test
 	public void testSaveRecipeLocally() throws IllegalStateException, IOException{
 		Recipe recipe = new Recipe("Name","Instructions");
@@ -79,6 +87,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		assertEquals(savedRecipe.getInstructions(),"Instructions");
 
 	}
+	//Test to see if a web recipe can be retrieved by its name.
 	@Test
 	public void testSearchForRecipe() throws IllegalStateException, IOException{
 		Recipe recipe0 = new Recipe("Salad", "Put some vegetables in a bowl.");
@@ -98,6 +107,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		assertTrue(findRecipeInList(results, recipe1));
 
 	}
+	//Helper method for searching for recipes.
 	public boolean findRecipeInList(ArrayList<Recipe> recipeList, Recipe recipe)
 	{
 		for(int i = 0; i < recipeList.size(); i++)

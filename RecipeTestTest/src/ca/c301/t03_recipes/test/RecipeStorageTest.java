@@ -16,7 +16,9 @@ import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeBook;
 import ca.c301.t03_model.RecipeManager;
 import ca.c301.t03_recipes.MainActivity;
-
+/*
+ * Tests dealing with the management of local recipe objects and general file storage.
+ */
 public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
 	private final static String TEST_FILE_NAME = "recipe_test_file";
@@ -24,12 +26,13 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		super(MainActivity.class);
 		// TODO Auto-generated constructor stub
 	}
-
+	//Delete testfile before each test.
 	@Before
 	public void setUp() throws Exception{
 		//Delete any existing file.
 		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
 	}
+	//Test creating a recipe and adding it to local storage.
 	@Test
 	public void testCreateRecipe(){
 		Recipe recipe = new Recipe("Name", "Instructions");
@@ -46,6 +49,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 
 		assertSame(savedRecipe,recipe);
 	}
+	//Test retrieving a recipe already in local storage.
 	@Test
 	public void testRetrieveRecipe() {
 		RecipeBook recipeBook = new RecipeBook();
@@ -59,6 +63,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		// Check same recipe is returned.
 		assertSame(retrievedRecipe, recipe);
 	}
+	//Test to make sure DataManager file that holds recipes and ingredients is saved.
 	@Test
 	public void testFileCreation()
 	{
@@ -83,6 +88,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			fail("Error reading from file");
 		}
 	}
+	//Test to make sure DataManager file that holds recipes and ingredients correctly stores a recipe.
 	@Test
 	public void testSavedRecipe(){
 		Recipe recipe = new Recipe("Name", "Instructions");
@@ -114,6 +120,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		}
 
 	}
+	//Test to make sure a recipe can be deleted from local storage.
 	@Test
 	public void testDeleteRecipe() throws IllegalStateException, IOException{
 		Recipe recipe = new Recipe("Name","Instructions");
@@ -135,6 +142,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		assertEquals(savedRecipe.getInstructions(),"Instructions");
 
 	}
+	//Test to make sure multiple recipes can be saved and retrieved.
 	@Test
 	public void testSaveAndRetrieveFromMany(){
 		Recipe recipe0 = new Recipe("Name0", "Instructions0");
@@ -155,6 +163,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		assertSame(recipe2,manager.getLocallySavedRecipeById(2));	
 
 	}
+	//Test to make sure that exception that is thrown when there is no room to save is thrown correctly.
 	@Test
 	public void testFullFile(){
 		boolean exceptionCaught = false;
@@ -168,6 +177,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		}
 		assertTrue(exceptionCaught);
 	}
+	//Mock object for faking a full file exception.
 	class FullDataManager extends DataManager{
 		public FullDataManager(Context c) {
 			super(c);

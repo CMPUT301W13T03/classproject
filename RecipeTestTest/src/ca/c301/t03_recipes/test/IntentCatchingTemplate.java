@@ -9,7 +9,11 @@ import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import ca.c301.t03_recipes.MainActivity;
 import ca.c301.t03_recipes.RecipeApplication;
-
+/*
+ * This is a template class used for catching intents thrown by test cases. It is
+ * useful for seeing if a method is correctly signalling another application using
+ * an intent.
+ */
 public class IntentCatchingTemplate extends ActivityUnitTestCase<MainActivity> {
 
 	protected Intent caughtIntent;
