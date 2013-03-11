@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
+/**
+ * Activity used to view recipes after searching
+ */
 public class ViewRecipeActivity extends Activity {
 
 	private Recipe recipe;
@@ -103,6 +106,11 @@ public class ViewRecipeActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * Is called when this activity resumes
+	 * Updates to show recipe if it was edited
+	 * Returns to search if recipe was deleted
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -128,6 +136,9 @@ public class ViewRecipeActivity extends Activity {
 		instructionsDisplay.setText(recipe.getInstructions());
 	}
 	
+	/**
+	 * Receives 0 if recipe was edited or 1 if it was deleted
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 

@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * Activity used to take and save new photos
+ */
 public class PhotoActivity extends Activity {
 	
 	/**

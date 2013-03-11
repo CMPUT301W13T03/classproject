@@ -24,6 +24,9 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
+/**
+ * Activity used to search recipes
+ */
 public class SearchActivity extends Activity {
 
 	private ArrayList<Recipe> recipes;
@@ -94,6 +97,11 @@ public class SearchActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Is called when this activity resumes
+	 * Updates an ArrayAdapter to show search results
+	 * If any ingredient is clicked, starts the ViewRecipeActivity
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();

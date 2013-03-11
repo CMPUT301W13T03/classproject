@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * Activity used to view list of ingredients in virtual pantry
+ */
 public class IngredientListActivity extends Activity {
 
 	/**

@@ -7,6 +7,9 @@ import android.content.Context;
 import android.os.StrictMode;
 import ca.c301.t03_model.RecipeManager;
 
+/**
+ * Application used by activities to access code in the model
+ */
 public class RecipeApplication extends Application{
 
 	/**

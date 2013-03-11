@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * Initial screen, used to access primary activities
+ */
 public class MainActivity extends Activity {
 	
 	/**
