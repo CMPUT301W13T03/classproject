@@ -2,18 +2,26 @@ package ca.c301.t03_recipes.test;
 
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import android.test.ActivityInstrumentationTestCase2;
+import ca.c301.t03_model.DataManager;
 import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeManager;
 import ca.c301.t03_recipes.MainActivity;
 
 public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
+	private final static String TEST_FILE_NAME = "http_test_file";
 
 	public HTTPTest(){
 		super(MainActivity.class);
+	}
+	@Before
+	public void setUp() throws Exception{
+		//Delete any existing file.
+		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
 	}
 	@Test
 	public void testPublishRecipe(){
@@ -23,7 +31,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		Ingredient water = new Ingredient("Water");
 		recipe.addIngredient(water);
 		recipe.setInstructions("Put it in a cup, you idiot.");
-		RecipeManager manager = new RecipeManager(getActivity());
+		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
 		manager.publishRecipeToWeb(recipe);
 		Recipe webRecipe = manager.getSingleRecipe(18473);
 		assertEquals(webRecipe.getName(), recipe.getName());
@@ -38,7 +46,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	public void testSaveRecipeLocally(){
 		Recipe recipe = new Recipe("Name","Instructions");
 		recipe.setId(1900);
-		RecipeManager manager = new RecipeManager(getActivity());
+		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
 		
 		manager.publishRecipeToWeb(recipe);
 		manager.saveWebRecipeByID(1900);
@@ -54,7 +62,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	public void testSearchForRecipe(){
 		Recipe recipe0 = new Recipe("Salad", "Put some vegetables in a bowl.");
 		Recipe recipe1 = new Recipe("Cookie", "Make a cookie");
-		RecipeManager manager = new RecipeManager(getActivity());
+		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
 		manager.publishRecipeToWeb(recipe0);
 		manager.publishRecipeToWeb(recipe1);
 		ArrayList<Recipe> results = manager.searchWebForRecipeByName("Cookie");
