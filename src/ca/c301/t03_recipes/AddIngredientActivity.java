@@ -9,12 +9,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-/*
- * TODO:
- * Add tests for proper input
+/**
+ * Activity used to add new ingredients to recipes
  */
-
 public class AddIngredientActivity extends Activity {
 
 	private Ingredient ingredient;
@@ -57,6 +56,8 @@ public class AddIngredientActivity extends Activity {
                 	
                 	finish();
             	}
+            	
+            	Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
             }
         });
 	}
