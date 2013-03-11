@@ -47,8 +47,8 @@ public class VirtualPantry implements Serializable{
 	 * @param ingredient2 Is the ingredient to be added
 	 */
 	public void addIngredient(Ingredient ingredient2) {
-		// TODO Auto-generated method stub
-		ingredient.add(ingredient2);
+		// TODO Implement
+//		ingredient.add(ingredient2);
 		//Do we need another CurID, just like in RecipeBook?
 	}
 

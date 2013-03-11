@@ -17,13 +17,11 @@ public class PhotoTest extends IntentCatchingTemplate{
 	public PhotoTest(){
     	super(MainActivity.class);
     }
-	@Before
-	public void setUp() throws Exception{
-		//Delete any existing file.
-		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
-	}
     @Test
     public void testPhotoIntent(){
+		//Delete any existing file.
+		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
+    	
     	RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
     	Recipe recipe = new Recipe("Name", "Instructions");
     	try {

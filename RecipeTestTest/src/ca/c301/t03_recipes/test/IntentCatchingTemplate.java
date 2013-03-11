@@ -2,11 +2,13 @@ package ca.c301.t03_recipes.test;
 
 import org.junit.Before;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import ca.c301.t03_recipes.MainActivity;
+import ca.c301.t03_recipes.RecipeApplication;
 
 public class IntentCatchingTemplate extends ActivityUnitTestCase<MainActivity> {
 
@@ -31,8 +33,11 @@ public class IntentCatchingTemplate extends ActivityUnitTestCase<MainActivity> {
 	@Before
     protected void setUp() throws Exception {
         super.setUp();
+        Application app = new RecipeApplication(getInstrumentation());
+        setApplication(app);
+/*        
         IntentCatchingContext contextWrapper = new IntentCatchingContext(getInstrumentation().getTargetContext());
-        setActivityContext(contextWrapper);
+        setActivityContext(contextWrapper);*/
         startActivity(new Intent(), null, null);
     }
 }
