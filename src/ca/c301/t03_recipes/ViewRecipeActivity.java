@@ -3,6 +3,7 @@ package ca.c301.t03_recipes;
 import java.util.ArrayList;
 
 import ca.c301.t03_model.DisplayConverter;
+import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_recipes.R;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class ViewRecipeActivity extends Activity {
 
@@ -26,6 +28,7 @@ public class ViewRecipeActivity extends Activity {
 	
 	private ListView ingredientsList;
 	private int id;
+	private int online;
 	
 	/**
 	 * Is responsible for creating the view of the activity,
@@ -38,6 +41,7 @@ public class ViewRecipeActivity extends Activity {
 		
 		Bundle data = getIntent().getExtras();
 		id = data.getInt("id");
+		online = data.getInt("online");
 		
 		converter = new DisplayConverter();
 		
@@ -60,16 +64,34 @@ public class ViewRecipeActivity extends Activity {
             }
         });
         
-        Button editButton = (Button) findViewById(R.id.button_edit);
-        editButton.setOnClickListener(new OnClickListener() {
+        Button editDownloadButton = (Button) findViewById(R.id.button_edit_download);
+        
+        if (online == 1) {
+        	editDownloadButton.setText("Download");
+        }
+        editDownloadButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(ViewRecipeActivity.this, EditRecipeActivity.class);
-                
-                Bundle data = new Bundle();
-				data.putInt("id", id);
-                
-				startActivityForResult(intent, 1);
+            	if (online == 0) {
+            		Intent intent = new Intent(ViewRecipeActivity.this, EditRecipeActivity.class);
+                    
+                    Bundle data = new Bundle();
+    				data.putInt("id", id);
+    				intent.putExtras(data);
+                    
+    				startActivityForResult(intent, 1);
+            	}
+            	else {
+            		
+            		// PUT DOWNLOAD CODE HERE
+            		//Actually saving code, its downloaded.
+            		try {
+						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+					} catch (FullFileException e) {
+						Toast.makeText(getApplicationContext(), "No room on disk to save.", Toast.LENGTH_LONG).show();
+						e.printStackTrace();
+					}            		
+            	}
             }
         });
 	}
@@ -85,14 +107,14 @@ public class ViewRecipeActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		/*
-		 * TODO:
-		 * - move code into search button listener
-		 * - implement search keywords
-		 * - implement check boxes for local/web search
-		 */
-		
-		recipe = ((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id);
+		if (online == 0) {
+			recipe = ((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id);
+		}
+		else {
+			// LOAD ONLINE RECIPE HERE
+			//TODO getting by localid for now.
+			recipe = ((RecipeApplication) getApplication()).getRecipeManager().getSingleRecipe(id);
+		}
 		
 		String[] displayList = converter.convertIngredientsList(recipe.getIngredients());
 		

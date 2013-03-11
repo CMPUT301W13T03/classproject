@@ -41,10 +41,17 @@ public class EditRecipeActivity extends Activity {
 
 		converter = new DisplayConverter();	
 		recipe = new Recipe();
+<<<<<<< HEAD
 
 		Bundle data = getIntent().getExtras();
 		id = data.getInt("id");
 
+=======
+		
+		Bundle data = getIntent().getExtras();
+		id = data.getInt("id");
+		
+>>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 		ingredientsList = (ListView) findViewById(R.id.listView_ingredients);
 
 		recipe.setName(((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id).getName());
@@ -131,7 +138,11 @@ public class EditRecipeActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 		String[] displayList = converter.convertIngredientsList(recipe.getIngredients());
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, displayList);

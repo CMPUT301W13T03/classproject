@@ -4,12 +4,18 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import org.apache.http.client.ClientProtocolException;
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 import org.junit.Before;
 import org.junit.Test;
 
 import android.test.ActivityInstrumentationTestCase2;
+<<<<<<< HEAD
 import android.util.Log;
+=======
+>>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 import ca.c301.t03_model.DataManager;
 import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
@@ -22,6 +28,11 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
 	public HTTPTest(){
 		super(MainActivity.class);
+	}
+	@Before
+	public void setUp() throws Exception{
+		//Delete any existing file.
+		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
 	}
 	@Before
 	public void setUp() throws Exception{
@@ -45,6 +56,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	}
 	public void testBadConnection(){
 		//TODO Need more implementation info (mock object?)
+<<<<<<< HEAD
 		Recipe recipe = new Recipe ("Burger", "Cook a Burger");
 		recipe.setId(93732);
 		RecipeManager manager = new RecipeManager(getActivity());
@@ -61,13 +73,20 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 			
 		}
 		fail("Bad Connection test failed");
+=======
+		fail("Test not implemented yet");
+>>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 	}
 	@Test
 	public void testSaveRecipeLocally() throws IllegalStateException, IOException{
 		Recipe recipe = new Recipe("Name","Instructions");
 		recipe.setId(1900);
 		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 		manager.publishRecipeToWeb(recipe);
 		Recipe downloadedRecipe = manager.getSingleRecipe(1900);
 		try {
@@ -76,7 +95,11 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 			fail("Full file exception");
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		//id would be 0  because its the first one saved.
+=======
+		//id would be 0 because its the first one saved.
+>>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 		Recipe savedRecipe = manager.getLocallySavedRecipeById(0);
 		assertNotNull(savedRecipe);
 		assertEquals(savedRecipe.getName(),"Name");
@@ -87,6 +110,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	public void testSearchForRecipe() throws IllegalStateException, IOException{
 		Recipe recipe0 = new Recipe("Salad", "Put some vegetables in a bowl.");
 		Recipe recipe1 = new Recipe("Cookie", "Make a cookie");
+<<<<<<< HEAD
 		Recipe recipe2 = new Recipe("Cookies", "Who makes one cookie? Idiot.");
 		recipe0.setId(0);
 		recipe1.setId(1);
@@ -94,6 +118,10 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
 		//THIS IS NOT YET IMPLEMENTED
 		//manager.resetServerID();
+=======
+		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
+		manager.publishRecipeToWeb(recipe0);
+>>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 		manager.publishRecipeToWeb(recipe1);
 		manager.publishRecipeToWeb(recipe0);
 		manager.publishRecipeToWeb(recipe2);
