@@ -6,11 +6,8 @@ import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-<<<<<<< HEAD
 import org.apache.http.client.ClientProtocolException;
 
-=======
->>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 import ca.c301.t03_recipes.RecipeApplication;
 
 import android.R;

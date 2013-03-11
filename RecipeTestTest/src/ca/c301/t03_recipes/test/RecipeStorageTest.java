@@ -64,11 +64,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	{
 		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
 		RecipeManager manager = new RecipeManager(dataManager);
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 		FileInputStream fin;
 
 		try {
@@ -119,7 +115,6 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 
 	}
 	@Test
-<<<<<<< HEAD
 	public void testDeleteRecipe() throws IllegalStateException, IOException{
 		Recipe recipe = new Recipe("Name","Instructions");
 		recipe.setId(1900);
@@ -127,35 +122,18 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 
 		manager.publishRecipeToWeb(recipe);
 		Recipe downloadedRecipe = manager.getSingleRecipe(1900);
-=======
-	public void testDeleteRecipe(){
-		Recipe recipe = new Recipe("Name", "Instructions");
-		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
-		RecipeManager manager = new RecipeManager(dataManager);
->>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 		try {
 			manager.saveRecipe(downloadedRecipe, getActivity());
 		} catch (FullFileException e) {
 			fail("Full file exception");
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
 		//id would be 0 because its the first one saved.
 		Recipe savedRecipe = manager.getLocallySavedRecipeById(0);
 		assertNotNull(savedRecipe);
 		assertEquals(savedRecipe.getName(),"Name");
 		assertEquals(savedRecipe.getInstructions(),"Instructions");
 
-=======
-		
-		try {
-			manager.deleteLocallySavedRecipeById(0, getActivity());
-		} catch (FullFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		assertNull(manager.getLocallySavedRecipeById(0));
->>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 	}
 	@Test
 	public void testSaveAndRetrieveFromMany(){
@@ -165,11 +143,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 
 		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
 		RecipeManager manager = new RecipeManager(dataManager);
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> branch 'master' of ssh://git@github.com/CMPUT301W13T03/classproject.git
 		try {
 			manager.saveRecipe(recipe0, getActivity());
 			manager.saveRecipe(recipe1, getActivity());
