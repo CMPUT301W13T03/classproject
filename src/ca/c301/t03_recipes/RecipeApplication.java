@@ -1,8 +1,10 @@
 package ca.c301.t03_recipes;
 
+import android.annotation.TargetApi;
 import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
+import android.os.StrictMode;
 import ca.c301.t03_model.RecipeManager;
 
 public class RecipeApplication extends Application{
@@ -20,7 +22,15 @@ public class RecipeApplication extends Application{
 	public RecipeApplication(Instrumentation instrumentation) {
 		attachBaseContext(instrumentation.getTargetContext());
 	}
+	//TODO None of this eventually.
+	@TargetApi(9)
+	@Override
+	public void onCreate()
+	{
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
+		StrictMode.setThreadPolicy(policy); 
+	}
 	/**
 	 * Getter of the property <tt>recipeManager</tt>
 	 * @return  Returns the recipeManager.

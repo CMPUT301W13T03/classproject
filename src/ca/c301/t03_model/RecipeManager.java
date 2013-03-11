@@ -12,6 +12,7 @@ import ca.c301.t03_recipes.RecipeApplication;
 
 import android.R;
 import android.content.Context;
+import android.util.Log;
 
 public class RecipeManager {
 
@@ -131,6 +132,7 @@ public class RecipeManager {
 	 */
 	public ArrayList<Recipe> searchWebForRecipeByName(String name) throws ClientProtocolException, IOException {
 		HTTPManager tempHTTPManager = new HTTPManager();
+		Log.i("RecipeManager","Searching web for " + name);
 			return tempHTTPManager.searchRecipes(name);
 
 	}
