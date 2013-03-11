@@ -72,6 +72,7 @@ public class AddRecipeActivity extends Activity {
                 	}
                 	catch (FullFileException e) {
                 		e.printStackTrace();
+                		Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
                 	}
                 	
                 	finish();
@@ -95,6 +96,7 @@ public class AddRecipeActivity extends Activity {
                 	}
                 	catch (FullFileException e) {
                 		e.printStackTrace();
+                		Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
                 	}
                 	
                 	// ADD CODE TO POST RECIPE TO WEB HERE
