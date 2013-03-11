@@ -3,6 +3,7 @@ package ca.c301.t03_recipes;
 import java.util.ArrayList;
 
 import ca.c301.t03_model.DisplayConverter;
+import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_recipes.R;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class ViewRecipeActivity extends Activity {
 
@@ -82,7 +84,13 @@ public class ViewRecipeActivity extends Activity {
             	else {
             		
             		// PUT DOWNLOAD CODE HERE
-            		
+            		//Actually saving code, its downloaded.
+            		try {
+						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
+					} catch (FullFileException e) {
+						Toast.makeText(getApplicationContext(), "No room on disk to save.", Toast.LENGTH_LONG).show();
+						e.printStackTrace();
+					}            		
             	}
             }
         });
@@ -104,8 +112,8 @@ public class ViewRecipeActivity extends Activity {
 		}
 		else {
 			// LOAD ONLINE RECIPE HERE
-			
-			// recipe = 
+			//TODO getting by localid for now.
+			recipe = ((RecipeApplication) getApplication()).getRecipeManager().getSingleRecipe(id);
 		}
 		
 		String[] displayList = converter.convertIngredientsList(recipe.getIngredients());

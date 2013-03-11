@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.c301.t03_model.DataManager;
+import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeManager;
@@ -49,8 +50,13 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
 		
 		manager.publishRecipeToWeb(recipe);
-		manager.saveWebRecipeByID(1900);
-		
+		Recipe downloadedRecipe = manager.getSingleRecipe(1900);
+		try {
+			manager.saveRecipe(downloadedRecipe, getActivity());
+		} catch (FullFileException e) {
+			fail("Full file exception");
+			e.printStackTrace();
+		}
 		//id would be 0 because its the first one saved.
 		Recipe savedRecipe = manager.getLocallySavedRecipeById(0);
 		assertNotNull(savedRecipe);

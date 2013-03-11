@@ -50,7 +50,8 @@ public class SearchActivity extends Activity {
             @Override
             public void onClick(View arg0) {
             	if (onlineCheck.isChecked()) {
-                    
+                    recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchWebForRecipeByName(keyword.getText().toString());
+                    displayWebResults();
             		// PUT ONLINE SEARCH CODE HERE
             		
                 }
@@ -67,6 +68,7 @@ public class SearchActivity extends Activity {
                     displayLocalResults();
                 }
             }
+
         });
 	}
 
@@ -82,7 +84,8 @@ public class SearchActivity extends Activity {
 		super.onResume();
 		
 		if (onlineCheck.isChecked()) {
-            
+            recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchWebForRecipeByName(keyword.getText().toString());
+            displayWebResults();
         }
     	if (offlineCheck.isChecked()) {
             if ( keyword.getText().toString().equals("") ) {        		
@@ -116,6 +119,27 @@ public class SearchActivity extends Activity {
 	            startActivity(intent);
 			}
 		}); 
+	}
+	private void displayWebResults() {
+		String[] displayList = converter.convertRecipeList(recipes);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1, displayList);
+		recipeList.setAdapter(adapter);
+		
+		recipeList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int index, long id) {
+				Intent intent = new Intent(SearchActivity.this, ViewRecipeActivity.class);
+					
+				Bundle data = new Bundle();
+//				data.putInt("id", ids.get(index));
+				data.putInt("online", 1);
+				intent.putExtras(data);
+				
+	            startActivity(intent);
+			}
+		}); 
+		
 	}
 	
 }
