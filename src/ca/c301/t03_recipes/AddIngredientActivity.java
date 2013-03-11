@@ -56,8 +56,8 @@ public class AddIngredientActivity extends Activity {
                 	
                 	finish();
             	}
-            	
-            	Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
+            	else
+            		Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_LONG).show();
             }
         });
 	}

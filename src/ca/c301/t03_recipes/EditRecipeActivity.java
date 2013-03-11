@@ -83,8 +83,8 @@ public class EditRecipeActivity extends Activity {
                 	
                 	finish();
             	}
-            	
-            	Toast.makeText(getApplicationContext(), 
+            	else
+            		Toast.makeText(getApplicationContext(), 
             			"Please fill in all fields and add at least one ingredient", Toast.LENGTH_LONG).show();
             }
         });
