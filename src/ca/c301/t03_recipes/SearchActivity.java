@@ -121,7 +121,7 @@ public class SearchActivity extends Activity {
 					
 				Bundle data = new Bundle();
 				data.putInt("id", ids.get(index));
-					
+				data.putInt("online", 0);
 				intent.putExtras(data);
 					
 	            startActivity(intent);

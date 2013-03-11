@@ -26,6 +26,7 @@ public class ViewRecipeActivity extends Activity {
 	
 	private ListView ingredientsList;
 	private int id;
+	private int online;
 	
 	/**
 	 * Is responsible for creating the view of the activity,
@@ -38,6 +39,7 @@ public class ViewRecipeActivity extends Activity {
 		
 		Bundle data = getIntent().getExtras();
 		id = data.getInt("id");
+		online = data.getInt("online");
 		
 		converter = new DisplayConverter();
 		
@@ -60,16 +62,27 @@ public class ViewRecipeActivity extends Activity {
             }
         });
         
-        Button editButton = (Button) findViewById(R.id.button_edit);
-        editButton.setOnClickListener(new OnClickListener() {
+        Button editDownloadButton = (Button) findViewById(R.id.button_edit_download);
+        
+        if (online == 1) {
+        	editDownloadButton.setText("Download");
+        }
+        editDownloadButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(ViewRecipeActivity.this, EditRecipeActivity.class);
-                
-                Bundle data = new Bundle();
-				data.putInt("id", id);
-                
-				startActivityForResult(intent, 1);
+            	if (online == 0) {
+            		Intent intent = new Intent(ViewRecipeActivity.this, EditRecipeActivity.class);
+                    
+                    Bundle data = new Bundle();
+    				data.putInt("id", id);
+                    
+    				startActivityForResult(intent, 1);
+            	}
+            	else {
+            		
+            		// PUT DOWNLOAD CODE HERE
+            		
+            	}
             }
         });
 	}
@@ -92,7 +105,14 @@ public class ViewRecipeActivity extends Activity {
 		 * - implement check boxes for local/web search
 		 */
 		
-		recipe = ((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id);
+		if (online == 0) {
+			recipe = ((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id);
+		}
+		else {
+			// LOAD ONLINE RECIPE HERE
+			
+			// recipe = 
+		}
 		
 		String[] displayList = converter.convertIngredientsList(recipe.getIngredients());
 		
