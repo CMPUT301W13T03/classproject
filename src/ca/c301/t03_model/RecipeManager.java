@@ -3,6 +3,12 @@ package ca.c301.t03_model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.http.client.ClientProtocolException;
+
+import ca.c301.t03_recipes.RecipeApplication;
 
 import android.R;
 import android.content.Context;
@@ -55,18 +61,12 @@ public class RecipeManager {
 	/**
 	 * To publish a given recipe to the webservice
 	 * @param recipe Is the recipe to be published
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
-	public void publishRecipeToWeb(Recipe recipe) {
-		try {
+	public void publishRecipeToWeb(Recipe recipe) throws IllegalStateException, IOException {
 			HTTPManager tempHTTPManager = new HTTPManager();
 			tempHTTPManager.addRecipe(recipe);
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -107,8 +107,22 @@ public class RecipeManager {
 	 * To delete a locally saved recipe with a given id
 	 * @param id Is the id of the recipe to be deleted
 	 */
-	public void deleteLocallySavedRecipeById(int id) {
+	public void deleteLocallySavedRecipeById(int id, Context c) throws FullFileException {
 		dataManager.getRecipeBook().deleteRecipeByID(id);
+		dataManager.saveToFile(c);
+	}
+	
+	public void resetServerID(){
+		HTTPManager httpManager = new HTTPManager();
+		try {
+			httpManager.setID(0);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -117,7 +131,18 @@ public class RecipeManager {
 	 * @return Returns an ArrayList<Recipe> containing the search results
 	 */
 	public ArrayList<Recipe> searchWebForRecipeByName(String name) {
-		return null;
+		HTTPManager httpManager = new HTTPManager();
+		ArrayList<Recipe> results = new ArrayList<Recipe>();
+		try {
+			results = httpManager.searchRecipes(name);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return results;
 	}
 
 	/**
@@ -154,6 +179,41 @@ public class RecipeManager {
 	public void saveWebRecipeByID(int i) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void publishToFail(Recipe recipe) throws ClientProtocolException, IOException{
+		HTTPManager httpManager = new HTTPManager();
+		httpManager.addToInvalid(recipe);
+	}
+	
+	public ArrayList<Integer> searchLocalAll() {
+		
+		ArrayList<Recipe> recipes = this.getRecipes();
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		
+		for (int i = 0; i < recipes.size(); i++) {
+			ids.add(recipes.get(i).getId());
+		}
+		
+		return ids;
+	}
+	
+	public ArrayList<Integer> searchLocalKeyword(String keyword) {
+		
+		ArrayList<Recipe> recipes = this.getRecipes();
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		
+		Pattern pattern = Pattern.compile(".*" + keyword + ".*", Pattern.CASE_INSENSITIVE);
+		Matcher matcher;
+		
+		for (int i = 0; i < recipes.size(); i++) {
+			matcher = pattern.matcher(recipes.get(i).getName());
+			if (matcher.find()) {
+				ids.add(recipes.get(i).getId());
+			}
+		}
+		
+		return ids;
 	}
 
 }
