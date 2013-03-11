@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ca.c301.t03_recipes.RecipeApplication;
+
 import android.R;
 import android.content.Context;
 
@@ -155,6 +157,30 @@ public class RecipeManager {
 	public void saveWebRecipeByID(int i) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public ArrayList<Integer> searchLocalAll() {
+		
+		ArrayList<Recipe> recipes = this.getRecipes();
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		
+		for (int i = 0; i < recipes.size(); i++) {
+			ids.add(recipes.get(i).getId());
+		}
+		
+		return ids;
+	}
+	
+	public ArrayList<Integer> searchLocalKeyword(String keyword) {
+		
+		ArrayList<Recipe> recipes = this.getRecipes();
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		
+		for (int i = 0; i < recipes.size(); i++) {
+			ids.add(recipes.get(i).getId());
+		}
+		
+		return ids;
 	}
 
 }

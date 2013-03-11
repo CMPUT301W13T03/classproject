@@ -53,22 +53,21 @@ public class SearchActivity extends Activity {
                     
                 }
             	if (offlineCheck.isChecked()) {
-                    if ( 1 == 1 ) {
+                    if ( keyword.getText().toString().equals("") ) {
                     	/*
                 		 * TODO:
                 		 * - implement search keywords
                 		 */
                 		
-                		recipes = ((RecipeApplication) getApplication()).getRecipeManager().getRecipes();
+                		ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalAll();
                 		
-                		ids = new ArrayList<Integer>();
-                		
-                		for (int i = 0; i < recipes.size(); i++) {
-                			ids.add(recipes.get(i).getId());
-                		}
-                		
-                		displayLocalResults();
                     }
+                    
+                    else {
+                    	ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
+                    }
+                    
+                    displayLocalResults();
                 }
             }
         });
