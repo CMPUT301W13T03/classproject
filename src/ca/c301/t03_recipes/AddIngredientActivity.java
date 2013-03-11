@@ -25,7 +25,7 @@ public class AddIngredientActivity extends Activity {
 
 	/**
 	 * Is responsible for creating the view of the activity,
-	 * Edit texts and buttons are set here
+	 * Edit texts and buttons are set here 
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

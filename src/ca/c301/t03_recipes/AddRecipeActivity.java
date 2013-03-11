@@ -22,11 +22,9 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-/*
- * TODO:
- * Add tests for proper input
+/**
+ * Activity used to add new recipes
  */
-
 public class AddRecipeActivity extends Activity {
 
 	/** 

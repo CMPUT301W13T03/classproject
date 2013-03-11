@@ -11,9 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-/*
- * TODO:
- * Add tests for proper input
+/**
+ * Activity used to edit or delete ingredients
  */
 public class EditIngredientActivity extends Activity {
 

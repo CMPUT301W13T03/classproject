@@ -20,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+/**
+ * Activity used to edit or delete locally saved recipes
+ */
 public class EditRecipeActivity extends Activity {
 
 	private Recipe recipe;
@@ -131,6 +134,12 @@ public class EditRecipeActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Is called when this activity resumes
+	 * Updates an ArrayAdapter to show list of ingredients
+	 * If any ingredient is clicked, starts the EditIngredientActivity,
+	 * and intends to get a return result from that activity
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
