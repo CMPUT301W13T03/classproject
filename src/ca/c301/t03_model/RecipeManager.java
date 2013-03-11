@@ -15,6 +15,7 @@ import android.content.Context;
 
 public class RecipeManager {
 
+	public String URL = "http://cmput301.softwareprocess.es:8080/testing/recipezzz/";
 	/**
 	 * Constructor with a given context
 	 * @param c Is the Android context
@@ -57,22 +58,20 @@ public class RecipeManager {
 		HTTPManager tempHTTPManager = new HTTPManager();
 		return tempHTTPManager.getRecipe(id);
 	}
+	
+	public void setURL(String URL){
+		this.URL = URL;
+	}
 
 	/**
 	 * To publish a given recipe to the webservice
 	 * @param recipe Is the recipe to be published
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
-	public void publishRecipeToWeb(Recipe recipe) {
-		try {
+	public void publishRecipeToWeb(Recipe recipe) throws IllegalStateException, IOException {
 			HTTPManager tempHTTPManager = new HTTPManager();
-			tempHTTPManager.addRecipe(recipe);
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			tempHTTPManager.addRecipe(recipe, URL);
 	}
 	
 	public void publishToFail(Recipe recipe) throws ClientProtocolException, IOException{
@@ -127,9 +126,13 @@ public class RecipeManager {
 	 * To search for and return a possible list of webservices recipes which matched a given name
 	 * @param name Is the name of the recipe to be searched for
 	 * @return Returns an ArrayList<Recipe> containing the search results
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
 	 */
-	public ArrayList<Recipe> searchWebForRecipeByName(String name) {
-		return null;
+	public ArrayList<Recipe> searchWebForRecipeByName(String name) throws ClientProtocolException, IOException {
+		HTTPManager tempHTTPManager = new HTTPManager();
+			return tempHTTPManager.searchRecipes(name);
+
 	}
 
 	/**

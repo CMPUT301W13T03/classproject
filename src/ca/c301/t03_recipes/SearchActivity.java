@@ -1,12 +1,16 @@
 package ca.c301.t03_recipes;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.apache.http.client.ClientProtocolException;
 
 import ca.c301.t03_model.DisplayConverter;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_recipes.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -18,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class SearchActivity extends Activity {
 
@@ -50,7 +55,17 @@ public class SearchActivity extends Activity {
             @Override
             public void onClick(View arg0) {
             	if (onlineCheck.isChecked()) {
-                    recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchWebForRecipeByName(keyword.getText().toString());
+                    try {
+						recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchWebForRecipeByName(keyword.getText().toString());
+					} catch (ClientProtocolException e) {
+					} catch (IOException e) {
+						Context context = getApplicationContext();
+						CharSequence text = "Unable to Access Internet";
+						int duration = Toast.LENGTH_LONG;
+						
+						Toast toast = Toast.makeText(context, text, duration);
+						toast.show();
+					}
                     displayWebResults();
             		// PUT ONLINE SEARCH CODE HERE
             		
@@ -84,7 +99,19 @@ public class SearchActivity extends Activity {
 		super.onResume();
 		
 		if (onlineCheck.isChecked()) {
-            recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchWebForRecipeByName(keyword.getText().toString());
+            try {
+				recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchWebForRecipeByName(keyword.getText().toString());
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				Context context = getApplicationContext();
+				CharSequence text = "Unable to Access Internet";
+				int duration = Toast.LENGTH_SHORT;
+				
+				Toast toast = Toast.makeText(context, text, duration);
+				toast.show();
+			}
             displayWebResults();
         }
     	if (offlineCheck.isChecked()) {

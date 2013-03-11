@@ -36,11 +36,11 @@ public class HTTPManager {
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
-	public void addRecipe(Recipe recipe) throws IllegalStateException, IOException{
+	public void addRecipe(Recipe recipe, String URL) throws IllegalStateException, IOException{
 		// TODO httpPost is currently directed at the testing server, will need to change to "http://cmput301.softwareprocess.es:8080/CMPUT301W13T03/"
 		//int id = getID();
 		//recipe.setId(id);
-		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/recipezzz/"+recipe.getId());
+		HttpPost httpPost = new HttpPost(URL+recipe.getId());
 		StringEntity stringEntity = null;
 		try {
 			stringEntity = new StringEntity(gson.toJson(recipe));

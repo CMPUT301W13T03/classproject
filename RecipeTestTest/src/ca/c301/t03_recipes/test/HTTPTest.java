@@ -48,19 +48,15 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		Recipe recipe = new Recipe ("Burger", "Cook a Burger");
 		recipe.setId(93732);
 		RecipeManager manager = new RecipeManager(getActivity());
+		manager.setURL("http://asdoiahspdsdfewdfssdfvcvergedfsljkl.softwareprocess.es:8080/testing/recipezzz/");
 		try {
-			manager.publishToFail(recipe);
-		} catch (ClientProtocolException e) {
+			manager.publishRecipeToWeb(recipe);
+		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {
 			return;
 		}
-		catch (IOException e){
-			
-		}
-		fail("Bad Connection test failed");
 	}
 	@Test
 	public void testSaveRecipeLocally() throws IllegalStateException, IOException{
@@ -81,7 +77,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		assertNotNull(savedRecipe);
 		assertEquals(savedRecipe.getName(),"Name");
 		assertEquals(savedRecipe.getInstructions(),"Instructions");
-		
+
 	}
 	@Test
 	public void testSearchForRecipe() throws IllegalStateException, IOException{
