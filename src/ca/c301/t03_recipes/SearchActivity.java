@@ -159,7 +159,7 @@ public class SearchActivity extends Activity {
 				Intent intent = new Intent(SearchActivity.this, ViewRecipeActivity.class);
 					
 				Bundle data = new Bundle();
-//				data.putInt("id", ids.get(index));
+				data.putInt("id", recipes.get(index).getId());
 				data.putInt("online", 1);
 				intent.putExtras(data);
 				
