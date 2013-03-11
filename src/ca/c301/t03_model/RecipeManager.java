@@ -61,12 +61,23 @@ public class RecipeManager {
 	/**
 	 * To publish a given recipe to the webservice
 	 * @param recipe Is the recipe to be published
-	 * @throws IOException 
-	 * @throws IllegalStateException 
 	 */
-	public void publishRecipeToWeb(Recipe recipe) throws IllegalStateException, IOException {
+	public void publishRecipeToWeb(Recipe recipe) {
+		try {
 			HTTPManager tempHTTPManager = new HTTPManager();
 			tempHTTPManager.addRecipe(recipe);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void publishToFail(Recipe recipe) throws ClientProtocolException, IOException{
+	HTTPManager tempHTTPManager = new HTTPManager();
+	tempHTTPManager.addToInvalid(recipe);
 	}
 
 	/**
@@ -111,19 +122,6 @@ public class RecipeManager {
 		dataManager.getRecipeBook().deleteRecipeByID(id);
 		dataManager.saveToFile(c);
 	}
-	
-	public void resetServerID(){
-		HTTPManager httpManager = new HTTPManager();
-		try {
-			httpManager.setID(0);
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * To search for and return a possible list of webservices recipes which matched a given name
@@ -131,18 +129,7 @@ public class RecipeManager {
 	 * @return Returns an ArrayList<Recipe> containing the search results
 	 */
 	public ArrayList<Recipe> searchWebForRecipeByName(String name) {
-		HTTPManager httpManager = new HTTPManager();
-		ArrayList<Recipe> results = new ArrayList<Recipe>();
-		try {
-			results = httpManager.searchRecipes(name);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return results;
+		return null;
 	}
 
 	/**
@@ -176,15 +163,6 @@ public class RecipeManager {
 		return dataManager.getRecipeBook().getRecipes();
 	}
 
-	public void saveWebRecipeByID(int i) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	public void publishToFail(Recipe recipe) throws ClientProtocolException, IOException{
-		HTTPManager httpManager = new HTTPManager();
-		httpManager.addToInvalid(recipe);
-	}
 	
 	public ArrayList<Integer> searchLocalAll() {
 		
