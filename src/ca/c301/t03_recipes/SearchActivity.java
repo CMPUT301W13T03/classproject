@@ -93,6 +93,7 @@ public class SearchActivity extends Activity {
             	/*
         		 * TODO:
         		 * - implement search keywords
+        		 * 
         		 */
         		
         		recipes = ((RecipeApplication) getApplication()).getRecipeManager().getRecipes();
