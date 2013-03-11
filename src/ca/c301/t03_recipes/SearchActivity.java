@@ -51,6 +51,8 @@ public class SearchActivity extends Activity {
             public void onClick(View arg0) {
             	if (onlineCheck.isChecked()) {
                     
+            		// PUT ONLINE SEARCH CODE HERE
+            		
                 }
             	if (offlineCheck.isChecked()) {
                     if ( keyword.getText().toString().equals("") ) {                		
