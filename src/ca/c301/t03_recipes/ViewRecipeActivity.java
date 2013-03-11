@@ -75,6 +75,7 @@ public class ViewRecipeActivity extends Activity {
                     
                     Bundle data = new Bundle();
     				data.putInt("id", id);
+    				intent.putExtras(data);
                     
     				startActivityForResult(intent, 1);
             	}

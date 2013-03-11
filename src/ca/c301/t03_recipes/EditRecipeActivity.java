@@ -41,6 +41,9 @@ public class EditRecipeActivity extends Activity {
 		converter = new DisplayConverter();	
 		recipe = new Recipe();
 		
+		Bundle data = getIntent().getExtras();
+		id = data.getInt("id");
+		
 		ingredientsList = (ListView) findViewById(R.id.listView_ingredients);
 		
 		recipe.setName(((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id).getName());
