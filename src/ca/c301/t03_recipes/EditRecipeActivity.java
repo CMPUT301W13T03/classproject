@@ -132,13 +132,6 @@ public class EditRecipeActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		/*
-		 * TODO:
-		 * - move code into search button listener
-		 * - implement search keywords
-		 * - implement check boxes for local/web search
-		 */
-		
 		String[] displayList = converter.convertIngredientsList(recipe.getIngredients());
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, displayList);

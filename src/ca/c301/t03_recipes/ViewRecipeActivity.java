@@ -99,13 +99,6 @@ public class ViewRecipeActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		/*
-		 * TODO:
-		 * - move code into search button listener
-		 * - implement search keywords
-		 * - implement check boxes for local/web search
-		 */
-		
 		if (online == 0) {
 			recipe = ((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id);
 		}
