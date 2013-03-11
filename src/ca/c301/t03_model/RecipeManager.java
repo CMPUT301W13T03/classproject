@@ -8,14 +8,14 @@ import java.util.regex.Pattern;
 
 import org.apache.http.client.ClientProtocolException;
 
-import ca.c301.t03_recipes.RecipeApplication;
-
-import android.R;
 import android.content.Context;
 import android.util.Log;
 
 public class RecipeManager {
 
+	//	Our server URL: "http://cmput301.softwareprocess.es:8080/CMPUT301W13T03/recipes/"
+	//  Testing Server URL: "http://cmput301.softwareprocess.es:8080/testing/recipezzz/"
+	//Our Prototype is still directed at the test server as we are still testing, swapping this to the server URL is just a switch of this line. 
 	public String URL = "http://cmput301.softwareprocess.es:8080/testing/recipezzz/";
 	/**
 	 * Constructor with a given context
@@ -59,33 +59,25 @@ public class RecipeManager {
 	 */
 	public Recipe getSingleRecipe(int id) {
 		HTTPManager tempHTTPManager = new HTTPManager();
-		return tempHTTPManager.getRecipe(id);
+		return tempHTTPManager.getRecipe(id, URL);
 	}
-	
+	/**
+	 * Sets the URL for this recipe manager
+	 * @param URL where searching and adding will be done
+	 */
 	public void setURL(String URL){
 		this.URL = URL;
 	}
 
 	/**
 	 * To publish a given recipe to the webservice
-	 * @param recipe Is the recipe to be published
+	 * @param recipe is the recipe to be published
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
 	public void publishRecipeToWeb(Recipe recipe) throws IllegalStateException, IOException {
-			HTTPManager tempHTTPManager = new HTTPManager();
-			tempHTTPManager.addRecipe(recipe, URL);
-	}
-	
-	/**
-	 * Publish failed recipe - testing purposes
-	 * @param recipe Is the recipe o be published
-	 * @throws ClientProtocolException
-	 * @throws IOException
-	 */
-	public void publishToFail(Recipe recipe) throws ClientProtocolException, IOException{
-	HTTPManager tempHTTPManager = new HTTPManager();
-	tempHTTPManager.addToInvalid(recipe);
+		HTTPManager tempHTTPManager = new HTTPManager();
+		tempHTTPManager.addRecipe(recipe, URL);
 	}
 
 	/**
@@ -93,12 +85,12 @@ public class RecipeManager {
 	 * @param recipe Is the recipe to be saved
 	 * @param c Is the Android context
 	 * @throws FullFileException
-	*/
+	 */
 	public void saveRecipe(Recipe recipe, Context c) throws FullFileException {
 		dataManager.getRecipeBook().addRecipe(recipe);
 		dataManager.saveToFile(c);
 	}
-	
+
 	/**
 	 * To set a given recipe with a given ID
 	 * @param id Is the ID that new recipe is to be set at
@@ -148,7 +140,7 @@ public class RecipeManager {
 	public ArrayList<Recipe> searchWebForRecipeByName(String name) throws ClientProtocolException, IOException {
 		HTTPManager tempHTTPManager = new HTTPManager();
 		Log.i("RecipeManager","Searching web for " + name);
-			return tempHTTPManager.searchRecipes(name);
+		return tempHTTPManager.searchRecipes(name, URL);
 
 	}
 
@@ -192,37 +184,37 @@ public class RecipeManager {
 	 * @return Returns Arraylist<Integer> of IDs of all local recipes
 	 */
 	public ArrayList<Integer> searchLocalAll() {
-		
+
 		ArrayList<Recipe> recipes = this.getRecipes();
 		ArrayList<Integer> ids = new ArrayList<Integer>();
-		
+
 		for (int i = 0; i < recipes.size(); i++) {
 			ids.add(recipes.get(i).getId());
 		}
-		
+
 		return ids;
 	}
-	
+
 	/**
 	 * Locally searches by keyword, returning IDs of all matching recipes
 	 * @param keyword Is the keyword used in the search
 	 * @return Returns Arraylist<Integer> of IDs of all local recipes with names containing the keyword
 	 */
 	public ArrayList<Integer> searchLocalKeyword(String keyword) {
-		
+
 		ArrayList<Recipe> recipes = this.getRecipes();
 		ArrayList<Integer> ids = new ArrayList<Integer>();
-		
+
 		Pattern pattern = Pattern.compile(".*" + keyword + ".*", Pattern.CASE_INSENSITIVE);
 		Matcher matcher;
-		
+
 		for (int i = 0; i < recipes.size(); i++) {
 			matcher = pattern.matcher(recipes.get(i).getName());
 			if (matcher.find()) {
 				ids.add(recipes.get(i).getId());
 			}
 		}
-		
+
 		return ids;
 	}
 

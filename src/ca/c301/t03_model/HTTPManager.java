@@ -24,23 +24,22 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Contains functions that handle all web related functionality
+ * Contains functions that handle all web related functionality, most of the adding and searching of recipes is heavily based off of the ESDemo code.
  */
 public class HTTPManager {
-	// http Connector
-	private HttpClient httpclient = new DefaultHttpClient();
 
-	// JSON Utilities
+	private HttpClient httpclient = new DefaultHttpClient();
 	private Gson gson = new Gson();
 
 	/**
-	 * Consumes the POST/Insert operation of the service
-	 * @param recipe Is the recipe to be published to the webservice
+	 * Sends a recipe to be added to the indicated server
+	 * @param recipe is the recipe to be published to the webservice
+	 * @param URL is the URL where the recipe is to be stored
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
 	public void addRecipe(Recipe recipe, String URL) throws IllegalStateException, IOException{
-		// TODO httpPost is currently directed at the testing server, will need to change to "http://cmput301.softwareprocess.es:8080/CMPUT301W13T03/"
+		// TODO Implement the server-side ID tracking
 		//int id = getID();
 		//recipe.setId(id);
 		HttpPost httpPost = new HttpPost(URL+recipe.getId());
@@ -72,9 +71,9 @@ public class HTTPManager {
 	}
 
 	/**
-	 * Sets ID of recipe to given ID
+	 * NOT YET FUNCTIONAL
+	 * Sets the serverside ID to a set integer
 	 * @param id
-	 * 		id provided
 	 */
 	public void setID(int id) throws IllegalStateException, IOException{
 		// TODO httpPost is currently directed at the testing server, will need to change to "http://cmput301.softwareprocess.es:8080/CMPUT301W13T03/"
@@ -100,10 +99,9 @@ public class HTTPManager {
 			e.printStackTrace();
 		}
 
-		//		String status = response.getStatusLine().toString();
-		//		System.out.println(status);
 		HttpEntity entity = response.getEntity();
 
+		//TODO Make sure this is clearing everything properly
 		try {
 			// May need if statement, check isStreaming();
 			entity.consumeContent();
@@ -116,9 +114,8 @@ public class HTTPManager {
 	}
 
 	/**
-	 * Gets ID from recipe posted online
-	 * @return
-	 * 		ID from recipe posted online
+	 * Get the current iterator from server
+	 * NOT YET FUNCTIONAL
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
@@ -138,29 +135,23 @@ public class HTTPManager {
 	}
 
 	/**
-	 * Consumes the Get operation of the service
+	 * Retrieves a specific ID recipe from the server
 	 * @param id Is the ID of the recipe to be retrieved
 	 */
-	public Recipe getRecipe(int id){
+	public Recipe getRecipe(int id, String URL){
 		Recipe recipe = null;
 		try{
-			HttpGet getRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/recipezzz/"+id);//S4bRPFsuSwKUDSJImbCE2g?pretty=1
+			HttpGet getRequest = new HttpGet(URL+id);
 
 			getRequest.addHeader("Accept","application/json");
 
 			HttpResponse response = httpclient.execute(getRequest);
 
-			//			String status = response.getStatusLine().toString();
-			//			System.out.println(status);
-
 			String json = getEntityContent(response);
 
 
-			// We have to tell GSON what type we expect
 			Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<Recipe>>(){}.getType();
-			// Now we expect to get a Recipe response
 			ElasticSearchResponse<Recipe> esResponse = gson.fromJson(json, elasticSearchResponseType);
-			// We get the recipe from it!
 			recipe = esResponse.getSource();
 			if(response.getEntity() != null){
 				response.getEntity().consumeContent();
@@ -182,13 +173,13 @@ public class HTTPManager {
 	 * @param str
 	 * 		Provided keyword for search
 	 * @return
-	 * 		Matchin recipes stored in an ArrayList of recipes
+	 * 		Matching recipes stored in an ArrayList of recipes
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public ArrayList<Recipe> searchRecipes(String str) throws ClientProtocolException, IOException {
+	public ArrayList<Recipe> searchRecipes(String str, String URL) throws ClientProtocolException, IOException {
 		ArrayList<Recipe> results = new ArrayList<Recipe>();
-		HttpGet searchRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/recipezzz/_search?pretty=1&q=" +
+		HttpGet searchRequest = new HttpGet(URL+"_search?pretty=1&q=" +
 				java.net.URLEncoder.encode(str,"UTF-8"));
 		searchRequest.setHeader("Accept","application/json");
 		HttpResponse response = httpclient.execute(searchRequest);
@@ -224,41 +215,6 @@ public class HTTPManager {
 		}
 		System.err.println("JSON:"+json);
 		return json;
-	}
-
-	/**
-	 * Adds given recipe to invalid
-	 * @param recipe
-	 * 		Provided recipe to add to invalid
-	 * @throws ClientProtocolException
-	 * @throws IOException
-	 */
-	public void addToInvalid(Recipe recipe) throws ClientProtocolException, IOException{
-		HttpPost httpPost = new HttpPost("http://asdoiahspdsdfewdfssdfvcvergedfsljkl.softwareprocess.es:8080/testing/recipezzz/"+recipe.getId());
-		StringEntity stringEntity = null;
-		try {
-			stringEntity = new StringEntity(gson.toJson(recipe));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		httpPost.setHeader("Accept","application/json");
-
-		httpPost.setEntity(stringEntity);
-		HttpResponse response = null;
-		response = httpclient.execute(httpPost);
-
-		//		String status = response.getStatusLine().toString();
-		//		System.out.println(status);
-		HttpEntity entity = response.getEntity();
-
-		try {
-			// May need if statement, check isStreaming();
-			entity.consumeContent();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
 

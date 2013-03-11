@@ -1,10 +1,8 @@
 package ca.c301.t03_recipes.test;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import org.apache.http.client.ClientProtocolException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,11 +19,11 @@ import ca.c301.t03_recipes.MainActivity;
  */
 public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	private final static String TEST_FILE_NAME = "http_test_file";
-	
+
 	public HTTPTest(){
 		super(MainActivity.class);
 	}
-	
+
 	//Delete testfile before each test.
 	@Before
 	public void setUp() throws Exception{
