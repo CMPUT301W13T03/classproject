@@ -100,7 +100,7 @@ public class AddRecipeActivity extends Activity {
                 	}
                 	
                 	// ADD CODE TO POST RECIPE TO WEB HERE
-                	
+                	((RecipeApplication) getApplication()).getRecipeManager().publishRecipeToWeb(recipe);
                 	finish();
             	}
             }
