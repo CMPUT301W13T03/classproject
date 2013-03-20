@@ -17,6 +17,7 @@ import ca.c301.t03_recipes.RecipeApplication;
 public class IntentCatchingTemplate extends ActivityUnitTestCase<MainActivity> {
 
 	protected Intent caughtIntent;
+	protected IntentCatchingContext intentCatcher;
 
 	protected class IntentCatchingContext extends ContextWrapper {
 		public IntentCatchingContext(Context base) {
@@ -26,7 +27,7 @@ public class IntentCatchingTemplate extends ActivityUnitTestCase<MainActivity> {
 		@Override
 		public void startActivity(Intent intent) {
 			caughtIntent = intent;
-			super.startActivity(intent);
+//			super.startActivity(intent);
 		}
 
 	}
@@ -39,9 +40,9 @@ public class IntentCatchingTemplate extends ActivityUnitTestCase<MainActivity> {
         super.setUp();
         Application app = new RecipeApplication(getInstrumentation());
         setApplication(app);
-/*        
-        IntentCatchingContext contextWrapper = new IntentCatchingContext(getInstrumentation().getTargetContext());
-        setActivityContext(contextWrapper);*/
+        
+        intentCatcher = new IntentCatchingContext(getInstrumentation().getTargetContext());
+        setActivityContext(intentCatcher);
         startActivity(new Intent(), null, null);
     }
 }

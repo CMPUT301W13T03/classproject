@@ -1,7 +1,13 @@
 package ca.c301.t03_recipes.test;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
+import android.content.Intent;
+import android.util.Log;
+
+import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeManager;
 import ca.c301.t03_recipes.MainActivity;
@@ -17,10 +23,17 @@ public class EmailTest extends IntentCatchingTemplate{
 	@Test
 	public void testSendEmail(){
 		caughtIntent = null;
-		RecipeManager manager = new RecipeManager(getActivity());
-		Recipe recipe = new Recipe("Nachos","Cheese and nachos and baking");
-		manager.emailRecipe("null@null", recipe);
+		RecipeManager manager = new RecipeManager(intentCatcher);
+		String recipeName = "Nachos";
+		String recipeInstruction = "Cheese and nachos and baking";
+		Recipe recipe = new Recipe(recipeName,recipeInstruction);
+		recipe.setIngredients(new ArrayList<Ingredient>());
+		
+		//Need to pass intentCatcher as the context so it can catch
+		// the email intent.
+		manager.emailRecipe("null@null", recipe, intentCatcher);
 		assertNotNull(caughtIntent);
+		
 		assertTrue(caughtIntent.getAction() == android.content.Intent.ACTION_SEND);
 
 	}
@@ -30,13 +43,14 @@ public class EmailTest extends IntentCatchingTemplate{
 	 */
 	@Test
 	public void testEmailFormat(){
-		RecipeManager manager = new RecipeManager(getActivity());
+		RecipeManager manager = new RecipeManager(intentCatcher);
 		String recipeName = "Nachos";
 		String recipeInstruction = "Cheese and nachos and baking";
 		String emailAddress = "null@null";
-		
 		Recipe recipe = new Recipe(recipeName,recipeInstruction);
-		manager.emailRecipe(emailAddress, recipe);
+		recipe.setIngredients(new ArrayList<Ingredient>());
+		
+		manager.emailRecipe(emailAddress, recipe, intentCatcher);
 		
 		assertNotNull(caughtIntent);
 
@@ -48,6 +62,7 @@ public class EmailTest extends IntentCatchingTemplate{
 		assertEquals(caughtIntent.getStringExtra(android.content.Intent.EXTRA_EMAIL),emailAddress);
 		
 		String body = caughtIntent.getStringExtra(android.content.Intent.EXTRA_TEXT);
+		Log.i("EmailTest", "Email Body: " + body);
 		assertTrue(body.contains(recipeName));
 		assertTrue(body.contains(recipeInstruction));
 		

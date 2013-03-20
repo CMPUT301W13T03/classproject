@@ -108,9 +108,9 @@ public class RecipeManager {
 	 * @param emailAddress Is the email address to send the recipe to
 	 * @param recipe Is the recipe to be emailed
 	 */
-	public void emailRecipe(String emailAddress, Recipe recipe) {
+	public void emailRecipe(String emailAddress, Recipe recipe, Context c) {
 		EmailHandler emailer = new EmailHandler();
-		emailer.sendRecipe(emailAddress, recipe);
+		emailer.sendRecipe(emailAddress, recipe, c);
 	}
 
 	/**
