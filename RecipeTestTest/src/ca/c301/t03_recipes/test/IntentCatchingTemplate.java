@@ -2,6 +2,7 @@ package ca.c301.t03_recipes.test;
 
 import org.junit.Before;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;

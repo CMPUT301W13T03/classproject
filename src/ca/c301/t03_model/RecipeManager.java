@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.apache.http.client.ClientProtocolException;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -148,11 +149,10 @@ public class RecipeManager {
 	 * To take a photo for a recipe with a given id
 	 * @param recipeId Is the id of the recipe to take a photo for
 	 */
-	public void takePhotoForRecipe(int recipeId) {
+	public void takePhotoForRecipe(int recipeId, Activity a) {
 		Camera camera = new Camera();
-		RecipePhoto photo = camera.takePhoto();
-		Recipe recipe = dataManager.getRecipeBook().findRecipeByID(recipeId);
-		recipe.addPhoto(photo);
+		camera.takePhoto(a);
+
 	}
 
 	/**
