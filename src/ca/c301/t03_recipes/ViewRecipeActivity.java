@@ -1,25 +1,26 @@
 package ca.c301.t03_recipes;
 
-import java.util.ArrayList;
-
-import ca.c301.t03_model.DisplayConverter;
-import ca.c301.t03_model.FullFileException;
-import ca.c301.t03_model.Ingredient;
-import ca.c301.t03_model.Recipe;
-import ca.c301.t03_recipes.R;
-import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
+import ca.c301.t03_model.DisplayConverter;
+import ca.c301.t03_model.FullFileException;
+import ca.c301.t03_model.Recipe;
 
 /**
  * Activity used to view recipes after searching
@@ -54,7 +55,8 @@ public class ViewRecipeActivity extends Activity {
         shareButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                
+                //Code for emailing the recipe.
+            	new emailDialogFragment().show(getFragmentManager(),"emailDialog");
             }
         });
         
@@ -151,6 +153,43 @@ public class ViewRecipeActivity extends Activity {
 				}
 			}
 		}
+	}
+	@TargetApi(11)
+	public class emailDialogFragment extends DialogFragment{
+		EditText emailAddressEntry;
+		@TargetApi(11)
+		@Override
+		  public Dialog onCreateDialog(Bundle savedInstanceState) {
+	        // Use the Builder class for convenient dialog construction
+	        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+	        
+	     // Get the layout inflater
+	        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+	        // Inflate and set the layout for the dialog
+	        // Pass null as the parent view because its going in the dialog layout
+	        final View dialogShareView = inflater.inflate(R.layout.dialog_share, null);
+	        builder.setView(dialogShareView);
+	        emailAddressEntry = (EditText)dialogShareView.findViewById(R.id.emailAddress);
+
+	        builder.setMessage(R.string.dialog_email_hint)
+	               .setPositiveButton(R.string.dialog_email_send, new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                       // FIRE ZE MISSILES!
+	                	   String emailAddress = ((EditText)dialogShareView.findViewById(R.id.emailAddress)).getText().toString();
+	                	   ((RecipeApplication)getApplication()).getRecipeManager().emailRecipe(emailAddress, recipe, getActivity());
+
+	                   }
+	               })
+	               .setNegativeButton(R.string.dialog_email_cancel, new DialogInterface.OnClickListener() {
+	                   public void onClick(DialogInterface dialog, int id) {
+	                	   emailDialogFragment.this.getDialog().cancel();
+	                   }
+	               });
+	        // Create the AlertDialog object and return it
+	        return builder.create();
+	    }
+
 	}
 
 }

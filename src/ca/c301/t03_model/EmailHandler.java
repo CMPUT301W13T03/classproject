@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 
 /**
  * Handles email operations.
@@ -21,14 +23,18 @@ public class EmailHandler {
 		String emailSubject = parseEmailSubject(recipe);
 		String emailBody = parseEmailBody(recipe);
 		
-		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-		emailIntent.setType("plain/text");
-		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, emailAddress);
+	Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+		emailIntent.setType("message/rfc822");
+		Log.i("EmailHandler","Email Address: " + emailAddress);
+		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[]{emailAddress});
 		emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, emailSubject);
 		emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailBody);
 		emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //		c.startActivity(Intent.createChooser(emailIntent, "Send Email"));
 		c.startActivity(emailIntent);
+
+
+
 	}
 
 	private String parseEmailSubject(Recipe recipe) {

@@ -12,5 +12,8 @@
     <string name="title_activity_photo">PhotoActivity</string>
     <string name="title_activity_add_ingredient">AddIngredientActivity</string>
     <string name="title_activity_edit_ingredient">EditIngredientActivity</string>
+    <string name="dialog_email_hint">Enter email address to share to</string>
+    <string name="dialog_email_send">Send</string>
+    <string name="dialog_email_cancel">Cancel</string>
 
 </resources>
