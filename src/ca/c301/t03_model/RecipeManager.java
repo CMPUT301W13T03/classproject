@@ -1,5 +1,6 @@
 package ca.c301.t03_model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,10 +11,12 @@ import org.apache.http.client.ClientProtocolException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 public class RecipeManager {
 
+	private static final String TAG = "RecipeManager";
 	//	Our server URL: "http://cmput301.softwareprocess.es:8080/CMPUT301W13T03/recipes/"
 	//  Testing Server URL: "http://cmput301.softwareprocess.es:8080/testing/recipezzz/"
 	//Our Prototype is still directed at the test server as we are still testing, swapping this to the server URL is just a switch of this line. 
@@ -151,8 +154,13 @@ public class RecipeManager {
 	 */
 	public void takePhotoForRecipe(int recipeId, Activity a) {
 		Camera camera = new Camera();
-		camera.takePhoto(a);
-
+		File f = camera.takePhoto(a);
+		if (f == null) Log.e(TAG,"Image file is null!");
+		RecipePhoto photo = new RecipePhoto(f);
+		Recipe r = getLocallySavedRecipeById(recipeId);
+		r.addPhoto(photo);
+/*		dataManager.saveToFile(c);
+*/
 	}
 
 	/**
@@ -216,6 +224,11 @@ public class RecipeManager {
 		}
 
 		return ids;
+	}
+
+	public Bitmap generateBitmap(int i, int j) {
+		Camera camera = new Camera();
+		return camera.generateBitmap(i, j);
 	}
 
 }

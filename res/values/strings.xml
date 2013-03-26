@@ -15,5 +15,7 @@
     <string name="dialog_email_hint">Enter email address to share to</string>
     <string name="dialog_email_send">Send</string>
     <string name="dialog_email_cancel">Cancel</string>
+    <string name="title_activity_bogo_pic_gen">BogoPicGenActivity</string>
+    <string name="title_activity_photo_viewer">PhotoViewerActivity</string>
 
 </resources>

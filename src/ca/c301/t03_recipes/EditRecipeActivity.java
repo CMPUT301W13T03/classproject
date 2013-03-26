@@ -1,5 +1,6 @@
 package ca.c301.t03_recipes;
 
+import ca.c301.t03_model.Camera;
 import ca.c301.t03_model.DisplayConverter;
 import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
@@ -112,8 +113,9 @@ public class EditRecipeActivity extends Activity {
         addPictureButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(EditRecipeActivity.this, PhotoActivity.class);
-                startActivity(intent);
+/*                Intent intent = new Intent(EditRecipeActivity.this, PhotoActivity.class);
+                startActivity(intent);*/
+            	takePhoto();
             }
         });
         
@@ -197,6 +199,17 @@ public class EditRecipeActivity extends Activity {
 				}
 		    }
 		}
+		//Case for photo result:
+		if(requestCode == Camera.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE)
+		{
+			if(resultCode == RESULT_OK){
+				//handle result
+
+			}
+		}
+	}
+	protected void takePhoto() {
+		((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(0, this);		
 	}
 
 }

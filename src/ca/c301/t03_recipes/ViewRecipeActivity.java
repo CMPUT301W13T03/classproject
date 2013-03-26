@@ -8,6 +8,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import ca.c301.t03_model.Camera;
 import ca.c301.t03_model.DisplayConverter;
 import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Recipe;
@@ -27,6 +29,7 @@ import ca.c301.t03_model.Recipe;
  */
 public class ViewRecipeActivity extends Activity {
 
+	private static final String TAG = "ViewRecipeActivity";
 	private Recipe recipe;
 	private DisplayConverter converter;
 	
@@ -64,10 +67,23 @@ public class ViewRecipeActivity extends Activity {
         addPictureButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(ViewRecipeActivity.this, PhotoActivity.class);
-                startActivity(intent);
+/*                Intent intent = new Intent(ViewRecipeActivity.this, PhotoActivity.class);
+                startActivity(intent);*/
+            	takePhoto();
             }
         });
+        Button viewPicturesButton = (Button) findViewById(R.id.button_view_pictures);
+        
+        viewPicturesButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ViewRecipeActivity.this, PhotoViewerActivity.class);
+				intent.putExtra("id", id);
+				
+				startActivity(intent);
+			}
+		});
         
         Button editDownloadButton = (Button) findViewById(R.id.button_edit_download);
         
@@ -153,6 +169,16 @@ public class ViewRecipeActivity extends Activity {
 				}
 			}
 		}
+		if (requestCode == Camera.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE)
+		{
+			if(resultCode == RESULT_OK){
+				Log.i(TAG,"Photo taking OK");
+				saveRecipe();
+			}
+			else
+				Log.i(TAG,"Photo taking ERROR");
+
+		}
 	}
 	@TargetApi(11)
 	public class emailDialogFragment extends DialogFragment{
@@ -191,5 +217,15 @@ public class ViewRecipeActivity extends Activity {
 	    }
 
 	}
-
+	protected void takePhoto() {
+		((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(recipe.getId(), this);		
+	}
+	private void saveRecipe(){
+		try {
+			((RecipeApplication) getApplication()).getRecipeManager().setRecipe(id, recipe, getApplicationContext());
+		} catch (FullFileException e) {
+			Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
+	}
 }

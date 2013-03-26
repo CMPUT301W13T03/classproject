@@ -28,6 +28,7 @@ public class Recipe implements Serializable{
 		this.name = "";
 		this.instructions = "";
 		this.ingredients = new ArrayList<Ingredient>();
+		this.recipePhoto = new ArrayList<RecipePhoto>();
 	}
 	
 	/**
@@ -147,7 +148,7 @@ public class Recipe implements Serializable{
 	 * @uml.property  name="recipePhoto"
 	 * @uml.associationEnd  multiplicity="(0 -1)" aggregation="shared" inverse="recipe:ca.c301.t03_model.RecipePhoto"
 	 */
-	private Collection<RecipePhoto> recipePhoto;
+	private ArrayList<RecipePhoto> recipePhoto;
 
 	/**
 	 * Getter of the property <tt>recipePhoto</tt>
@@ -158,14 +159,6 @@ public class Recipe implements Serializable{
 		return recipePhoto;
 	}
 
-	/**
-	 * Setter of the property <tt>recipePhoto</tt>
-	 * @param recipePhoto  The recipePhoto to set.
-	 * @uml.property  name="recipePhoto"
-	 */
-	public void setRecipePhoto(Collection<RecipePhoto> recipePhoto) {
-		this.recipePhoto = recipePhoto;
-	}
 
 	/**
 	 * @uml.property  name="id"
@@ -195,7 +188,7 @@ public class Recipe implements Serializable{
 	 * @param photo Is the photo to be added
 	 */
 	public void addPhoto(RecipePhoto photo) {
-		// TODO Auto-generated method stub
+		recipePhoto.add(photo);
 		
 	}
 
