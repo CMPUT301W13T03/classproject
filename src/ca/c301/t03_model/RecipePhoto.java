@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.net.URI;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 /**
@@ -22,6 +23,9 @@ public class RecipePhoto implements Serializable{
 	private static final long serialVersionUID = -2415081243980986524L;
 	public Uri getURI() {
 		return Uri.fromFile(photoFile);
+	}
+	public Drawable getDrawable() {
+		return Drawable.createFromPath(getURI().getPath());
 	}
 
 }

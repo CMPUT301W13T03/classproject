@@ -42,10 +42,12 @@ public class PhotoActivity extends Activity {
         takePhotoButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-            	
+/*            	takePhoto();
+*/            	
             }
         });
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
