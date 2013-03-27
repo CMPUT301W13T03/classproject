@@ -150,17 +150,15 @@ public class RecipeManager {
 
 	/**
 	 * To take a photo for a recipe with a given id
-	 * @param recipeId Is the id of the recipe to take a photo for
 	 */
-	public void takePhotoForRecipe(int recipeId, Activity a) {
+	public File takePhotoForRecipe(Activity a) {
 		Camera camera = new Camera();
-		File f = camera.takePhoto(a);
+		return camera.takePhoto(a);
+	}
+	public void attachPhotoToRecipe(Recipe recipe, File f){
 		if (f == null) Log.e(TAG,"Image file is null!");
 		RecipePhoto photo = new RecipePhoto(f);
-		Recipe r = getLocallySavedRecipeById(recipeId);
-		r.addPhoto(photo);
-/*		dataManager.saveToFile(c);
-*/
+		recipe.addPhoto(photo);
 	}
 
 	/**

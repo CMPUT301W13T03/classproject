@@ -56,7 +56,7 @@ public class PhotoTest extends  ActivityInstrumentationTestCase2<MainActivity>{
 			fail("Full file error.");
 		}
     	
-    	manager.takePhotoForRecipe(0, fakeActivity);
+    	manager.takePhotoForRecipe(fakeActivity);
     	assertNotNull(caughtIntent);
     	assertEquals(caughtIntent.getAction(),MediaStore.ACTION_IMAGE_CAPTURE);
     	assertEquals(caughtRequestCode, Camera.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);

@@ -209,7 +209,7 @@ public class EditRecipeActivity extends Activity {
 		}
 	}
 	protected void takePhoto() {
-		((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(0, this);		
+		((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(this);		
 	}
 
 }

@@ -1,5 +1,7 @@
 package ca.c301.t03_recipes;
 
+import java.io.File;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,6 +38,7 @@ public class ViewRecipeActivity extends Activity {
 	private ListView ingredientsList;
 	private int id;
 	private int online;
+	private File photoFile;
 	
 	/**
 	 * Is responsible for creating the view of the activity,
@@ -173,6 +176,7 @@ public class ViewRecipeActivity extends Activity {
 		{
 			if(resultCode == RESULT_OK){
 				Log.i(TAG,"Photo taking OK");
+				((RecipeApplication)getApplication()).getRecipeManager().attachPhotoToRecipe(recipe, photoFile);
 				saveRecipe();
 			}
 			else
@@ -218,7 +222,8 @@ public class ViewRecipeActivity extends Activity {
 
 	}
 	protected void takePhoto() {
-		((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(recipe.getId(), this);		
+		//Store file and add it to the recipe if the Photo activity returns RESULT_OK
+		photoFile = ((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(this);		
 	}
 	private void saveRecipe(){
 		try {
