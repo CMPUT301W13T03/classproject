@@ -126,20 +126,15 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		Recipe recipe = new Recipe("Name","Instructions");
 		recipe.setId(1900);
 		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
-
-		manager.publishRecipeToWeb(recipe);
-		Recipe downloadedRecipe = manager.getSingleRecipe(1900);
 		try {
-			manager.saveRecipe(downloadedRecipe, getActivity());
+			manager.saveRecipe(recipe, getActivity());
+			manager.deleteLocallySavedRecipeById(1900, getActivity());
 		} catch (FullFileException e) {
-			fail("Full file exception");
 			e.printStackTrace();
 		}
-		//id would be 0 because its the first one saved.
-		Recipe savedRecipe = manager.getLocallySavedRecipeById(0);
-		assertNotNull(savedRecipe);
-		assertEquals(savedRecipe.getName(),"Name");
-		assertEquals(savedRecipe.getInstructions(),"Instructions");
+		assertNull(manager.getLocallySavedRecipeById(1990));
+		
+
 
 	}
 	//Test to make sure multiple recipes can be saved and retrieved.
