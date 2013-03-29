@@ -1,7 +1,9 @@
 package ca.c301.t03_recipes;
 
+import java.io.File;
 import java.io.IOException;
 
+import ca.c301.t03_model.Camera;
 import ca.c301.t03_model.DisplayConverter;
 import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
@@ -39,6 +41,8 @@ public class AddRecipeActivity extends Activity {
 	private EditText name;
 	private EditText instructions;
 	private ListView ingredientsList;
+
+	private File photoFile;
 
 
 	/**
@@ -137,8 +141,7 @@ public class AddRecipeActivity extends Activity {
 		addPictureButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(AddRecipeActivity.this, PhotoActivity.class);
-				startActivity(intent);
+				takePhoto();
 			}
 		});
 	}
@@ -187,6 +190,7 @@ public class AddRecipeActivity extends Activity {
 	 * Called when returning from another activity
 	 * Depending on what the result was from that activity,
 	 * It can delete an ingredient, modify an ingredient, or do nothing
+	 * It may also add a photo.
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -213,6 +217,19 @@ public class AddRecipeActivity extends Activity {
 				}
 			}
 		}
+		// Case for photo result:
+		if (requestCode == Camera.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				// handle result
+				((RecipeApplication) getApplication()).getRecipeManager()
+						.attachPhotoToRecipe(recipe, photoFile);
+			}
+		}
+		
+	}
+	protected void takePhoto() {
+		//Store file and add it to the recipe if the Photo activity returns RESULT_OK
+		photoFile = ((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(this);		
 	}
 
 }

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -175,12 +176,12 @@ public class ViewRecipeActivity extends Activity {
 		if (requestCode == Camera.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE)
 		{
 			if(resultCode == RESULT_OK){
-				Log.i(TAG,"Photo taking OK");
+				Log.i(TAG,"Photo taken");
 				((RecipeApplication)getApplication()).getRecipeManager().attachPhotoToRecipe(recipe, photoFile);
 				saveRecipe();
 			}
 			else
-				Log.i(TAG,"Photo taking ERROR");
+				Log.i(TAG,"Photo not taken");
 
 		}
 	}
@@ -205,9 +206,13 @@ public class ViewRecipeActivity extends Activity {
 	        builder.setMessage(R.string.dialog_email_hint)
 	               .setPositiveButton(R.string.dialog_email_send, new DialogInterface.OnClickListener() {
 	                   public void onClick(DialogInterface dialog, int id) {
-	                       // FIRE ZE MISSILES!
 	                	   String emailAddress = ((EditText)dialogShareView.findViewById(R.id.emailAddress)).getText().toString();
+	                	   try{
 	                	   ((RecipeApplication)getApplication()).getRecipeManager().emailRecipe(emailAddress, recipe, getActivity());
+	                	   }
+	                	   catch(ActivityNotFoundException e){
+	                		   Toast.makeText(getApplicationContext(), "No email app found!", Toast.LENGTH_LONG).show();
+	                	   }
 
 	                   }
 	               })

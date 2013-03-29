@@ -1,5 +1,7 @@
 package ca.c301.t03_recipes;
 
+import java.io.File;
+
 import ca.c301.t03_model.Camera;
 import ca.c301.t03_model.DisplayConverter;
 import ca.c301.t03_model.FullFileException;
@@ -33,6 +35,7 @@ public class EditRecipeActivity extends Activity {
 	private EditText instructions;
 	private ListView ingredientsList;
 	private int id;
+	private File photoFile;
 
 	/**
 	 * Is responsible for creating the view of the activity,
@@ -204,12 +207,22 @@ public class EditRecipeActivity extends Activity {
 		{
 			if(resultCode == RESULT_OK){
 				//handle result
+				((RecipeApplication)getApplication()).getRecipeManager().attachPhotoToRecipe(recipe, photoFile);
+				saveRecipe();
 
 			}
 		}
 	}
 	protected void takePhoto() {
-		((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(this);		
+		photoFile = ((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(this);		
+	}
+	private void saveRecipe(){
+		try {
+			((RecipeApplication) getApplication()).getRecipeManager().setRecipe(id, recipe, getApplicationContext());
+		} catch (FullFileException e) {
+			Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
 	}
 
 }

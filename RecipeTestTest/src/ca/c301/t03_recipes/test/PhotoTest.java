@@ -38,15 +38,8 @@ public class PhotoTest extends  ActivityInstrumentationTestCase2<MainActivity>{
 	public void setUp() throws Exception{
 		//Delete any existing file.
 		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
-	}
-	//Test to make sure the intent to capture an image is successfully signalled
-	//when a photo is taken.
-    @Test
-    public void testPhotoIntent(){
+		
     	FakeActivity fakeActivity = new FakeActivity();
-		//Delete any existing file.
-		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
-    	
     	RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
     	Recipe recipe = new Recipe("Name", "Instructions");
     	try {
@@ -55,11 +48,20 @@ public class PhotoTest extends  ActivityInstrumentationTestCase2<MainActivity>{
 			e.printStackTrace();
 			fail("Full file error.");
 		}
-    	
     	manager.takePhotoForRecipe(fakeActivity);
+
+	}
+	//Test to make sure the intent is sent when a photo is taken.
+    @Test
+    public void testPhotoIntentNotNull(){
     	assertNotNull(caughtIntent);
+
+    }
+    
+	//Test to make sure the intent to capture an image is properly formatted.
+    @Test
+    public void testPhotoIntentFormat(){
     	assertEquals(caughtIntent.getAction(),MediaStore.ACTION_IMAGE_CAPTURE);
     	assertEquals(caughtRequestCode, Camera.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
     }
-
 }
