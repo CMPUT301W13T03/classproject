@@ -16,6 +16,11 @@ import ca.c301.t03_recipes.MainActivity;
 public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	private final static String TEST_FILE_NAME = "ingredients_test_file";
 
+	DataManager dataManager;
+	RecipeManager manager;
+	Ingredient ingredient;	
+	VirtualPantry pantry;
+	
 	public IngredientsTest()
 	{
 		super(MainActivity.class);
@@ -25,37 +30,49 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 	public void setUp() throws Exception{
 		//Delete any existing file.
 		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
+		
+		dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
+		manager = new RecipeManager(dataManager);
+		ingredient = new Ingredient("Name");	
+		pantry = dataManager.getVirtualPantry();
 	}
-	//Test to see if ingredients are saved correctly.
+	//Make sure pantry is created
+	@Test
+	public void testPantryCreation()
+	{
+		assertNotNull(pantry);
+	}
+	
+	//Test to see if ingredients are saved at all.
 	@Test
 	public void testSaveIngredient()
 	{
-		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
-		RecipeManager manager = new RecipeManager(dataManager);
-		Ingredient ingredient = new Ingredient("Name");
-		
-		VirtualPantry pantry = dataManager.getVirtualPantry();
-		assertNotNull(pantry);
 		manager.addIngredientToPantry(ingredient);
 		Ingredient retIngredient = dataManager.getVirtualPantry().findIngredient(0);
 		assertNotNull(retIngredient);
-		assertSame(retIngredient,ingredient);
-		
 	}
-	//Test to see if ingredients are retrieved correctly.
+	//Test to see if ingredients are saved correctly.
+	@Test
+	public void testSaveIngredientFormat()
+	{
+		manager.addIngredientToPantry(ingredient);
+		Ingredient retIngredient = dataManager.getVirtualPantry().findIngredient(0);
+		assertSame(retIngredient,ingredient);
+	}
+	//Test to see if ingredients are retrieved at all.
 	@Test
 	public void testGetIngredient()
 	{
-		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
-		RecipeManager manager = new RecipeManager(dataManager);
-		Ingredient ingredient = new Ingredient("Name");
-		
-		VirtualPantry pantry = dataManager.getVirtualPantry();
-		assertNotNull(pantry);
 		dataManager.getVirtualPantry().addIngredient(ingredient);
 		Ingredient retIngredient = manager.getLocalIngredientById(0);
-		assertNotNull(retIngredient);
-		assertSame(retIngredient,ingredient);
-		
+		assertNotNull(retIngredient);		
+	}
+	//Test to see if ingredients are retrieved correctly.
+	@Test
+	public void testGetIngredientFormat()
+	{
+		dataManager.getVirtualPantry().addIngredient(ingredient);
+		Ingredient retIngredient = manager.getLocalIngredientById(0);
+		assertSame(retIngredient,ingredient);		
 	}
 }
