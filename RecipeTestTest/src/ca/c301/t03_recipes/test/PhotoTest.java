@@ -16,19 +16,9 @@ import ca.c301.t03_recipes.MainActivity;
 /*
  * Tests dealing specifically with RecipePhotos.
  */
-public class PhotoTest extends  ActivityInstrumentationTestCase2<MainActivity>{
+public class PhotoTest extends  IntentCatchingTemplate{
 	
-	public Intent caughtIntent;
-	public int caughtRequestCode;
-	private class FakeActivity extends Activity{
-		@Override
-		public void startActivityForResult(Intent intent, int requestCode) {
-			caughtIntent = intent;
-			caughtRequestCode = requestCode;
-//			super.startActivity(intent);
-		}
-	}
-	
+
     private static final String TEST_FILE_NAME = "photo_test_file";
 	public PhotoTest(){
     	super(MainActivity.class);

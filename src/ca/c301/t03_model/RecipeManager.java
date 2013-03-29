@@ -38,6 +38,13 @@ public class RecipeManager {
 	}
 
 	/**
+	 * Constructor that doesn't initialize dataManager, this
+	 * should probably only be used for testing.
+	 */
+	public RecipeManager() {
+	}
+
+	/**
 	 * @uml.property name="dataManager"
 	 * @uml.associationEnd aggregation="shared"
 	 *                     inverse="recipeManager:ca.c301.t03_model.DataManager"

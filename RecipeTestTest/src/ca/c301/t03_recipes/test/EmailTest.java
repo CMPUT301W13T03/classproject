@@ -8,6 +8,7 @@ import org.junit.Test;
 import android.content.Intent;
 import android.util.Log;
 
+import ca.c301.t03_model.DataManager;
 import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeManager;
@@ -25,9 +26,9 @@ public class EmailTest extends IntentCatchingTemplate{
 	@Before
 	public void setUp() throws Exception{
 		caughtIntent = null;
-		RecipeManager manager = new RecipeManager(intentCatcher);
+		RecipeManager manager = new RecipeManager();
 		recipeName = "Nachos";
-		emailAddress = "null@null";
+		emailAddress = "fake@fake.com";
 		recipeInstruction = "Cheese and nachos and baking";
 		
 		recipe = new Recipe(recipeName,recipeInstruction);
@@ -35,7 +36,7 @@ public class EmailTest extends IntentCatchingTemplate{
 		
 		//Need to pass intentCatcher as the context so it can catch
 		// the email intent.
-		manager.emailRecipe(emailAddress, recipe, intentCatcher);
+		manager.emailRecipe(emailAddress, recipe, fakeActivity);
 	}
 	/*
 	 * Tests to see if any intent is sent to send an email.
@@ -58,7 +59,8 @@ public class EmailTest extends IntentCatchingTemplate{
 	}
 	@Test
 	public void testCorrectAddress(){
-		assertEquals(caughtIntent.getStringExtra(android.content.Intent.EXTRA_EMAIL),emailAddress);
+		String[] addressList = caughtIntent.getStringArrayExtra(android.content.Intent.EXTRA_EMAIL);
+		assertEquals(emailAddress,addressList[0]);
 	}
 	@Test
 	public void testNamePresent(){
