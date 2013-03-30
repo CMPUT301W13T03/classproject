@@ -67,7 +67,7 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
  public ArrayList<Recipe> searchRecipes(String keyword) {
 	 	ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
     	
-        String selectQuery = "SELECT RECIPE FROM " + TABLE_RECIPES + " WHERE " + NAME + " LIKE '%" + keyword + "%'";
+        String selectQuery = "SELECT " + RECIPE + " FROM " + TABLE_RECIPES + " WHERE " + NAME + " LIKE '%" + keyword + "%'";
      
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -85,7 +85,7 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
     public ArrayList<Recipe> getAllRecipes() {
     	ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
     	
-        String selectQuery = "SELECT RECIPE FROM " + TABLE_RECIPES;
+        String selectQuery = "SELECT " + RECIPE + " FROM " + TABLE_RECIPES;
      
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

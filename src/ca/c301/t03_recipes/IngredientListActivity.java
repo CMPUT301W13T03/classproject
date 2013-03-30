@@ -1,12 +1,22 @@
 package ca.c301.t03_recipes;
 
+import java.util.ArrayList;
+
+import ca.c301.t03_model.Camera;
+import ca.c301.t03_model.Ingredient;
+import ca.c301.t03_model.DisplayConverter;
 import ca.c301.t03_recipes.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 /**
  * Activity used to view list of ingredients in virtual pantry
@@ -19,6 +29,11 @@ public class IngredientListActivity extends Activity {
 	 */
 	private RecipeApplication recipeApplication;
 	
+	private DisplayConverter converter;
+	
+	private ListView ingredientsList;
+	private ArrayList<Ingredient> ingredients;
+	
 	/**
 	 * Is responsible for creating the view of the activity,
 	 * A buttons is set here
@@ -28,11 +43,17 @@ public class IngredientListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ingredient_list);
 		
+		converter = new DisplayConverter();
+		ingredients = new ArrayList<Ingredient>();
+		
+		ingredientsList = (ListView) findViewById(R.id.listView_ingredients);
+		
 		Button addIngredientButton = (Button) findViewById(R.id.button_add_ingredient);
         addIngredientButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-            	
+            	Intent intent = new Intent(IngredientListActivity.this, AddIngredientActivity.class);            	
+                startActivityForResult(intent, 1);
             }
         });
 	}
@@ -42,5 +63,61 @@ public class IngredientListActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_ingredient_list, menu);
 		return true;
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		ingredients = ((RecipeApplication) getApplication()).getIngredientDatabase().getAllIngredients();
+
+		String[] displayList = converter.convertIngredientsList(ingredients);
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, displayList);
+		ingredientsList.setAdapter(adapter);
+
+		ingredientsList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int index, long id) {
+				Intent intent = new Intent(IngredientListActivity.this, EditIngredientActivity.class);
+
+				Bundle data = new Bundle();
+				data.putInt("index", 0);
+				data.putString("name", ingredients.get(index).getName());
+				data.putDouble("amount", ingredients.get(index).getAmount());
+				data.putString("unit", ingredients.get(index).getUnitOfMeasurement());
+
+				intent.putExtras(data);
+
+	            startActivityForResult(intent, 1);
+			}
+		}); 
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		if (requestCode == 1) {
+
+			if(resultCode == RESULT_OK){
+
+				if (data.getIntExtra("del", 0) == 1) {
+					((RecipeApplication) getApplication()).getIngredientDatabase().deleteIngredient(data.getStringExtra("name"));
+				}
+				else {			        
+			        Ingredient ingredient = new Ingredient();
+			        ingredient.setName(data.getStringExtra("name"));
+			        ingredient.setAmount(data.getDoubleExtra("amount", 0.00));
+			        ingredient.setUnitOfMeasurement(data.getStringExtra("unit"));
+
+			        if (data.getIntExtra("type", 0) == 0) {
+			        	((RecipeApplication) getApplication()).getIngredientDatabase().addIngredient(ingredient);
+			        }
+			        else {
+			        	((RecipeApplication) getApplication()).getIngredientDatabase().updateIngredient(ingredient);
+			        }
+				}
+		    }
+		}
 	}
 }
