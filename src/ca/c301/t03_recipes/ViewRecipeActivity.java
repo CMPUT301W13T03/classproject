@@ -110,12 +110,7 @@ public class ViewRecipeActivity extends Activity {
             		
             		// PUT DOWNLOAD CODE HERE
             		//Actually saving code, its downloaded.
-            		try {
-						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
-					} catch (FullFileException e) {
-						Toast.makeText(getApplicationContext(), "No room on disk to save.", Toast.LENGTH_LONG).show();
-						e.printStackTrace();
-					}            		
+            		((RecipeApplication) getApplication()).getRecipeDatabase().addRecipe(recipe);        		
             	}
             }
         });
@@ -177,8 +172,8 @@ public class ViewRecipeActivity extends Activity {
 		{
 			if(resultCode == RESULT_OK){
 				Log.i(TAG,"Photo taken");
-				((RecipeApplication)getApplication()).getRecipeManager().attachPhotoToRecipe(recipe, photoFile);
-				saveRecipe();
+				((RecipeApplication) getApplication()).getRecipeManager().attachPhotoToRecipe(recipe, photoFile);
+				((RecipeApplication) getApplication()).getRecipeDatabase().updateRecipe(recipe);
 			}
 			else
 				Log.i(TAG,"Photo not taken");
@@ -230,12 +225,5 @@ public class ViewRecipeActivity extends Activity {
 		//Store file and add it to the recipe if the Photo activity returns RESULT_OK
 		photoFile = ((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(this);		
 	}
-	private void saveRecipe(){
-		try {
-			((RecipeApplication) getApplication()).getRecipeManager().setRecipe(id, recipe, getApplicationContext());
-		} catch (FullFileException e) {
-			Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
-			e.printStackTrace();
-		}
-	}
+	
 }
