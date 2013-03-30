@@ -23,6 +23,8 @@ private Ingredient ingredient;
 	private EditText unit;
 	private int index;
 	
+	private String originalName;
+	
 	/**
 	 * Is responsible for creating the view of the activity,
 	 * Edit texts and buttons are set here
@@ -41,6 +43,7 @@ private Ingredient ingredient;
 		amount = (EditText) findViewById(R.id.editText_amount);
 		unit = (EditText) findViewById(R.id.editText_unit_type);
 		
+		originalName = data.getString("name");
 		name.setText(data.getString("name"));
 		amount.setText(String.valueOf(data.getDouble("amount")));
 		unit.setText(data.getString("unit"));
@@ -77,6 +80,7 @@ private Ingredient ingredient;
             	Intent returnIntent = new Intent();
             	returnIntent.putExtra("del",1);
             	returnIntent.putExtra("index", index);
+            	returnIntent.putExtra("name", originalName);
             	setResult(RESULT_OK,returnIntent); 
             	
             	finish();
