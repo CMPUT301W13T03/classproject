@@ -54,9 +54,7 @@ public class EditRecipeActivity extends Activity {
 
 		ingredientsList = (ListView) findViewById(R.id.listView_ingredients);
 
-		recipe.setName(((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id).getName());
-		recipe.copyIngredients(((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id).getIngredients());
-		recipe.setInstructions(((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id).getInstructions());
+		recipe = ((RecipeApplication) getApplication()).getRecipeDatabase().getRecipe(id);
 
 		name = (EditText) findViewById(R.id.editText_name);
 		instructions = (EditText) findViewById(R.id.editText_instructions);
@@ -78,12 +76,7 @@ public class EditRecipeActivity extends Activity {
                 	recipe.setName(name.getText().toString());
                 	recipe.setInstructions(instructions.getText().toString());
                 	
-                	try {
-    					((RecipeApplication) getApplication()).getRecipeManager().setRecipe(id, recipe, getApplicationContext());
-    				} catch (FullFileException e) {
-    					Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
-    					e.printStackTrace();
-    				}
+                	((RecipeApplication) getApplication()).getRecipeDatabase().updateRecipe(recipe);
                 	
                 	finish();
             	}
@@ -101,12 +94,7 @@ public class EditRecipeActivity extends Activity {
             	returnIntent.putExtra("del",1);
             	setResult(RESULT_OK,returnIntent);
             	
-            	try {
-					((RecipeApplication) getApplication()).getRecipeManager().deleteLocallySavedRecipeById(id, getApplicationContext());
-				} catch (FullFileException e) {
-					e.printStackTrace();
-					Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
-				}
+				((RecipeApplication) getApplication()).getRecipeDatabase().deleteRecipe(id);
             	
             	finish();
             }
