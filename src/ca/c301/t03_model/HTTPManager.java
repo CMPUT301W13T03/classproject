@@ -42,7 +42,7 @@ public class HTTPManager {
 		// TODO Implement the server-side ID tracking
 		//int id = getID();
 		//recipe.setId(id);
-		HttpPost httpPost = new HttpPost(URL+recipe.getId());
+		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/recipezzz/"+recipe.getId());
 		StringEntity stringEntity = null;
 		try {
 			stringEntity = new StringEntity(gson.toJson(recipe));
@@ -56,8 +56,6 @@ public class HTTPManager {
 		HttpResponse response = null;
 		response = httpclient.execute(httpPost);
 
-		//		String status = response.getStatusLine().toString();
-		//		System.out.println(status);
 		HttpEntity entity = response.getEntity();
 
 		try {
@@ -68,70 +66,6 @@ public class HTTPManager {
 			e.printStackTrace();
 		}
 		//May possibly need to deallocate more resources here. No 4.0 implementation of releaseconnection();
-	}
-
-	/**
-	 * NOT YET FUNCTIONAL
-	 * Sets the serverside ID to a set integer
-	 * @param id
-	 */
-	public void setID(int id) throws IllegalStateException, IOException{
-		// TODO httpPost is currently directed at the testing server, will need to change to "http://cmput301.softwareprocess.es:8080/CMPUT301W13T03/"
-		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/iterator/0");
-		StringEntity stringEntity = null;
-		try {
-			stringEntity = new StringEntity(gson.toJson(id));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		httpPost.setHeader("Accept","application/json");
-
-		httpPost.setEntity(stringEntity);
-		HttpResponse response = null;
-		try {
-			response = httpclient.execute(httpPost);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		HttpEntity entity = response.getEntity();
-
-		//TODO Make sure this is clearing everything properly
-		try {
-			// May need if statement, check isStreaming();
-			entity.consumeContent();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Log.i("HTTPSearch", Integer.toString(getID()));
-		//May possibly need to deallocate more resources here. No 4.0 implementation of releaseconnection();
-	}
-
-	/**
-	 * Get the current iterator from server
-	 * NOT YET FUNCTIONAL
-	 * @throws ClientProtocolException
-	 * @throws IOException
-	 */
-	private int getID() throws ClientProtocolException, IOException {
-		int id = 0;
-		HttpGet getRequest = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/iterator/0");
-		getRequest.addHeader("Accept", "application/json");
-
-		HttpResponse response = httpclient.execute(getRequest);
-		String json = getEntityContent(response);
-
-		Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<Integer>>(){}.getType();
-
-		ElasticSearchResponse<Integer> intResponse = gson.fromJson(json, elasticSearchResponseType);
-		id = intResponse.getSource();
-		return id;
 	}
 
 	/**

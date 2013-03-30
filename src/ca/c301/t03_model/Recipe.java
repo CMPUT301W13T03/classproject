@@ -3,7 +3,10 @@ package ca.c301.t03_model;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+
+import android.util.Log;
 
 /**
  * Recipe object used to store name, instructions, and ingredients
@@ -29,6 +32,7 @@ public class Recipe implements Serializable{
 		this.instructions = "";
 		this.ingredients = new ArrayList<Ingredient>();
 		this.recipePhoto = new ArrayList<RecipePhoto>();
+		this.id = generateID();
 	}
 	
 	/**
@@ -37,11 +41,22 @@ public class Recipe implements Serializable{
 	 * @param instructions Is the instructions as a String
 	 */
 	public Recipe(String name, String instructions){
-		this.id = id;
+
+		this.id = generateID();
 		this.name = name;
 		this.instructions = instructions;
 	}
 	
+	private int generateID() {
+		String tempID = "";
+		Calendar cal = Calendar.getInstance();
+		tempID = tempID.concat(Integer.toString(cal.get(Calendar.DAY_OF_YEAR)));
+		tempID = tempID.concat(Integer.toString(cal.get(Calendar.MINUTE)));
+		tempID = tempID.concat(Integer.toString(cal.get(Calendar.SECOND)));
+		tempID = tempID.concat(Integer.toString(cal.get(Calendar.MILLISECOND)));
+		return Integer.parseInt(tempID);
+	}
+
 	/**
 	 * Getter of the property <tt>name</tt>
 	 * @return Returns the name of this recipe
