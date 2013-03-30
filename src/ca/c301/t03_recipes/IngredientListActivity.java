@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 /**
@@ -110,11 +111,18 @@ public class IngredientListActivity extends Activity {
 			        ingredient.setAmount(data.getDoubleExtra("amount", 0.00));
 			        ingredient.setUnitOfMeasurement(data.getStringExtra("unit"));
 
-			        if (data.getIntExtra("type", 0) == 0) {
-			        	((RecipeApplication) getApplication()).getIngredientDatabase().addIngredient(ingredient);
+			        if (((RecipeApplication) getApplication()).getIngredientDatabase().getIngredientCount(ingredient.getName()) == 0) {
+			        
+			        	if (data.getIntExtra("type", 0) == 0) {
+			        		((RecipeApplication) getApplication()).getIngredientDatabase().addIngredient(ingredient);
+			        	}
+			        	else {
+			        		((RecipeApplication) getApplication()).getIngredientDatabase().updateIngredient(ingredient);
+			        	}
 			        }
 			        else {
-			        	((RecipeApplication) getApplication()).getIngredientDatabase().updateIngredient(ingredient);
+			        	Toast.makeText(getApplicationContext(), 
+								"Ingredient already exists: Please edit the ingredient or create a new one", Toast.LENGTH_LONG).show();
 			        }
 				}
 		    }

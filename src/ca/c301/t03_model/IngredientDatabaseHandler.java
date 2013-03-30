@@ -38,7 +38,7 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
     
     public void addIngredient(Ingredient ingredient) {
     	SQLiteDatabase db = this.getWritableDatabase();
-    	 
+    	
     	String sql                      =   "INSERT INTO " + TABLE_INGREDIENTS + " (" + KEY_NAME + "," + INGREDIENT + ") VALUES(?,?)";
         SQLiteStatement insertStmt      =   db.compileStatement(sql);
         insertStmt.clearBindings();
@@ -65,6 +65,18 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
      
         return ingredientList;
 	}
+    
+    public int getIngredientCount(String name) {
+        String countQuery = "SELECT  * FROM " + TABLE_INGREDIENTS + " WHERE " + KEY_NAME + " LIKE '" + name + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        
+        int count = cursor.getCount();
+        
+        cursor.close();
+        
+        return count;
+    }
 
     public void updateIngredient(Ingredient ingredient) {
     	deleteIngredient(ingredient.getName());
