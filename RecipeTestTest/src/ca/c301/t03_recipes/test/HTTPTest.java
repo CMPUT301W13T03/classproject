@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+import ca.c301.t03_exceptions.NullStringException;
 import ca.c301.t03_model.DataManager;
 import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
@@ -41,6 +42,13 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		recipe.setInstructions("Put it in a cup, you idiot.");
 		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
 		manager.publishRecipeToWeb(recipe);
+		//Added a rest because instantly grabbing a recipe without waiting for the storage of one throws an error.
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Recipe webRecipe = manager.getSingleRecipe(recipe.getId());
 		assertEquals(webRecipe.getName(), recipe.getName());
 		assertEquals(webRecipe.getIngredient(0).getName(), recipe.getIngredient(0).getName());
@@ -86,7 +94,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	}
 	//Test to see if a web recipe can be retrieved by its name.
 	@Test
-	public void testSearchForRecipe() throws IllegalStateException, IOException{
+	public void testSearchForRecipe() throws IllegalStateException, IOException, NullStringException{
 		Recipe recipe0 = new Recipe("Salad", "Put some vegetables in a bowl.");
 		Recipe recipe1 = new Recipe("Cookie", "Make a cookie");
 		Recipe recipe2 = new Recipe("Cookies", "Who makes one cookie? Idiot.");
@@ -94,8 +102,6 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		recipe1.setId(1);
 		recipe2.setId(2);
 		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
-		//THIS IS NOT YET IMPLEMENTED
-		//manager.resetServerID();
 		manager.publishRecipeToWeb(recipe1);
 		manager.publishRecipeToWeb(recipe0);
 		manager.publishRecipeToWeb(recipe2);

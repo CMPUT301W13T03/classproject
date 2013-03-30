@@ -18,7 +18,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.os.AsyncTask;
 import android.util.Log;
+
+import ca.c301.t03_exceptions.NullStringException;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,7 +29,7 @@ import com.google.gson.reflect.TypeToken;
 /**
  * Contains functions that handle all web related functionality, most of the adding and searching of recipes is heavily based off of the ESDemo code.
  */
-public class HTTPManager {
+public class HTTPManager{
 
 	private HttpClient httpclient = new DefaultHttpClient();
 	private Gson gson = new Gson();
@@ -38,34 +41,21 @@ public class HTTPManager {
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
-	public void addRecipe(Recipe recipe, String URL) throws IllegalStateException, IOException{
-		// TODO Implement the server-side ID tracking
-		//int id = getID();
-		//recipe.setId(id);
+	public void addRecipe (Recipe recipe, String URL) throws IllegalStateException, IOException{
+
 		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/recipezzz/"+recipe.getId());
 		StringEntity stringEntity = null;
 		try {
 			stringEntity = new StringEntity(gson.toJson(recipe));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return;
 		}
 		httpPost.setHeader("Accept","application/json");
 
 		httpPost.setEntity(stringEntity);
-		HttpResponse response = null;
-		response = httpclient.execute(httpPost);
+//		httpclient.execute(httpPost);
+		new SendRecipeTask().execute(httpPost);
 
-		HttpEntity entity = response.getEntity();
-
-		try {
-			// May need if statement, check isStreaming();
-			entity.consumeContent();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//May possibly need to deallocate more resources here. No 4.0 implementation of releaseconnection();
 	}
 
 	/**
@@ -110,9 +100,13 @@ public class HTTPManager {
 	 * 		Matching recipes stored in an ArrayList of recipes
 	 * @throws ClientProtocolException
 	 * @throws IOException
+	 * @throws NullStringException 
 	 */
-	public ArrayList<Recipe> searchRecipes(String str, String URL) throws ClientProtocolException, IOException {
+	public ArrayList<Recipe> searchRecipes(String str, String URL) throws ClientProtocolException, IOException, NullStringException {
 		ArrayList<Recipe> results = new ArrayList<Recipe>();
+		if(str.length() == 0){
+			throw new NullStringException();
+		}
 		HttpGet searchRequest = new HttpGet(URL+"_search?pretty=1&q=" +
 				java.net.URLEncoder.encode(str,"UTF-8"));
 		searchRequest.setHeader("Accept","application/json");
@@ -149,6 +143,23 @@ public class HTTPManager {
 		}
 		System.err.println("JSON:"+json);
 		return json;
+	}
+
+	private class SendRecipeTask extends AsyncTask<HttpPost, Integer, HttpResponse>{
+
+		@Override
+		protected HttpResponse doInBackground(HttpPost... httpPost) {
+			HttpResponse response = null;
+			try {
+				response = httpclient.execute(httpPost[0]);
+			} catch (ClientProtocolException e) {
+				Log.i("SendTask", "ClientProtocol");
+			} catch (IOException e) {
+				Log.i("SendTask", "IOException");
+			}
+			return response;
+		}
+
 	}
 }
 

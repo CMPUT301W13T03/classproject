@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 import org.apache.http.client.ClientProtocolException;
 
+import ca.c301.t03_exceptions.NullStringException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -147,8 +149,9 @@ public class RecipeManager {
 	 * @return Returns an ArrayList<Recipe> containing the search results
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
+	 * @throws NullStringException 
 	 */
-	public ArrayList<Recipe> searchWebForRecipeByName(String name) throws ClientProtocolException, IOException {
+	public ArrayList<Recipe> searchWebForRecipeByName(String name) throws ClientProtocolException, IOException, NullStringException {
 		HTTPManager tempHTTPManager = new HTTPManager();
 		Log.i("RecipeManager","Searching web for " + name);
 		return tempHTTPManager.searchRecipes(name, URL);
