@@ -22,9 +22,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import ca.c301.t03_exceptions.FullFileException;
 import ca.c301.t03_model.Camera;
 import ca.c301.t03_model.DisplayConverter;
-import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Recipe;
 
 /**

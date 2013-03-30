@@ -8,9 +8,9 @@ import org.junit.Test;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+import ca.c301.t03_exceptions.FullFileException;
 import ca.c301.t03_exceptions.NullStringException;
 import ca.c301.t03_model.DataManager;
-import ca.c301.t03_model.FullFileException;
 import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipeManager;

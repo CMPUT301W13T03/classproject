@@ -11,6 +11,8 @@ import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ca.c301.t03_exceptions.FullFileException;
+
 import android.content.Context;
 import android.util.Log;
 

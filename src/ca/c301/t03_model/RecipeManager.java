@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import org.apache.http.client.ClientProtocolException;
 
+import ca.c301.t03_exceptions.FullFileException;
 import ca.c301.t03_exceptions.NullStringException;
 
 import android.app.Activity;
