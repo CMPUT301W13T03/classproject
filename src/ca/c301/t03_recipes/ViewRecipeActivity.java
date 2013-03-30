@@ -63,7 +63,7 @@ public class ViewRecipeActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 //Code for emailing the recipe.
-            	//new emailDialogFragment().show(getFragmentManager(),"emailDialog");
+            	new emailDialogFragment().show(getFragmentManager(),"emailDialog");
             }
         });
         
