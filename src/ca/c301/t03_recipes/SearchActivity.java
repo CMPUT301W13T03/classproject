@@ -82,14 +82,14 @@ public class SearchActivity extends Activity {
 					// PUT ONLINE SEARCH CODE HERE
 
 				}
-				if (offlineCheck.isChecked()) {
+				else if (offlineCheck.isChecked()) {
 					if ( keyword.getText().toString().equals("") ) {                		
 						recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().getAllRecipes();
 
 					}
 
 					else {
-						//ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
+						recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().searchRecipes(keyword.getText().toString());
 					}
 
 					displayLocalResults();
@@ -139,13 +139,13 @@ public class SearchActivity extends Activity {
 			}
 			displayWebResults();
 		}
-		if (offlineCheck.isChecked()) {
+		else if (offlineCheck.isChecked()) {
 			if ( keyword.getText().toString().equals("") ) {        		
 				recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().getAllRecipes();
 			}
 
 			else {
-				//ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
+				recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().searchRecipes(keyword.getText().toString());
 			}
 
 			displayLocalResults();

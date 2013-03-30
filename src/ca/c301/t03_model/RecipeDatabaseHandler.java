@@ -63,6 +63,24 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
      
         return recipe;
 	}
+    
+ public ArrayList<Recipe> searchRecipes(String keyword) {
+	 	ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+    	
+        String selectQuery = "SELECT RECIPE FROM " + TABLE_RECIPES + " WHERE " + NAME + " LIKE '%" + keyword + "%'";
+     
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+     
+        if (cursor.moveToFirst()) {
+            do {
+                Recipe recipe = (Recipe) SerializeHandler.deserializeObject(cursor.getBlob(0));
+                recipeList.add(recipe);
+            } while (cursor.moveToNext());
+        }
+     
+        return recipeList;
+	}
      
     public ArrayList<Recipe> getAllRecipes() {
     	ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
