@@ -57,12 +57,12 @@ public class DisplayConverter {
 	 * @return
 	 * 		Array containing recipe names
 	 */
- 	public String[] convertRecipeList(ArrayList<Integer> id, RecipeApplication app) {
+ 	public String[] convertRecipeList(ArrayList<Recipe> recipes, RecipeApplication app) {
 		
 		ArrayList<String> stringList = new ArrayList<String>();
 		
-		for (int i = 0; i < id.size(); i++) {
-			stringList.add(app.getRecipeManager().getLocallySavedRecipeById(id.get(i)).getName());
+		for (int i = 0; i < recipes.size(); i++) {
+			stringList.add(recipes.get(i).getName());
 		}
 		
 		String[] outArray = new String[stringList.size()];

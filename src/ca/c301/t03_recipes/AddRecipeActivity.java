@@ -72,18 +72,13 @@ public class AddRecipeActivity extends Activity {
 					recipe.setName(name.getText().toString());
 					recipe.setInstructions(instructions.getText().toString());
 
-					try {
-						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
-					}
-					catch (FullFileException e) {
-						e.printStackTrace();
-						Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
-					}
+					((RecipeApplication) getApplication()).getRecipeDatabase().addRecipe(recipe);
 
 					finish();
 				}
-				
-				Toast.makeText(getApplicationContext(), "Please fill in all fields and add at least one ingredient", Toast.LENGTH_LONG).show();
+				else {
+					Toast.makeText(getApplicationContext(), "Please fill in all fields and add at least one ingredient", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 
@@ -98,13 +93,7 @@ public class AddRecipeActivity extends Activity {
 					recipe.setName(name.getText().toString());
 					recipe.setInstructions(instructions.getText().toString());
 
-					try {
-						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe, getApplicationContext());
-					}
-					catch (FullFileException e) {
-						e.printStackTrace();
-						Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
-					}
+					((RecipeApplication) getApplication()).getRecipeDatabase().addRecipe(recipe);
 
 					// ADD CODE TO POST RECIPE TO WEB HERE
 					try {

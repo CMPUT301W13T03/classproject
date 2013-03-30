@@ -32,7 +32,6 @@ import android.widget.Toast;
 public class SearchActivity extends Activity {
 
 	private ArrayList<Recipe> recipes;
-	private ArrayList<Integer> ids;
 	private DisplayConverter converter;
 	private ListView recipeList;
 	private EditText keyword;
@@ -85,12 +84,12 @@ public class SearchActivity extends Activity {
 				}
 				if (offlineCheck.isChecked()) {
 					if ( keyword.getText().toString().equals("") ) {                		
-						ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalAll();
+						recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().getAllRecipes();
 
 					}
 
 					else {
-						ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
+						//ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
 					}
 
 					displayLocalResults();
@@ -142,11 +141,11 @@ public class SearchActivity extends Activity {
 		}
 		if (offlineCheck.isChecked()) {
 			if ( keyword.getText().toString().equals("") ) {        		
-				ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalAll();
+				recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().getAllRecipes();
 			}
 
 			else {
-				ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
+				//ids = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
 			}
 
 			displayLocalResults();
@@ -157,7 +156,7 @@ public class SearchActivity extends Activity {
 	 * Displays results from local search in the list view
 	 */
 	private void displayLocalResults() {
-		String[] displayList = converter.convertRecipeList(ids, (RecipeApplication) getApplication());
+		String[] displayList = converter.convertRecipeList(recipes, (RecipeApplication) getApplication());
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1, displayList);
 		recipeList.setAdapter(adapter);
@@ -168,7 +167,7 @@ public class SearchActivity extends Activity {
 				Intent intent = new Intent(SearchActivity.this, ViewRecipeActivity.class);
 
 				Bundle data = new Bundle();
-				data.putInt("id", ids.get(index));
+				data.putInt("id", recipes.get(index).getId());
 				data.putInt("online", 0);
 				intent.putExtras(data);
 

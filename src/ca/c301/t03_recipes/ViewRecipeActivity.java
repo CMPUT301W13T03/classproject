@@ -63,7 +63,7 @@ public class ViewRecipeActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 //Code for emailing the recipe.
-            	new emailDialogFragment().show(getFragmentManager(),"emailDialog");
+            	//new emailDialogFragment().show(getFragmentManager(),"emailDialog");
             }
         });
         
@@ -138,7 +138,7 @@ public class ViewRecipeActivity extends Activity {
 		super.onResume();
 		
 		if (online == 0) {
-			recipe = ((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id);
+			recipe = ((RecipeApplication) getApplication()).getRecipeDatabase().getRecipe(id);
 		}
 		else {
 			// LOAD ONLINE RECIPE HERE
