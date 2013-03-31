@@ -11,6 +11,7 @@ import org.apache.http.client.ClientProtocolException;
 
 import ca.c301.t03_exceptions.FullFileException;
 import ca.c301.t03_exceptions.NullStringException;
+import ca.c301.t03_recipes.RecipeApplication;
 
 import android.app.Activity;
 import android.content.Context;
@@ -233,6 +234,38 @@ public class RecipeManager {
 		}
 
 		return ids;
+	}
+	
+	public ArrayList<Recipe> ingredientMatch(ArrayList<Recipe> recipes, IngredientDatabaseHandler ingredientDB) {
+
+		ArrayList<Recipe> output = new ArrayList<Recipe>();
+		
+		for (int x = 0; x < recipes.size(); x++) {
+			ArrayList<Ingredient> ingredients = recipes.get(x).getIngredients();
+			ArrayList<String> pantry = ingredientDB.getAllIngredientNames();
+			
+			boolean result = true;
+
+			for (int i = 0; i < ingredients.size(); i++) {
+				boolean check = false;
+				for (int j = 0; j < pantry.size(); j++) {
+					if (ingredients.get(i).getName().equalsIgnoreCase(pantry.get(j))) {
+						check = true;
+						break;
+					}
+				}
+				if (!check) {
+					result = false;
+					break;
+				}
+			}
+			
+			if (result) {
+				output.add(recipes.get(x));
+			}
+		}
+		
+		return output;
 	}
 
 	public Bitmap generateBitmap(int i, int j) {

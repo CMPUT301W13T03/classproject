@@ -37,6 +37,7 @@ public class SearchActivity extends Activity {
 	private EditText keyword;
 	private CheckBox onlineCheck;
 	private CheckBox offlineCheck;
+	private CheckBox ingredientsCheck;
 
 	/**
 	 * Is responsible for creating the view of the activity,
@@ -51,6 +52,7 @@ public class SearchActivity extends Activity {
 
 		onlineCheck = (CheckBox) findViewById(R.id.checkBox_online);
 		offlineCheck = (CheckBox) findViewById(R.id.checkBox_offline);
+		ingredientsCheck = (CheckBox) findViewById(R.id.checkBox_ingredients);
 
 		keyword = (EditText) findViewById(R.id.editText_search);
 
@@ -79,8 +81,6 @@ public class SearchActivity extends Activity {
 						return;
 					}
 					displayWebResults();
-					// PUT ONLINE SEARCH CODE HERE
-
 				}
 				else if (offlineCheck.isChecked()) {
 					if ( keyword.getText().toString().equals("") ) {                		
@@ -90,6 +90,10 @@ public class SearchActivity extends Activity {
 
 					else {
 						recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().searchRecipes(keyword.getText().toString());
+					}
+					
+					if (ingredientsCheck.isChecked()) {
+						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
 					}
 
 					displayLocalResults();
@@ -146,6 +150,10 @@ public class SearchActivity extends Activity {
 
 			else {
 				recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().searchRecipes(keyword.getText().toString());
+			}
+			
+			if (ingredientsCheck.isChecked()) {
+				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
 			}
 
 			displayLocalResults();

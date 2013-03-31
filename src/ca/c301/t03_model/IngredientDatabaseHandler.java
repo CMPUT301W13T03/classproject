@@ -66,6 +66,24 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
         return ingredientList;
 	}
     
+    public ArrayList<String> getAllIngredientNames() {
+    	ArrayList<String> ingredientList = new ArrayList<String>();
+    	
+        String selectQuery = "SELECT " + KEY_NAME + " FROM " + TABLE_INGREDIENTS;
+     
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+     
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(0);
+                ingredientList.add(name);
+            } while (cursor.moveToNext());
+        }
+     
+        return ingredientList;
+	}
+    
     public int getIngredientCount(String name) {
         String countQuery = "SELECT  * FROM " + TABLE_INGREDIENTS + " WHERE " + KEY_NAME + " LIKE '" + name + "'";
         SQLiteDatabase db = this.getReadableDatabase();
