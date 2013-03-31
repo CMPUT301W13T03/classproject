@@ -191,6 +191,10 @@ public class SearchActivity extends Activity {
 	 * Displays results from local search in the list view
 	 */
 	private void displayResults(final int online) {
+		
+		if (recipes.isEmpty()) {
+			Toast.makeText(getApplicationContext(), "No results", Toast.LENGTH_LONG).show();
+		}
 		String[] displayList = converter.convertRecipeList(recipes);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1, displayList);
