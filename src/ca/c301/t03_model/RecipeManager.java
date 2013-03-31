@@ -267,6 +267,19 @@ public class RecipeManager {
 		
 		return output;
 	}
+	
+	public ArrayList<Recipe> photoCheck(ArrayList<Recipe> recipes) {
+
+		ArrayList<Recipe> output = new ArrayList<Recipe>();
+		
+		for (int i = 0; i < recipes.size(); i++) {
+			if (!recipes.get(i).getRecipePhoto().isEmpty()) {
+				output.add(recipes.get(i));
+			}
+		}
+		
+		return output;
+	}
 
 	public Bitmap generateBitmap(int i, int j) {
 		Camera camera = new Camera();

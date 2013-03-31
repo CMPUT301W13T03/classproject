@@ -38,6 +38,7 @@ public class SearchActivity extends Activity {
 	private CheckBox onlineCheck;
 	private CheckBox offlineCheck;
 	private CheckBox ingredientsCheck;
+	private CheckBox photoCheck;
 
 	/**
 	 * Is responsible for creating the view of the activity,
@@ -53,6 +54,7 @@ public class SearchActivity extends Activity {
 		onlineCheck = (CheckBox) findViewById(R.id.checkBox_online);
 		offlineCheck = (CheckBox) findViewById(R.id.checkBox_offline);
 		ingredientsCheck = (CheckBox) findViewById(R.id.checkBox_ingredients);
+		photoCheck = (CheckBox) findViewById(R.id.checkBox_photos);
 
 		keyword = (EditText) findViewById(R.id.editText_search);
 
@@ -85,6 +87,10 @@ public class SearchActivity extends Activity {
 						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
 					}
 					
+					if (photoCheck.isChecked()) {
+						recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
+					}
+					
 					displayResults(1);
 				}
 				else if (offlineCheck.isChecked()) {
@@ -98,6 +104,10 @@ public class SearchActivity extends Activity {
 					
 					if (ingredientsCheck.isChecked()) {
 						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
+					}
+					
+					if (photoCheck.isChecked()) {
+						recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
 					}
 
 					displayResults(0);
@@ -150,6 +160,10 @@ public class SearchActivity extends Activity {
 				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
 			}
 			
+			if (photoCheck.isChecked()) {
+				recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
+			}
+			
 			displayResults(1);
 		}
 		else if (offlineCheck.isChecked()) {
@@ -163,6 +177,10 @@ public class SearchActivity extends Activity {
 			
 			if (ingredientsCheck.isChecked()) {
 				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
+			}
+			
+			if (photoCheck.isChecked()) {
+				recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
 			}
 
 			displayResults(0);

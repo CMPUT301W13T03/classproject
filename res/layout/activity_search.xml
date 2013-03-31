@@ -54,7 +54,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/checkBox_offline" >
+        android:layout_below="@+id/checkBox_photos" >
     </ListView>
+
+    <CheckBox
+        android:id="@+id/checkBox_photos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/checkBox_offline"
+        android:text="Only list results with photos" />
 
 </RelativeLayout>
