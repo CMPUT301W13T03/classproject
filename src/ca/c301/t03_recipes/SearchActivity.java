@@ -83,14 +83,6 @@ public class SearchActivity extends Activity {
 						return;
 					}
 					
-					if (ingredientsCheck.isChecked()) {
-						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes);
-					}
-					/*
-					if (photoCheck.isChecked()) {
-						recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
-					}
-					*/
 					displayResults(1);
 				}
 				else if (offlineCheck.isChecked()) {
@@ -100,14 +92,6 @@ public class SearchActivity extends Activity {
 					}
 					else {
 						recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
-					}
-					
-					if (ingredientsCheck.isChecked()) {
-						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes);
-					}
-					
-					if (photoCheck.isChecked()) {
-						recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
 					}
 
 					displayResults(0);
@@ -156,14 +140,6 @@ public class SearchActivity extends Activity {
 				return;
 			}
 			
-			if (ingredientsCheck.isChecked()) {
-				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes);
-			}
-			/*
-			if (photoCheck.isChecked()) {
-				recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
-			}
-			*/
 			displayResults(1);
 		}
 		else if (offlineCheck.isChecked()) {
@@ -174,14 +150,6 @@ public class SearchActivity extends Activity {
 			else {
 				recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
 			}
-			
-			if (ingredientsCheck.isChecked()) {
-				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes);
-			}
-			
-			if (photoCheck.isChecked()) {
-				recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
-			}
 
 			displayResults(0);
 		}
@@ -191,6 +159,14 @@ public class SearchActivity extends Activity {
 	 * Displays results from local search in the list view
 	 */
 	private void displayResults(final int online) {
+		
+		if (ingredientsCheck.isChecked()) {
+			recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes);
+		}
+		
+		if (photoCheck.isChecked()) {
+			recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
+		}
 		
 		if (recipes.isEmpty()) {
 			Toast.makeText(getApplicationContext(), "No results", Toast.LENGTH_LONG).show();
