@@ -86,11 +86,11 @@ public class SearchActivity extends Activity {
 					if (ingredientsCheck.isChecked()) {
 						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
 					}
-					
+					/*
 					if (photoCheck.isChecked()) {
 						recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
 					}
-					
+					*/
 					displayResults(1);
 				}
 				else if (offlineCheck.isChecked()) {
@@ -159,11 +159,11 @@ public class SearchActivity extends Activity {
 			if (ingredientsCheck.isChecked()) {
 				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
 			}
-			
+			/*
 			if (photoCheck.isChecked()) {
 				recipes = ((RecipeApplication) getApplication()).getRecipeManager().photoCheck(recipes);
 			}
-			
+			*/
 			displayResults(1);
 		}
 		else if (offlineCheck.isChecked()) {
