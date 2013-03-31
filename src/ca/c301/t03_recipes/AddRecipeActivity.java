@@ -72,7 +72,12 @@ public class AddRecipeActivity extends Activity {
 					recipe.setName(name.getText().toString());
 					recipe.setInstructions(instructions.getText().toString());
 
-					((RecipeApplication) getApplication()).getRecipeDatabase().addRecipe(recipe);
+					try {
+						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe);
+					} catch (FullFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 					finish();
 				}
@@ -93,7 +98,12 @@ public class AddRecipeActivity extends Activity {
 					recipe.setName(name.getText().toString());
 					recipe.setInstructions(instructions.getText().toString());
 
-					((RecipeApplication) getApplication()).getRecipeDatabase().addRecipe(recipe);
+					try {
+						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe);
+					} catch (FullFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
 					// ADD CODE TO POST RECIPE TO WEB HERE
 					try {

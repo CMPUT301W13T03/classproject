@@ -70,7 +70,7 @@ public class IngredientListActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		ingredients = ((RecipeApplication) getApplication()).getIngredientDatabase().getAllIngredients();
+		ingredients = ((RecipeApplication) getApplication()).getRecipeManager().getAllIngredients();
 
 		String[] displayList = converter.convertIngredientsList(ingredients);
 
@@ -103,7 +103,7 @@ public class IngredientListActivity extends Activity {
 			if(resultCode == RESULT_OK){
 
 				if (data.getIntExtra("del", 0) == 1) {
-					((RecipeApplication) getApplication()).getIngredientDatabase().deleteIngredient(data.getStringExtra("name"));
+					((RecipeApplication) getApplication()).getRecipeManager().deleteIngredient(data.getStringExtra("name"));
 				}
 				else {			        
 			        Ingredient ingredient = new Ingredient();
@@ -111,13 +111,13 @@ public class IngredientListActivity extends Activity {
 			        ingredient.setAmount(data.getDoubleExtra("amount", 0.00));
 			        ingredient.setUnitOfMeasurement(data.getStringExtra("unit"));
 
-			        if (((RecipeApplication) getApplication()).getIngredientDatabase().getIngredientCount(ingredient.getName()) == 0) {
+			        if (((RecipeApplication) getApplication()).getRecipeManager().getIngredientCount(ingredient.getName()) == 0) {
 			        
 			        	if (data.getIntExtra("type", 0) == 0) {
-			        		((RecipeApplication) getApplication()).getIngredientDatabase().addIngredient(ingredient);
+			        		((RecipeApplication) getApplication()).getRecipeManager().addIngredient(ingredient);
 			        	}
 			        	else {
-			        		((RecipeApplication) getApplication()).getIngredientDatabase().updateIngredient(ingredient);
+			        		((RecipeApplication) getApplication()).getRecipeManager().updateIngredient(ingredient);
 			        	}
 			        }
 			        else {

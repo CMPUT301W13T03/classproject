@@ -110,7 +110,12 @@ public class ViewRecipeActivity extends Activity {
             		
             		// PUT DOWNLOAD CODE HERE
             		//Actually saving code, its downloaded.
-            		((RecipeApplication) getApplication()).getRecipeDatabase().addRecipe(recipe);        		
+            		try {
+						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe);
+					} catch (FullFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}        		
             	}
             }
         });
@@ -133,7 +138,7 @@ public class ViewRecipeActivity extends Activity {
 		super.onResume();
 		
 		if (online == 0) {
-			recipe = ((RecipeApplication) getApplication()).getRecipeDatabase().getRecipe(id);
+			recipe = ((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id);
 		}
 		else {
 			// LOAD ONLINE RECIPE HERE
@@ -173,7 +178,12 @@ public class ViewRecipeActivity extends Activity {
 			if(resultCode == RESULT_OK){
 				Log.i(TAG,"Photo taken");
 				((RecipeApplication) getApplication()).getRecipeManager().attachPhotoToRecipe(recipe, photoFile);
-				((RecipeApplication) getApplication()).getRecipeDatabase().updateRecipe(recipe);
+				try {
+					((RecipeApplication) getApplication()).getRecipeManager().setRecipe(recipe);
+				} catch (FullFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else
 				Log.i(TAG,"Photo not taken");

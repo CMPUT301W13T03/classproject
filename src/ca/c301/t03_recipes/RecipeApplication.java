@@ -19,8 +19,6 @@ public class RecipeApplication extends Application{
 	 * @uml.associationEnd  aggregation="composite" inverse="recipeApplication:ca.c301.t03_model.RecipeManager"
 	 */
 	private RecipeManager recipeManager;
-	private RecipeDatabaseHandler recipeDatabase;
-	private IngredientDatabaseHandler ingredientDatabase;
 
 	// I need this for testing. -Zach
 	public RecipeApplication(){
@@ -46,14 +44,6 @@ public class RecipeApplication extends Application{
 	public RecipeManager getRecipeManager() {
 		return recipeManager;
 	}
-	
-	public RecipeDatabaseHandler getRecipeDatabase() {
-		return recipeDatabase;
-	}
-	
-	public IngredientDatabaseHandler getIngredientDatabase() {
-		return ingredientDatabase;
-	}
 
 	/**
 	 * Setter of the property <tt>recipeManager</tt>
@@ -62,8 +52,6 @@ public class RecipeApplication extends Application{
 	 */
 	public void setRecipeManager() {
 		this.recipeManager = new RecipeManager(getApplicationContext());
-		this.recipeDatabase = new RecipeDatabaseHandler(getApplicationContext());
-		this.ingredientDatabase = new IngredientDatabaseHandler(getApplicationContext());
 	}
 
 	

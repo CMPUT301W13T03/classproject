@@ -23,6 +23,9 @@ public class PhotoTest extends  IntentCatchingTemplate{
 	public PhotoTest(){
     	super(MainActivity.class);
     }
+	
+	/*
+	
 	//Delete testfile before each test.
 	@Before
 	public void setUp() throws Exception{
@@ -41,6 +44,9 @@ public class PhotoTest extends  IntentCatchingTemplate{
     	manager.takePhotoForRecipe(fakeActivity);
 
 	}
+	
+	*/
+	
 	//Test to make sure the intent is sent when a photo is taken.
     @Test
     public void testPhotoIntentNotNull(){

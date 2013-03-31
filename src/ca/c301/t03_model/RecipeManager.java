@@ -101,9 +101,8 @@ public class RecipeManager {
 	 * @param c Is the Android context
 	 * @throws FullFileException
 	 */
-	public void saveRecipe(Recipe recipe, Context c) throws FullFileException {
-		dataManager.getRecipeBook().addRecipe(recipe);
-		dataManager.saveToFile(c);
+	public void saveRecipe(Recipe recipe) throws FullFileException {
+		dataManager.getRecipeDatabase().addRecipe(recipe);
 	}
 
 	/**
@@ -113,9 +112,8 @@ public class RecipeManager {
 	 * @param c Is the application context
 	 * @throws FullFileException
 	 */
-	public void setRecipe(int id, Recipe recipe, Context c) throws FullFileException {
-		dataManager.getRecipeBook().setRecipeByID(id, recipe);
-		dataManager.saveToFile(c);
+	public void setRecipe(Recipe recipe) throws FullFileException {
+		dataManager.getRecipeDatabase().updateRecipe(recipe);
 	}
 
 	/**
@@ -133,16 +131,15 @@ public class RecipeManager {
 	 * @return Returns the local recipe with the given id
 	 */
 	public Recipe getLocallySavedRecipeById(int id) {
-		return dataManager.getRecipeBook().findRecipeByID(id);
+		return dataManager.getRecipeDatabase().getRecipe(id);
 	}
 
 	/**
 	 * To delete a locally saved recipe with a given id
 	 * @param id Is the id of the recipe to be deleted
 	 */
-	public void deleteLocallySavedRecipeById(int id, Context c) throws FullFileException {
-		dataManager.getRecipeBook().deleteRecipeByID(id);
-		dataManager.saveToFile(c);
+	public void deleteLocallySavedRecipeById(int id) throws FullFileException {
+		dataManager.getRecipeDatabase().deleteRecipe(id);
 	}
 
 	/**
@@ -177,40 +174,36 @@ public class RecipeManager {
 	 * To add an ingredient to the Virtual Pantry
 	 * @param ingredient Is the ingredient to add
 	 */
-	public void addIngredientToPantry(Ingredient ingredient) {
+	public void addIngredient(Ingredient ingredient) {
+		dataManager.getIngredientDatabase().addIngredient(ingredient);
+	}
+	
+	public ArrayList<Ingredient> getAllIngredients() {
+		return dataManager.getIngredientDatabase().getAllIngredients();
 	}
 
-	/**
-	 * To get an ingredient by id
-	 * @param id Is the id of the ingredient to get
-	 * @return Returns the ingredient with the given id
-	 */
-	public Ingredient getLocalIngredientById(int id) {
-		return null;
+	public void deleteIngredient(String name) {
+		dataManager.getIngredientDatabase().deleteIngredient(name);
 	}
-
-	/**
-	 * To get all local recipes
-	 * @return Returns ArrayList of all local recipes
-	 */
-	public ArrayList<Recipe> getRecipes() {
-		return dataManager.getRecipeBook().getRecipes();
+	
+	public int getIngredientCount(String name) {
+		return dataManager.getIngredientDatabase().getIngredientCount(name);
+	}
+	
+	public void updateIngredient(Ingredient ingredient) {
+		dataManager.getIngredientDatabase().updateIngredient(ingredient);
+	}
+	
+	public ArrayList<String> getAllIngredientNames() {
+		return dataManager.getIngredientDatabase().getAllIngredientNames();
 	}
 
 	/**
 	 * Locally searches, returning IDs of all local recipes
 	 * @return Returns Arraylist<Integer> of IDs of all local recipes
 	 */
-	public ArrayList<Integer> searchLocalAll() {
-
-		ArrayList<Recipe> recipes = this.getRecipes();
-		ArrayList<Integer> ids = new ArrayList<Integer>();
-
-		for (int i = 0; i < recipes.size(); i++) {
-			ids.add(recipes.get(i).getId());
-		}
-
-		return ids;
+	public ArrayList<Recipe> getAllLocalRecipes() {
+		return dataManager.getRecipeDatabase().getAllRecipes();
 	}
 
 	/**
@@ -218,31 +211,17 @@ public class RecipeManager {
 	 * @param keyword Is the keyword used in the search
 	 * @return Returns Arraylist<Integer> of IDs of all local recipes with names containing the keyword
 	 */
-	public ArrayList<Integer> searchLocalKeyword(String keyword) {
-
-		ArrayList<Recipe> recipes = this.getRecipes();
-		ArrayList<Integer> ids = new ArrayList<Integer>();
-
-		Pattern pattern = Pattern.compile(".*" + keyword + ".*", Pattern.CASE_INSENSITIVE);
-		Matcher matcher;
-
-		for (int i = 0; i < recipes.size(); i++) {
-			matcher = pattern.matcher(recipes.get(i).getName());
-			if (matcher.find()) {
-				ids.add(recipes.get(i).getId());
-			}
-		}
-
-		return ids;
+	public ArrayList<Recipe> searchLocalKeyword(String keyword) {
+		return dataManager.getRecipeDatabase().searchRecipes(keyword);
 	}
 	
-	public ArrayList<Recipe> ingredientMatch(ArrayList<Recipe> recipes, IngredientDatabaseHandler ingredientDB) {
+	public ArrayList<Recipe> ingredientMatch(ArrayList<Recipe> recipes) {
 
 		ArrayList<Recipe> output = new ArrayList<Recipe>();
 		
 		for (int x = 0; x < recipes.size(); x++) {
 			ArrayList<Ingredient> ingredients = recipes.get(x).getIngredients();
-			ArrayList<String> pantry = ingredientDB.getAllIngredientNames();
+			ArrayList<String> pantry = this.getAllIngredientNames();
 			
 			boolean result = true;
 

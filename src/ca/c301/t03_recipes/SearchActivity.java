@@ -84,7 +84,7 @@ public class SearchActivity extends Activity {
 					}
 					
 					if (ingredientsCheck.isChecked()) {
-						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
+						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes);
 					}
 					/*
 					if (photoCheck.isChecked()) {
@@ -95,15 +95,15 @@ public class SearchActivity extends Activity {
 				}
 				else if (offlineCheck.isChecked()) {
 					if ( keyword.getText().toString().equals("") ) {                		
-						recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().getAllRecipes();
+						recipes = ((RecipeApplication) getApplication()).getRecipeManager().getAllLocalRecipes();
 
 					}
 					else {
-						recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().searchRecipes(keyword.getText().toString());
+						recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
 					}
 					
 					if (ingredientsCheck.isChecked()) {
-						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
+						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes);
 					}
 					
 					if (photoCheck.isChecked()) {
@@ -157,7 +157,7 @@ public class SearchActivity extends Activity {
 			}
 			
 			if (ingredientsCheck.isChecked()) {
-				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
+				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes);
 			}
 			/*
 			if (photoCheck.isChecked()) {
@@ -168,15 +168,15 @@ public class SearchActivity extends Activity {
 		}
 		else if (offlineCheck.isChecked()) {
 			if ( keyword.getText().toString().equals("") ) {        		
-				recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().getAllRecipes();
+				recipes = ((RecipeApplication) getApplication()).getRecipeManager().getAllLocalRecipes();
 			}
 
 			else {
-				recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().searchRecipes(keyword.getText().toString());
+				recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
 			}
 			
 			if (ingredientsCheck.isChecked()) {
-				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
+				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes);
 			}
 			
 			if (photoCheck.isChecked()) {

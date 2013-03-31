@@ -54,7 +54,7 @@ public class EditRecipeActivity extends Activity {
 
 		ingredientsList = (ListView) findViewById(R.id.listView_ingredients);
 
-		recipe = ((RecipeApplication) getApplication()).getRecipeDatabase().getRecipe(id);
+		recipe = ((RecipeApplication) getApplication()).getRecipeManager().getLocallySavedRecipeById(id);
 
 		name = (EditText) findViewById(R.id.editText_name);
 		instructions = (EditText) findViewById(R.id.editText_instructions);
@@ -76,7 +76,17 @@ public class EditRecipeActivity extends Activity {
                 	recipe.setName(name.getText().toString());
                 	recipe.setInstructions(instructions.getText().toString());
                 	
-                	((RecipeApplication) getApplication()).getRecipeDatabase().updateRecipe(recipe);
+                	try {
+						try {
+							((RecipeApplication) getApplication()).getRecipeManager().setRecipe(recipe);
+						} catch (FullFileException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 	
                 	finish();
             	}
@@ -94,7 +104,12 @@ public class EditRecipeActivity extends Activity {
             	returnIntent.putExtra("del",1);
             	setResult(RESULT_OK,returnIntent);
             	
-				((RecipeApplication) getApplication()).getRecipeDatabase().deleteRecipe(id);
+				try {
+					((RecipeApplication) getApplication()).getRecipeManager().deleteLocallySavedRecipeById(id);
+				} catch (FullFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             	
             	finish();
             }
@@ -206,7 +221,7 @@ public class EditRecipeActivity extends Activity {
 	}
 	private void saveRecipe(){
 		try {
-			((RecipeApplication) getApplication()).getRecipeManager().setRecipe(id, recipe, getApplicationContext());
+			((RecipeApplication) getApplication()).getRecipeManager().setRecipe(recipe);
 		} catch (FullFileException e) {
 			Toast.makeText(getApplicationContext(), "No room to save recipe", Toast.LENGTH_LONG).show();
 			e.printStackTrace();
