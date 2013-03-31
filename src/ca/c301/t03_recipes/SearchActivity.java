@@ -80,14 +80,18 @@ public class SearchActivity extends Activity {
 						toast.show();
 						return;
 					}
-					displayWebResults();
+					
+					if (ingredientsCheck.isChecked()) {
+						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
+					}
+					
+					displayResults(1);
 				}
 				else if (offlineCheck.isChecked()) {
 					if ( keyword.getText().toString().equals("") ) {                		
 						recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().getAllRecipes();
 
 					}
-
 					else {
 						recipes = ((RecipeApplication) getApplication()).getRecipeDatabase().searchRecipes(keyword.getText().toString());
 					}
@@ -96,7 +100,7 @@ public class SearchActivity extends Activity {
 						recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
 					}
 
-					displayLocalResults();
+					displayResults(0);
 				}
 			}
 
@@ -141,7 +145,12 @@ public class SearchActivity extends Activity {
 				toast.show();
 				return;
 			}
-			displayWebResults();
+			
+			if (ingredientsCheck.isChecked()) {
+				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
+			}
+			
+			displayResults(1);
 		}
 		else if (offlineCheck.isChecked()) {
 			if ( keyword.getText().toString().equals("") ) {        		
@@ -156,38 +165,14 @@ public class SearchActivity extends Activity {
 				recipes = ((RecipeApplication) getApplication()).getRecipeManager().ingredientMatch(recipes, ((RecipeApplication) getApplication()).getIngredientDatabase());
 			}
 
-			displayLocalResults();
+			displayResults(0);
 		}
 	}
 
 	/**
 	 * Displays results from local search in the list view
 	 */
-	private void displayLocalResults() {
-		String[] displayList = converter.convertRecipeList(recipes, (RecipeApplication) getApplication());
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1, displayList);
-		recipeList.setAdapter(adapter);
-
-		recipeList.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View view, int index, long id) {
-				Intent intent = new Intent(SearchActivity.this, ViewRecipeActivity.class);
-
-				Bundle data = new Bundle();
-				data.putInt("id", recipes.get(index).getId());
-				data.putInt("online", 0);
-				intent.putExtras(data);
-
-				startActivity(intent);
-			}
-		}); 
-	}
-
-	/**
-	 * Displays results from a web search in the list view
-	 */
-	private void displayWebResults() {
+	private void displayResults(final int online) {
 		String[] displayList = converter.convertRecipeList(recipes);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchActivity.this,android.R.layout.simple_list_item_1, displayList);
@@ -200,13 +185,12 @@ public class SearchActivity extends Activity {
 
 				Bundle data = new Bundle();
 				data.putInt("id", recipes.get(index).getId());
-				data.putInt("online", 1);
+				data.putInt("online", online);
 				intent.putExtras(data);
 
 				startActivity(intent);
 			}
 		}); 
-
 	}
 
 }

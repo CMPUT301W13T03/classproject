@@ -47,27 +47,4 @@ public class DisplayConverter {
 		
 		return outArray;	
 		}
-	
-	/**
-	 * To convert an ArrayList<Integer> of recipe IDs into an array of Strings for display
-	 * @param id
-	 * 		ArrayList of recipe IDs to be converted
-	 * @param app
-	 * 		Application context
-	 * @return
-	 * 		Array containing recipe names
-	 */
- 	public String[] convertRecipeList(ArrayList<Recipe> recipes, RecipeApplication app) {
-		
-		ArrayList<String> stringList = new ArrayList<String>();
-		
-		for (int i = 0; i < recipes.size(); i++) {
-			stringList.add(recipes.get(i).getName());
-		}
-		
-		String[] outArray = new String[stringList.size()];
-		stringList.toArray(outArray);
-		
-		return outArray;
-	}
 }
