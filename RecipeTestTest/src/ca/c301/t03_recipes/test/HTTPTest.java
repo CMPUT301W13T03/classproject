@@ -32,8 +32,6 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
 	}
 	
-	/*
-	
 	//Test to make sure publishing and retrieving recipes from the web works correctly. Must be done all in
 	//one test.
 	@Test
@@ -43,7 +41,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		Ingredient water = new Ingredient("Water");
 		recipe.addIngredient(water);
 		recipe.setInstructions("Put it in a cup, you idiot.");
-		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
+		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe);
 		//Added a rest because instantly grabbing a recipe without waiting for the storage of one throws an error.
 		try {
@@ -77,22 +75,28 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	@Test
 	public void testSaveRecipeLocally() throws IllegalStateException, IOException{
 		Recipe recipe = new Recipe("Name","Instructions");
-		recipe.setId(1900);
-		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
+		RecipeManager manager = new RecipeManager(getActivity());
 
 		manager.publishRecipeToWeb(recipe);
-		Recipe downloadedRecipe = manager.getSingleRecipe(1900);
+		Recipe downloadedRecipe = manager.getSingleRecipe(recipe.getId());
 		try {
 			manager.saveRecipe(downloadedRecipe);
 		} catch (FullFileException e) {
 			fail("Full file exception");
 			e.printStackTrace();
 		}
-		//id would be 0  because its the first one saved.
-		Recipe savedRecipe = manager.getLocallySavedRecipeById(0);
+
+		Recipe savedRecipe = manager.getLocallySavedRecipeById(recipe.getId());
 		assertNotNull(savedRecipe);
 		assertEquals(savedRecipe.getName(),"Name");
 		assertEquals(savedRecipe.getInstructions(),"Instructions");
+		
+		try {
+			manager.deleteLocallySavedRecipeById(recipe.getId());
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	//Test to see if a web recipe can be retrieved by its name.
@@ -104,7 +108,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		recipe0.setId(0);
 		recipe1.setId(1);
 		recipe2.setId(2);
-		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
+		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe1);
 		manager.publishRecipeToWeb(recipe0);
 		manager.publishRecipeToWeb(recipe2);
@@ -124,7 +128,5 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		}
 		return false;
 	}
-	
-	*/
 	
 }
