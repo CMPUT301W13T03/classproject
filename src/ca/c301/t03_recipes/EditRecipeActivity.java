@@ -250,7 +250,7 @@ public class EditRecipeActivity extends Activity {
 		{
 			if(resultCode == RESULT_OK){
 				//handle result
-				((RecipeApplication)getApplication()).getRecipeManager().attachPhotoToRecipe(recipe, photoFile);
+				recipe.attachPhotoFile(photoFile);
 				saveRecipe();
 
 			}

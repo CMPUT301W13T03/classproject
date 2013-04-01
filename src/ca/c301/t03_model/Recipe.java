@@ -1,5 +1,6 @@
 package ca.c301.t03_model;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -80,6 +81,17 @@ public class Recipe implements Serializable{
 		tempID = tempID.concat(Integer.toString(cal.get(Calendar.SECOND)));
 		tempID = tempID.concat(Integer.toString(cal.get(Calendar.MILLISECOND)));
 		return tempID;
+	}
+	/**
+	 * To attach the photo from a given file to a given recipe
+	 * 
+
+	 * @param f
+	 * 				The file which contains the photo to attach
+	 */
+	public void attachPhotoFile(File f){
+		RecipePhoto photo = new RecipePhoto(f);
+		this.addPhoto(photo);
 	}
 
 	/**

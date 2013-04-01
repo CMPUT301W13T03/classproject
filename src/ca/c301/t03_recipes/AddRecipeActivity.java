@@ -264,8 +264,7 @@ public class AddRecipeActivity extends Activity {
 		if (requestCode == Camera.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				// handle result
-				((RecipeApplication) getApplication()).getRecipeManager()
-						.attachPhotoToRecipe(recipe, photoFile);
+				recipe.attachPhotoFile(photoFile);
 			}
 		}
 		

@@ -205,20 +205,6 @@ public class RecipeManager {
 	}
 
 	/**
-	 * To attach the photo from a given file to a given recipe
-	 * 
-	 * @param recipe
-	 * 				The recipe which the photo will be attached to
-	 * @param f
-	 * 				The file which contains the photo to attach
-	 */
-	public void attachPhotoToRecipe(Recipe recipe, File f){
-		if (f == null) Log.e(TAG,"Image file is null!");
-		RecipePhoto photo = new RecipePhoto(f);
-		recipe.addPhoto(photo);
-	}
-
-	/**
 	 * To add an ingredient to the Virtual Pantry, which is the ingredients database
 	 * 
 	 * @param ingredient
