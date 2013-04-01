@@ -316,30 +316,33 @@ public class RecipeManager {
 
 		for (int x = 0; x < recipes.size(); x++) {
 			ArrayList<Ingredient> ingredients = recipes.get(x).getIngredients();
-			ArrayList<String> pantry = this.getAllIngredientNames();
 
-			boolean result = true;
+			boolean pantryHasAllIngredients = true;
 
 			for (int i = 0; i < ingredients.size(); i++) {
-				boolean check = false;
-				for (int j = 0; j < pantry.size(); j++) {
-					if (ingredients.get(i).getName().equalsIgnoreCase(pantry.get(j))) {
-						check = true;
-						break;
-					}
-				}
-				if (!check) {
-					result = false;
-					break;
-				}
+				pantryHasAllIngredients = isInPantry(ingredients.get(i));
+				if(!pantryHasAllIngredients) break;
 			}
-
-			if (result) {
+			if (pantryHasAllIngredients) {
 				output.add(recipes.get(x));
 			}
 		}
-
 		return output;
+	}
+	/**
+	 * Checks to see if the ingredient is in the pantry.
+	 * @param ingredient
+	 * @return true if the ingredient is in the pantry.
+	 */
+	private boolean isInPantry(Ingredient ingredient)
+	{
+		ArrayList<String> pantry = this.getAllIngredientNames();
+		for (int j = 0; j < pantry.size(); j++) {
+			if (ingredient.getName().equalsIgnoreCase(pantry.get(j))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
