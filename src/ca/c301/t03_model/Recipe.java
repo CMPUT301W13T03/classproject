@@ -65,13 +65,21 @@ public class Recipe implements Serializable{
 	 * 				The ID based on current time
 	 */
 	private int generateID() {
+		String tempID = generateIDString();
+		return Integer.parseInt(tempID);
+	}
+	/**
+	 * Generates an ID for a recipe as a String.
+	 * @return ID as a string
+	 */
+	private String generateIDString(){
 		String tempID = "";
 		Calendar cal = Calendar.getInstance();
 		tempID = tempID.concat(Integer.toString(cal.get(Calendar.DAY_OF_YEAR)));
 		tempID = tempID.concat(Integer.toString(cal.get(Calendar.MINUTE)));
 		tempID = tempID.concat(Integer.toString(cal.get(Calendar.SECOND)));
 		tempID = tempID.concat(Integer.toString(cal.get(Calendar.MILLISECOND)));
-		return Integer.parseInt(tempID);
+		return tempID;
 	}
 
 	/**
