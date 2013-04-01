@@ -66,16 +66,6 @@ public class ViewRecipeActivity extends Activity {
             	new emailDialogFragment().show(getFragmentManager(),"emailDialog");
             }
         });
-        
-        Button addPictureButton = (Button) findViewById(R.id.button_add_picture);
-        addPictureButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-/*                Intent intent = new Intent(ViewRecipeActivity.this, PhotoActivity.class);
-                startActivity(intent);*/
-            	takePhoto();
-            }
-        });
         Button viewPicturesButton = (Button) findViewById(R.id.button_view_pictures);
         
         viewPicturesButton.setOnClickListener(new OnClickListener() {
@@ -175,22 +165,6 @@ public class ViewRecipeActivity extends Activity {
 				}
 			}
 		}
-		if (requestCode == Camera.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE)
-		{
-			if(resultCode == RESULT_OK){
-				Log.i(TAG,"Photo taken");
-				((RecipeApplication) getApplication()).getRecipeManager().attachPhotoToRecipe(recipe, photoFile);
-				try {
-					((RecipeApplication) getApplication()).getRecipeManager().setRecipe(recipe);
-				} catch (FullFileException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			else
-				Log.i(TAG,"Photo not taken");
-
-		}
 	}
 	@TargetApi(11)
 	public class emailDialogFragment extends DialogFragment{
@@ -232,10 +206,6 @@ public class ViewRecipeActivity extends Activity {
 	        return builder.create();
 	    }
 
-	}
-	protected void takePhoto() {
-		//Store file and add it to the recipe if the Photo activity returns RESULT_OK
-		photoFile = ((RecipeApplication)getApplication()).getRecipeManager().takePhotoForRecipe(this);		
 	}
 	
 }
