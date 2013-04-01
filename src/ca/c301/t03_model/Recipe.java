@@ -51,10 +51,11 @@ public class Recipe implements Serializable{
 	 * 				Is the instructions as a String
 	 */
 	public Recipe(String name, String instructions){
-
 		this.id = generateID();
 		this.name = name;
 		this.instructions = instructions;
+		this.ingredients = new ArrayList<Ingredient>();
+		this.recipePhoto = new ArrayList<RecipePhoto>();
 	}
 	
 	/**

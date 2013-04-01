@@ -92,11 +92,14 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
     	
         String selectQuery = "SELECT RECIPE FROM " + TABLE_RECIPES + " WHERE " + KEY_ID + " = " + Integer.toString(id);
      
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
      
         if (cursor.moveToFirst()) {
         	recipe = (Recipe) SerializeHandler.deserializeObject(cursor.getBlob(0));
+        }
+        else {
+        	return null;
         }
      
         return recipe;
@@ -115,7 +118,7 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
     	
         String selectQuery = "SELECT " + RECIPE + " FROM " + TABLE_RECIPES + " WHERE " + NAME + " LIKE '%" + keyword + "%'";
      
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
      
         if (cursor.moveToFirst()) {
@@ -139,7 +142,7 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
     	
         String selectQuery = "SELECT " + RECIPE + " FROM " + TABLE_RECIPES;
      
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
      
         if (cursor.moveToFirst()) {

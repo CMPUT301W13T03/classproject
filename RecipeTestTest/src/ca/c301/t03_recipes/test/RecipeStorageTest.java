@@ -25,116 +25,72 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		super(MainActivity.class);
 		// TODO Auto-generated constructor stub
 	}
-	//Delete testfile before each test.
-	@Before
-	public void setUp() throws Exception{
-		//Delete any existing file.
-		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
-	}
-	
-	/*
 	
 	//Test creating a recipe and adding it to local storage.
 	@Test
 	public void testCreateRecipe(){
 		Recipe recipe = new Recipe("Name", "Instructions");
-		DataManager testDataManager = new DataManager(getActivity(),TEST_FILE_NAME);
-		RecipeManager manager = new RecipeManager(testDataManager);
+		RecipeManager manager = new RecipeManager(getActivity());
 
 		try {
-			manager.saveRecipe(recipe, getActivity());
+			manager.saveRecipe(recipe);
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Recipe savedRecipe = testDataManager.getRecipeBook().findRecipeByID(0);
+		Recipe savedRecipe = manager.getLocallySavedRecipeById(recipe.getId());
 
-		assertSame(savedRecipe,recipe);
+		assertEquals(savedRecipe.getId(),recipe.getId());
+		assertEquals(savedRecipe.getName(),recipe.getName());
+		assertEquals(savedRecipe.getInstructions(),recipe.getInstructions());
+		
+		try {
+			manager.deleteLocallySavedRecipeById(savedRecipe.getId());
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
 	//Test retrieving a recipe already in local storage.
 	@Test
 	public void testRetrieveRecipe() {
-		RecipeBook recipeBook = new RecipeBook();
 		Recipe recipe = new Recipe("Name", "Instructions");
-		DataManager dataManager = new DataManager(recipeBook, null, getActivity(),TEST_FILE_NAME);
-		RecipeManager manager = new RecipeManager(dataManager);
+		RecipeManager manager = new RecipeManager(getActivity());
 
-		recipeBook.addRecipe(recipe);
-		Recipe retrievedRecipe = manager.getLocallySavedRecipeById(0);
+		try {
+			manager.saveRecipe(recipe);
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Recipe retrievedRecipe = manager.getLocallySavedRecipeById(recipe.getId());
 
 		// Check same recipe is returned.
-		assertSame(retrievedRecipe, recipe);
-	}
-	//Test to make sure DataManager file that holds recipes and ingredients is saved.
-	@Test
-	public void testFileCreation()
-	{
-		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
-		RecipeManager manager = new RecipeManager(dataManager);
-
-		FileInputStream fin;
-
+		assertEquals(retrievedRecipe.getId(),recipe.getId());
+		assertEquals(retrievedRecipe.getName(),recipe.getName());
+		assertEquals(retrievedRecipe.getInstructions(),recipe.getInstructions());
+		
 		try {
-			fin = getActivity().openFileInput(TEST_FILE_NAME);
-			getActivity().getFilesDir();
-			ObjectInputStream ois = new ObjectInputStream(fin);
-			DataManager savedManager;
-			savedManager = (DataManager) ois.readObject();
-			assertNotNull(savedManager);
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			fail("Recipe file not found.");
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error reading from file");
-		}
-	}
-	//Test to make sure DataManager file that holds recipes and ingredients correctly stores a recipe.
-	@Test
-	public void testSavedRecipe(){
-		Recipe recipe = new Recipe("Name", "Instructions");
-		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
-		RecipeManager manager = new RecipeManager(dataManager);
-		try {
-			manager.saveRecipe(recipe, getActivity());
-		} catch (FullFileException e1) {
+			manager.deleteLocallySavedRecipeById(retrievedRecipe.getId());
+		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		// Check file status
-		DataManager savedManager;
-		FileInputStream fin;
-		try {
-			fin = getActivity().openFileInput(TEST_FILE_NAME);
-			getActivity().getFilesDir();
-			ObjectInputStream ois = new ObjectInputStream(fin);
-			savedManager = (DataManager) ois.readObject();
-			assertEquals("Name",savedManager.getRecipeBook().findRecipeByID(0).getName());
-
-		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			fail("Recipe file not found.");
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("Error reading from file");
 		}
-
 	}
 	//Test to make sure a recipe can be deleted from local storage.
 	@Test
 	public void testDeleteRecipe() throws IllegalStateException, IOException{
 		Recipe recipe = new Recipe("Name","Instructions");
-		recipe.setId(1900);
-		RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
+
+		RecipeManager manager = new RecipeManager(getActivity());
 		try {
-			manager.saveRecipe(recipe, getActivity());
-			manager.deleteLocallySavedRecipeById(1900, getActivity());
+			manager.saveRecipe(recipe);
+			manager.deleteLocallySavedRecipeById(recipe.getId());
 		} catch (FullFileException e) {
 			e.printStackTrace();
 		}
-		assertNull(manager.getLocallySavedRecipeById(1990));
+		assertNull(manager.getLocallySavedRecipeById(recipe.getId()));
 		
 
 
@@ -144,22 +100,38 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 	public void testSaveAndRetrieveFromMany(){
 		Recipe recipe0 = new Recipe("Name0", "Instructions0");
 		Recipe recipe1 = new Recipe("Name1", "Instructions1");
+		recipe1.setId(recipe1.getId() + 5);
 		Recipe recipe2 = new Recipe("Name2", "Instructions2");
-
-		DataManager dataManager = new DataManager(getActivity(),TEST_FILE_NAME);
-		RecipeManager manager = new RecipeManager(dataManager);
+		recipe2.setId(recipe2.getId() + 10);
+		
+		RecipeManager manager = new RecipeManager(getActivity());
 
 		try {
-			manager.saveRecipe(recipe0, getActivity());
-			manager.saveRecipe(recipe1, getActivity());
-			manager.saveRecipe(recipe2, getActivity());
+			manager.saveRecipe(recipe0);
+			manager.saveRecipe(recipe1);
+			manager.saveRecipe(recipe2);
 		} catch (FullFileException e) {
 			e.printStackTrace();
 		}
 
-		assertSame(recipe2,manager.getLocallySavedRecipeById(2));	
-
+		Recipe retrievedRecipe = manager.getLocallySavedRecipeById(recipe1.getId());
+		
+		assertEquals(retrievedRecipe.getId(),recipe1.getId());
+		assertEquals(retrievedRecipe.getName(),recipe1.getName());
+		assertEquals(retrievedRecipe.getInstructions(),recipe1.getInstructions());
+		
+		try {
+			manager.deleteLocallySavedRecipeById(recipe0.getId());
+			manager.deleteLocallySavedRecipeById(recipe1.getId());
+			manager.deleteLocallySavedRecipeById(recipe2.getId());
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	/*
+	
 	//Test to make sure that exception that is thrown when there is no room to save is thrown correctly.
 	@Test
 	public void testFullFile(){

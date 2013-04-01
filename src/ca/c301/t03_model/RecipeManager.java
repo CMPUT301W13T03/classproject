@@ -122,14 +122,7 @@ public class RecipeManager {
 	 * @throws FullFileException
 	 */
 	public void saveRecipe(Recipe recipe) throws FullFileException {
-		Recipe exist = null;
-		exist = dataManager.getRecipeDatabase().getRecipe(recipe.getId());
-		Log.i("save", "in");
-		Log.i("save", exist.getName());
-		if(exist.getName() == "") dataManager.getRecipeDatabase().addRecipe(recipe);
-		else{
-			setRecipe(recipe);
-		}
+		dataManager.getRecipeDatabase().addRecipe(recipe);
 	}
 
 	/**
