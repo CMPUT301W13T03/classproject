@@ -7,7 +7,7 @@ import java.net.URI;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
-/**
+/*
  * Handles storage of photos for recipes - NOT IMPLEMENTED
  */
 public class RecipePhoto implements Serializable{
@@ -17,9 +17,6 @@ public class RecipePhoto implements Serializable{
 		photoFile = f;
 	}
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2415081243980986524L;
 	public File getFile(){
 		return this.photoFile;

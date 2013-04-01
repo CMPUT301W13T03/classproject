@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+/**
+ * Handles the Ingredients Database, which is also called Virtual Pantry
+ */
 public class IngredientDatabaseHandler extends SQLiteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	 
@@ -18,10 +21,22 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_NAME = "name";
     private static final String INGREDIENT = "ingredient";
  
+    /**
+     * Constructor for IngredientDatabaseHandler
+     * 
+     * @param context
+     * 				The Android context for the IngredientDatabaseHandler
+     */
     public IngredientDatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
  
+    /**
+     * To create the database table for ingredients, which will be the Virtual Pantry
+     * 
+     * @param db
+     * 				Is the database where the table will be created
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_RECIPES_TABLE = "CREATE TABLE " + TABLE_INGREDIENTS + "("
@@ -30,12 +45,28 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_RECIPES_TABLE);
     }
  
+    /**
+     * To upgrade, must drop the old ingredients table and then create a new one
+     * 
+     * @param db
+     * 				Is the database to drop and create the table
+     * @param oldVersion
+     * 				The version number of the old database
+     * @param newVersion
+     * 				The version number of the new database
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTS);
         onCreate(db);
     }
     
+    /**
+     * To add an ingredient to the Virtual Pantry
+     * 
+     * @param ingredient
+     * 				Is the ingredient to add
+     */
     public void addIngredient(Ingredient ingredient) {
     	SQLiteDatabase db = this.getWritableDatabase();
     	
@@ -48,6 +79,12 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
      
+    /**
+     * To get all ingredients in the Virtual Pantry
+     * 
+     * @return
+     * 				An ArrayList of all ingredients
+     */
     public ArrayList<Ingredient> getAllIngredients() {
     	ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
     	
@@ -66,6 +103,12 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
         return ingredientList;
 	}
     
+    /**
+     * To get the names of all ingredients in the Virtual Pantry
+     * 
+     * @return
+     * 				An ArrayList of Strings which are all the ingredient names
+     */
     public ArrayList<String> getAllIngredientNames() {
     	ArrayList<String> ingredientList = new ArrayList<String>();
     	
@@ -84,6 +127,14 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
         return ingredientList;
 	}
     
+    /**
+     * To get the number of ingredients matching a given name in the Virtual Pantry
+     * 
+     * @param name
+     * 				The name of the ingredients to count
+     * @return
+     * 				The number of ingredients matching the given name
+     */
     public int getIngredientCount(String name) {
         String countQuery = "SELECT  * FROM " + TABLE_INGREDIENTS + " WHERE " + KEY_NAME + " LIKE '" + name + "'";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -96,11 +147,23 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
         return count;
     }
 
+    /**
+     * To update an ingredient in the Virtual Pantry
+     * 
+     * @param ingredient
+     * 				The ingredient to update
+     */
     public void updateIngredient(Ingredient ingredient) {
     	deleteIngredient(ingredient.getName());
     	addIngredient(ingredient);
 	}
     
+    /**
+     * To delete an ingredient from the database
+     * 
+     * @param name
+     * 				The name of the ingredient to delete
+     */
     public void deleteIngredient(String name) {
     	SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_INGREDIENTS, KEY_NAME + " = ?",

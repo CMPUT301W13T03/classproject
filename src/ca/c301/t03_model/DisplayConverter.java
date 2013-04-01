@@ -11,8 +11,11 @@ public class DisplayConverter {
 
 	/**
 	 * To convert an ArrayList<Ingredient> of ingredients into an array of Strings
-	 * @param ingredients Is the ArrayList to convert
-	 * @return Returns an array of Strings which contains the ingredients information
+	 * 
+	 * @param ingredients
+	 * 				Is the ArrayList to convert
+	 * @return
+	 * 				An array of Strings which contains the ingredients information
 	 */
 	public String[] convertIngredientsList(ArrayList<Ingredient> ingredients) {
 		
@@ -30,10 +33,11 @@ public class DisplayConverter {
 	
 	/**
 	 * To convert an ArrayList<Recipe> of recipes into an array of Strings for display
+	 * 
 	 * @param recipes
-	 * 		recipe ArrayList to be converted
+	 * 				recipe ArrayList to be converted
 	 * @return
-	 * 		Array containing recipe names
+	 * 				Array containing recipe names
 	 */
 	public String[] convertRecipeList(ArrayList<Recipe> recipes){
 		

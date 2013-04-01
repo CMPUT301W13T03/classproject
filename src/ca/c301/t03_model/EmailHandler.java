@@ -16,8 +16,13 @@ public class EmailHandler {
 	private final String BODY_INTRO = "";
 	/**
 	 * To send a given recipe to a given email address
-	 * @param emailAddress Is the email address
-	 * @param recipe Is the recipe to be emailed
+	 * 
+	 * @param emailAddress
+	 * 				Is the email address
+	 * @param recipe
+	 * 				Is the recipe to be emailed
+	 * @param c
+	 * 				Is the Android context for the EmailHandler
 	 */
 	public void sendRecipe(String emailAddress, Recipe recipe, Context c) {
 		String emailSubject = parseEmailSubject(recipe);
@@ -37,10 +42,26 @@ public class EmailHandler {
 
 	}
 
+	/**
+	 * To create a string for the subject line of the email
+	 * 
+	 * @param recipe
+	 * 				The name used in the subject line is based off this recipe
+	 * @return
+	 * 				A string containing the property SUBJECT_PREFIX and the recipe name
+	 */
 	private String parseEmailSubject(Recipe recipe) {
 		return SUBJECT_PREFIX + recipe.getName();
 	}
 
+	/**
+	 * To create a string for the body of the email
+	 * 
+	 * @param recipe
+	 * 				The recipe to be sent in an email
+	 * @return
+	 * 				A string containing the name, instructions, and ingredients of the recipe
+	 */
 	private String parseEmailBody(Recipe recipe) {
 		String body = new String(recipe.getName());
 		body += "\n";

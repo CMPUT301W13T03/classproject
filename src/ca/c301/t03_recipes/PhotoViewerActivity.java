@@ -19,6 +19,9 @@ import android.widget.ImageView.ScaleType;
 import ca.c301.t03_model.Recipe;
 import ca.c301.t03_model.RecipePhoto;
 
+/**
+ * Activity used to view a recipe's photos
+ */
 public class PhotoViewerActivity extends Activity {
 
 	private static final String TAG = "PhotoViewerActivity";

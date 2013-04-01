@@ -19,7 +19,12 @@ public class Camera {
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
 	/**
-	 * Takes photos
+	 * To take a photo
+	 * 
+	 * @param a
+	 * 				Is the Activity where the picture is being taken
+	 * @return
+	 * 				The File where the picture is stored
 	 */
 	public File takePhoto(Activity a) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -41,11 +46,16 @@ public class Camera {
 		return imageFile;
 	}
 	/**
+	 * Used to generate a randomized Bitmap
 	 * 
-	 * @source https://github.com/abramhindle/BogoPicGen/blob/master/src/es/softwareprocess/bogopicgen/BogoPicGen.java
+	 * @source
+	 * 				https://github.com/abramhindle/BogoPicGen/blob/master/src/es/softwareprocess/bogopicgen/BogoPicGen.java
 	 * @param width
+	 * 				Is the width of the bitmap to be generated
 	 * @param height
+	 * 				Is the height of the bitmap to be generated
 	 * @return
+	 * 				The Bitmap generated
 	 */
 	public Bitmap generateBitmap(int width, int height) {
 		// Algorithms based on:

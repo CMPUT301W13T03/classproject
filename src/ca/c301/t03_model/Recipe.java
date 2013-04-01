@@ -44,8 +44,11 @@ public class Recipe implements Serializable{
 	
 	/**
 	 * Constructor with name and instruction arguments
-	 * @param name Is the name of the recipe
-	 * @param instructions Is the instructions as a String
+	 * 
+	 * @param name
+	 * 				Is the name of the recipe
+	 * @param instructions
+	 * 				Is the instructions as a String
 	 */
 	public Recipe(String name, String instructions){
 
@@ -54,6 +57,12 @@ public class Recipe implements Serializable{
 		this.instructions = instructions;
 	}
 	
+	/**
+	 * To generate an ID for a recipe based on the current time
+	 * 
+	 * @return
+	 * 				The ID based on current time
+	 */
 	private int generateID() {
 		String tempID = "";
 		Calendar cal = Calendar.getInstance();
@@ -66,7 +75,9 @@ public class Recipe implements Serializable{
 
 	/**
 	 * Getter of the property <tt>name</tt>
-	 * @return Returns the name of this recipe
+	 * 
+	 * @return
+	 * 				The name of this recipe
 	 * @uml.property  name="name"
 	 */
 	public String getName() {
@@ -75,7 +86,9 @@ public class Recipe implements Serializable{
 	
 	/**
 	 * Getter of the property <tt>instructions</tt>
-	 * @return Returns the instructions of this recipe
+	 * 
+	 * @return
+	 * 				The instructions of this recipe
 	 * @uml.property  name="instructions"
 	 */
 	public String getInstructions() {
@@ -84,20 +97,31 @@ public class Recipe implements Serializable{
 	
 	/**
 	 * Getter for the ingredient at index i
-	 * @param i Is the index of the ingredient to be returned
-	 * @return Returns the ingredient at the specified index
+	 * 
+	 * @param i
+	 * 				Is the index of the ingredient to be returned
+	 * @return
+	 * 				The ingredient at the specified index
 	 */
 	public Ingredient getIngredient(int i) {
 		return this.ingredients.get(i);
 	}
 	
+	/**
+	 * Getter for the number of photos saved to this recipe
+	 * 
+	 * @return
+	 * 				The number of photos of this recipe
+	 */
 	public int getPhotoCount(){
 		return this.photoCount;
 	}
 	
 	/**
 	 * Setter for the recipe's name
-	 * @param name Is the name to be saved for this recipe
+	 * 
+	 * @param name
+	 * 				Is the name to be saved for this recipe
 	 * @uml.property  name="name"
 	 */
 	public void setName(String name) {
@@ -106,7 +130,9 @@ public class Recipe implements Serializable{
 	
 	/**
 	 * Setter for the instructions of this recipe
-	 * @param instructions Is the instructions to be set
+	 * 
+	 * @param instructions
+	 * 				Is the instructions to be set
 	 * @uml.property  name="instructions"
 	 */
 	public void setInstructions(String instructions) {
@@ -115,7 +141,9 @@ public class Recipe implements Serializable{
 	
 	/**
 	 * To add an ingredient to this recipe
-	 * @param name Is the ingredient to be added
+	 * 
+	 * @param name
+	 * 				Is the ingredient to be added
 	 */
 	public void addIngredient(Ingredient ingredient) {
 		this.ingredients.add(ingredient);
@@ -123,8 +151,11 @@ public class Recipe implements Serializable{
 	
 	/**
 	 * Sets the ingredient at a given index i to a given argument
-	 * @param i Is the index of the ingredient to be set
-	 * @param ingredient Is the ingredient to be set
+	 * 
+	 * @param i
+	 * 				Is the index of the ingredient to be set
+	 * @param ingredient
+	 * 				Is the ingredient to be set
 	 */
 	public void setIngredient(int i, Ingredient ingredient) {
 		this.ingredients.set(i, ingredient);
@@ -132,7 +163,9 @@ public class Recipe implements Serializable{
 	
 	/**
 	 * Deletes the ingredient at a given index
-	 * @param i Is the index of the ingredient to be deleted
+	 * 
+	 * @param i
+	 * 				Is the index of the ingredient to be deleted
 	 */
 	public void deleteIngredient(int i) {
 		this.ingredients.remove(i);
@@ -146,7 +179,9 @@ public class Recipe implements Serializable{
 
 	/**
 	 * Getter of the property <tt>ingredients</tt>
-	 * @return  Returns the ingredients.
+	 * 
+	 * @return
+	 * 				The Array List of ingredients
 	 * @uml.property  name="ingredients"
 	 */
 	public ArrayList<Ingredient> getIngredients() {
@@ -155,7 +190,9 @@ public class Recipe implements Serializable{
 
 	/**
 	 * Setter of the property <tt>ingredients</tt>
-	 * @param ingredients  The ingredients to set.
+	 * 
+	 * @param ingredients
+	 * 				The ingredients to set.
 	 * @uml.property  name="ingredients"
 	 */
 	public void setIngredients(ArrayList<Ingredient> ingredients) {
@@ -164,7 +201,9 @@ public class Recipe implements Serializable{
 	
 	/**
 	 * Copies ingredients list to current recipe
-	 * @param ingredients	The ingredients list to be copied
+	 * 
+	 * @param ingredients
+	 * 				The ingredients list to be copied
 	 */
 	public void copyIngredients(ArrayList<Ingredient> ingredients) {
 		this.ingredients.addAll(ingredients);
@@ -178,7 +217,9 @@ public class Recipe implements Serializable{
 
 	/**
 	 * Getter of the property <tt>recipePhoto</tt>
-	 * @return  Returns the recipePhoto.
+	 * 
+	 * @return
+	 * 				The recipePhoto
 	 * @uml.property  name="recipePhoto"
 	 */
 	public Collection<RecipePhoto> getRecipePhoto() {
@@ -193,7 +234,9 @@ public class Recipe implements Serializable{
 
 	/**
 	 * Getter of the property <tt>id</tt>
-	 * @return  Returns the id.
+	 * 
+	 * @return
+	 * 				The id
 	 * @uml.property  name="id"
 	 */
 	public int getId() {
@@ -202,20 +245,30 @@ public class Recipe implements Serializable{
 
 	/**
 	 * Setter of the property <tt>id</tt>
-	 * @param id  The id to set.
+	 * 
+	 * @param id
+	 * 				The id to set
 	 * @uml.property  name="id"
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
+	/**
+	 * To check whether this recipe has a photo
+	 * 
+	 * @return
+	 * 				A Boolean, true if this recipe has a photo
+	 */
 	public boolean hasPhoto(){
 		return hasPhoto;
 	}
 	
 	/**
 	 * To add a photo to a recipe
-	 * @param photo Is the photo to be added
+	 * 
+	 * @param photo
+	 * 				Is the photo to be added
 	 */
 	public void addPhoto(RecipePhoto photo) {
 		if(hasPhoto == false) hasPhoto = true;

@@ -33,23 +33,36 @@ public class DataManager implements Serializable {
 	 * Constructor loads any existing DataManager from file.
 	 * 
 	 * @param c
-	 *            The Android context for the DataManager
+	 * 				The Android context for the DataManager
 	 */
 	public DataManager(Context c) {
 		recipeDatabase = new RecipeDatabaseHandler(c);
 		ingredientDatabase = new IngredientDatabaseHandler(c);
 	}
 	
+	/**
+	 * Getter of the RecipeDatabaseHandler
+	 * 
+	 * @return
+	 * 				Returns the recipe database handler
+	 */
 	public RecipeDatabaseHandler getRecipeDatabase() {
 		return recipeDatabase;
 	}
 	
+	/**
+	 * Getter of the IngredientDatabaseHandler
+	 * 
+	 * @return
+	 * 				Returns the ingredient database handler
+	 */
 	public IngredientDatabaseHandler getIngredientDatabase() {
 		return ingredientDatabase;
 	}
 
 	/**
 	 * Handles full device exceptions
+	 * 
 	 * @param ioe
 	 * 				Exception code
 	 * @return

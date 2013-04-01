@@ -8,13 +8,7 @@ import java.io.Serializable;
  */
 public class Ingredient implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6601357183564369003L;
-	/**
-	 * @uml.property  name="name"
-	 */
 	
 	/**
 	 * Constructor with no given arguments
@@ -24,17 +18,24 @@ public class Ingredient implements Serializable{
 	
 	/**
 	 * Constructor using a given name
-	 * @param name Is the name of the ingredient
+	 * 
+	 * @param name
+	 * 				Is the name of the ingredient
 	 */
 	public Ingredient(String name){
 		this.name = name;
 	}
 	
+	/**
+	 * @uml.property  name="name"
+	 */
 	private String name;
 
 	/**
 	 * Getter of the property <tt>name</tt>
-	 * @return  Returns the name.
+	 * 
+	 * @return
+	 * 				The name of this ingredient
 	 * @uml.property  name="name"
 	 */
 	public String getName() {
@@ -43,7 +44,9 @@ public class Ingredient implements Serializable{
 
 	/**
 	 * Setter of the property <tt>name</tt>
-	 * @param name  The name to set.
+	 * 
+	 * @param name
+	 * 				The name to set
 	 * @uml.property  name="name"
 	 */
 	public void setName(String name) {
@@ -57,7 +60,9 @@ public class Ingredient implements Serializable{
 
 	/**
 	 * Getter of the property <tt>amount</tt>
-	 * @return  Returns the amount.
+	 * 
+	 * @return
+	 * 				The amount of this ingredient
 	 * @uml.property  name="amount"
 	 */
 	public double getAmount() {
@@ -66,7 +71,9 @@ public class Ingredient implements Serializable{
 
 	/**
 	 * Setter of the property <tt>amount</tt>
-	 * @param amount  The amount to set.
+	 * 
+	 * @param amount
+	 * 				The amount to set
 	 * @uml.property  name="amount"
 	 */
 	public void setAmount(double amount) {
@@ -80,7 +87,9 @@ public class Ingredient implements Serializable{
 
 	/**
 	 * Getter of the property <tt>unitOfMeasurement</tt>
-	 * @return  Returns the unitOfMeasurement.
+	 * 
+	 * @return
+	 * 				The unitOfMeasurement for this ingredient
 	 * @uml.property  name="unitOfMeasurement"
 	 */
 	public String getUnitOfMeasurement() {
@@ -89,7 +98,9 @@ public class Ingredient implements Serializable{
 
 	/**
 	 * Setter of the property <tt>unitOfMeasurement</tt>
-	 * @param unitOfMeasurement  The unitOfMeasurement to set.
+	 * 
+	 * @param unitOfMeasurement
+	 * 				The unitOfMeasurement to set
 	 * @uml.property  name="unitOfMeasurement"
 	 */
 	public void setUnitOfMeasurement(String unitOfMeasurement) {
@@ -103,7 +114,9 @@ public class Ingredient implements Serializable{
 
 	/**
 	 * Getter of the property <tt>id</tt>
-	 * @return  Returns the id.
+	 * 
+	 * @return
+	 * 				The id
 	 * @uml.property  name="id"
 	 */
 	public int getId() {
@@ -112,7 +125,9 @@ public class Ingredient implements Serializable{
 
 	/**
 	 * Setter of the property <tt>id</tt>
-	 * @param id  The id to set.
+	 * 
+	 * @param id
+	 * 				The id to set
 	 * @uml.property  name="id"
 	 */
 	public void setId(int id) {

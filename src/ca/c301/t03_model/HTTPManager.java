@@ -41,8 +41,11 @@ public class HTTPManager{
 
 	/**
 	 * Sends a recipe to be added to the indicated server
-	 * @param recipe is the recipe to be published to the webservice
-	 * @param URL is the URL where the recipe is to be stored
+	 * 
+	 * @param recipe
+	 * 				Is the recipe to be published to the webservice
+	 * @param URL
+	 * 				Is the URL where the recipe is to be stored
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
@@ -64,6 +67,16 @@ public class HTTPManager{
 
 	}
 
+	/**
+	 * To add the images of the given recipe to the given URL
+	 * 
+	 * @param recipe
+	 * 				Is the recipe containing the images to save
+	 * @param IMGURL
+	 * 				Is the URL used when saving the images
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
 	public void addImages (Recipe recipe, String IMGURL) throws IllegalStateException, IOException{
 
 		ArrayList<RecipePhoto> photos = new ArrayList<RecipePhoto>(recipe.getRecipePhoto());
@@ -89,7 +102,11 @@ public class HTTPManager{
 	}
 	/**
 	 * Retrieves a specific ID recipe from the server
-	 * @param id Is the ID of the recipe to be retrieved
+	 * 
+	 * @param id
+	 * 				Is the ID of the recipe to be retrieved
+	 * @return
+	 * 				The recipe which has the given ID
 	 */
 	public Recipe getRecipe(int id, String URL){
 		Recipe recipe = null;
@@ -121,6 +138,14 @@ public class HTTPManager{
 		return recipe;
 	}
 
+	/**
+	 * To save the images of a given recipe from a given URL to a file
+	 * 
+	 * @param recipe
+	 * 				Is the recipe to get the images
+	 * @param IMGURL
+	 * 				Is the URL to retrieve from
+	 */
 	public void getImages(Recipe recipe, String IMGURL) {
 		
 		OnlineImage image;
@@ -156,10 +181,11 @@ public class HTTPManager{
 
 	/**
 	 * Searches web for provided keyword
+	 * 
 	 * @param str
-	 * 		Provided keyword for search
+	 * 				Provided keyword for search
 	 * @return
-	 * 		Matching recipes stored in an ArrayList of recipes
+	 * 				Matching recipes stored in an ArrayList of recipes
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 * @throws NullStringException 
@@ -190,7 +216,9 @@ public class HTTPManager{
 
 	/**
 	 * Gets the contents of an http response as a String
-	 * @param response Is the http response to be read
+	 * 
+	 * @param response
+	 * 				Is the http response to be read
 	 * @throws IOException 
 	 */
 	public String getEntityContent(HttpResponse response) throws IOException {
@@ -222,6 +250,7 @@ public class HTTPManager{
 			return response;
 		}
 	}
+	
 	private class OnlineImage{
 		String path;
 		String image;
@@ -237,12 +266,29 @@ public class HTTPManager{
 		}
 	}
 
-
+	/**
+	 * To read a file to a String in base 64
+	 * 
+	 * @param path
+	 * 				The path of the file to convert to base 64
+	 * @return
+	 * 				The String representation of the file in base 64
+	 * @throws IOException
+	 */
 	public static String fileToBase64(String path) throws IOException {
 		byte[] bytes = fileToByteArray(path);
 		return Base64.encodeBytes(bytes);
 	}
 
+	/**
+	 * To read a file to a byte array
+	 * 
+	 * @param path
+	 * 				The path of the file to convert to a byte array
+	 * @return
+	 * 				The byte array representation of the given file
+	 * @throws IOException
+	 */
 	public static byte[] fileToByteArray(String path) throws IOException {
 		File imagefile = new File(path);
 		byte[] data = new byte[(int) imagefile.length()];
@@ -251,12 +297,31 @@ public class HTTPManager{
 		fis.close();
 		return data;
 	}
+	
+	/**
+	 * To save a String in base 64 to a file
+	 * 
+	 * @param path
+	 * 				The path of the file to be saved
+	 * @param strBase64
+	 * 				The String in base 64 to save
+	 * @throws IOException
+	 */
 	public static void base64ToFile(String path, String strBase64)
 			throws IOException {
 		byte[] bytes = Base64.decode(strBase64);
 		byteArrayTofile(path, bytes);
 	}
 
+	/**
+	 * To save a byte array as a file
+	 * 
+	 * @param path
+	 * 				The path of the file to be saved
+	 * @param bytes
+	 * 				The byte array to save
+	 * @throws IOException
+	 */
 	public static void byteArrayTofile(String path, byte[] bytes)
 			throws IOException {
 		File imagefile = new File(path);

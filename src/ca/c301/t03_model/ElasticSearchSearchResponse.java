@@ -12,9 +12,23 @@ public class ElasticSearchSearchResponse<T> {
     transient Object _shards;
     Hits<T> hits;
     boolean exists;    
+    
+    /**
+     * Gets the collection of hits from the Elastic Search
+     * 
+     * @return
+     * 				A Collection of Elastic Search Responses
+     */
     public Collection<ElasticSearchResponse<T>> getHits() {
         return hits.getHits();        
     }
+    
+    /**
+     * Gets the sources of the Elastic Search hits
+     * 
+     * @return
+     * 				A Collection, which are the sources
+     */
     public Collection<T> getSources() {
         Collection<T> out = new ArrayList<T>();
         for (ElasticSearchResponse<T> essrt : getHits()) {
@@ -22,6 +36,13 @@ public class ElasticSearchSearchResponse<T> {
         }
         return out;
     }
+    
+    /**
+     * To turn this Elastic Search Response into a String format
+     * 
+     * @return
+     * 				The string format
+     */
     public String toString() {
         return (super.toString() + ":" + took + "," + _shards + "," + exists + ","  + hits);     
     }

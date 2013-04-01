@@ -18,6 +18,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+/**
+ * Handles recipe manipulation
+ */
 public class RecipeManager {
 
 	private static final String TAG = "RecipeManager";
@@ -28,7 +31,9 @@ public class RecipeManager {
 	public String IMGURL = "http://cmput301.softwareprocess.es:8080/testing/";
 	/**
 	 * Constructor with a given context
-	 * @param c Is the Android context
+	 * 
+	 * @param c
+	 * 				Is the Android context
 	 */
 	public RecipeManager(Context c) {
 		dataManager = new DataManager(c);
@@ -36,7 +41,9 @@ public class RecipeManager {
 
 	/**
 	 * Constructor with a given dataManager
-	 * @param dataManager Is the dataManager to set
+	 * 
+	 * @param dataManager
+	 * 				Is the dataManager to set
 	 */
 	public RecipeManager(DataManager dataManager) {
 		this.dataManager = dataManager;
@@ -69,9 +76,12 @@ public class RecipeManager {
 	}
 
 	/**
-	 * To retrieve a single recipe from the webservice with a given id
-	 * @param id Is the id of the recipe to retrieve
-	 * @return Returns the recipe from the webservice
+	 * To retrieve a single recipe from the webservice with a given ID
+	 * 
+	 * @param id
+	 * 				Is the id of the recipe to retrieve
+	 * @return
+	 * 				The recipe from the webservice
 	 */
 	public Recipe getSingleRecipe(int id) {
 		HTTPManager tempHTTPManager = new HTTPManager();
@@ -81,7 +91,9 @@ public class RecipeManager {
 	}
 	/**
 	 * Sets the URL for this recipe manager
-	 * @param URL where searching and adding will be done
+	 * 
+	 * @param URL
+	 * 				Is where searching and adding will be done
 	 */
 	public void setURL(String URL){
 		this.URL = URL;
@@ -89,7 +101,9 @@ public class RecipeManager {
 
 	/**
 	 * To publish a given recipe to the webservice
-	 * @param recipe is the recipe to be published
+	 * 
+	 * @param recipe
+	 * 				Is the recipe to be published
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
@@ -101,7 +115,9 @@ public class RecipeManager {
 
 	/**
 	 * To save a given recipe
-	 * @param recipe Is the recipe to be saved
+	 * 
+	 * @param recipe
+	 * 				Is the recipe to be saved
 	 * @param c Is the Android context
 	 * @throws FullFileException
 	 */
@@ -111,9 +127,13 @@ public class RecipeManager {
 
 	/**
 	 * To set a given recipe with a given ID
-	 * @param id Is the ID that new recipe is to be set at
-	 * @param recipe Is the recipe to be set
-	 * @param c Is the application context
+	 * 
+	 * @param id
+	 * 				Is the ID that new recipe is to be set at
+	 * @param recipe
+	 * 				Is the recipe to be set
+	 * @param c
+	 * 				Is the application context
 	 * @throws FullFileException
 	 */
 	public void setRecipe(Recipe recipe) throws FullFileException {
@@ -122,8 +142,11 @@ public class RecipeManager {
 
 	/**
 	 * To email a given recipe to a given email
-	 * @param emailAddress Is the email address to send the recipe to
-	 * @param recipe Is the recipe to be emailed
+	 * 
+	 * @param emailAddress
+	 * 				Is the email address to send the recipe to
+	 * @param recipe
+	 * 				Is the recipe to be emailed
 	 */
 	public void emailRecipe(String emailAddress, Recipe recipe, Context c) {
 		EmailHandler emailer = new EmailHandler();
@@ -132,7 +155,9 @@ public class RecipeManager {
 
 	/**
 	 * To get a locally saved recipe with a given id
-	 * @return Returns the local recipe with the given id
+	 * 
+	 * @return
+	 * 				The local recipe with the given id
 	 */
 	public Recipe getLocallySavedRecipeById(int id) {
 		return dataManager.getRecipeDatabase().getRecipe(id);
@@ -140,7 +165,9 @@ public class RecipeManager {
 
 	/**
 	 * To delete a locally saved recipe with a given id
-	 * @param id Is the id of the recipe to be deleted
+	 * 
+	 * @param id
+	 * 				Is the id of the recipe to be deleted
 	 */
 	public void deleteLocallySavedRecipeById(int id) throws FullFileException {
 		Recipe recipe = dataManager.getRecipeDatabase().getRecipe(id);
@@ -152,9 +179,12 @@ public class RecipeManager {
 	}
 
 	/**
-	 * To search for and return a possible list of webservices recipes which matched a given name
-	 * @param name Is the name of the recipe to be searched for
-	 * @return Returns an ArrayList<Recipe> containing the search results
+	 * To search for and return a possible list of webservice recipes which matched a given name
+	 * 
+	 * @param name
+	 * 				Is the name of the recipe to be searched for
+	 * @return
+	 * 				An ArrayList<Recipe> containing the search results
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 * @throws NullStringException 
@@ -173,6 +203,15 @@ public class RecipeManager {
 		Camera camera = new Camera();
 		return camera.takePhoto(a);
 	}
+	
+	/**
+	 * To attach the photo from a given file to a given recipe
+	 * 
+	 * @param recipe
+	 * 				The recipe which the photo will be attached to
+	 * @param f
+	 * 				The file which contains the photo to attach
+	 */
 	public void attachPhotoToRecipe(Recipe recipe, File f){
 		if (f == null) Log.e(TAG,"Image file is null!");
 		RecipePhoto photo = new RecipePhoto(f);
@@ -180,36 +219,72 @@ public class RecipeManager {
 	}
 
 	/**
-	 * To add an ingredient to the Virtual Pantry
-	 * @param ingredient Is the ingredient to add
+	 * To add an ingredient to the Virtual Pantry, which is the ingredients database
+	 * 
+	 * @param ingredient
+	 * 				Is the ingredient to add
 	 */
 	public void addIngredient(Ingredient ingredient) {
 		dataManager.getIngredientDatabase().addIngredient(ingredient);
 	}
 	
+	/**
+	 * To get all of the ingredients in the Virtual Pantry
+	 * 
+	 * @return
+	 * 				An ArrayList of all ingredients in the Virtual Pantry
+	 */
 	public ArrayList<Ingredient> getAllIngredients() {
 		return dataManager.getIngredientDatabase().getAllIngredients();
 	}
 
+	/**
+	 * To delete an ingredient with a given name from the Virtual Pantry
+	 * 
+	 * @param name
+	 * 				Is the name of the ingredient to delete
+	 */
 	public void deleteIngredient(String name) {
 		dataManager.getIngredientDatabase().deleteIngredient(name);
 	}
 	
+	/**
+	 * To get the number of ingredients which match a given name from the Virtual Pantry
+	 * 
+	 * @param name
+	 * 				The name of ingredient to count
+	 * @return
+	 * 				The number of ingredients matching the name
+	 */
 	public int getIngredientCount(String name) {
 		return dataManager.getIngredientDatabase().getIngredientCount(name);
 	}
 	
+	/**
+	 * To update an ingredient in the Virtual Pantry
+	 * 
+	 * @param ingredient
+	 * 				The ingredient to update
+	 */
 	public void updateIngredient(Ingredient ingredient) {
 		dataManager.getIngredientDatabase().updateIngredient(ingredient);
 	}
 	
+	/**
+	 * To get the names of all ingredients in the Virtual Pantry
+	 * 
+	 * @return
+	 * 				An ArrayList of Strings which are the ingredient names
+	 */
 	public ArrayList<String> getAllIngredientNames() {
 		return dataManager.getIngredientDatabase().getAllIngredientNames();
 	}
 
 	/**
 	 * Locally searches, returning IDs of all local recipes
-	 * @return Returns Arraylist<Integer> of IDs of all local recipes
+	 * 
+	 * @return
+	 *				Arraylist<Integer> of IDs of all local recipes
 	 */
 	public ArrayList<Recipe> getAllLocalRecipes() {
 		return dataManager.getRecipeDatabase().getAllRecipes();
@@ -217,13 +292,24 @@ public class RecipeManager {
 
 	/**
 	 * Locally searches by keyword, returning IDs of all matching recipes
-	 * @param keyword Is the keyword used in the search
-	 * @return Returns Arraylist<Integer> of IDs of all local recipes with names containing the keyword
+	 * 
+	 * @param keyword
+	 * 				Is the keyword used in the search
+	 * @return
+	 * 				Arraylist<Integer> of IDs of all local recipes with names containing the keyword
 	 */
 	public ArrayList<Recipe> searchLocalKeyword(String keyword) {
 		return dataManager.getRecipeDatabase().searchRecipes(keyword);
 	}
 	
+	/**
+	 * To filter a given ArrayList of recipes to return those which only use ingredients from the Virtual Pantry
+	 * 
+	 * @param recipes
+	 * 				The ArrayList of recipes to filter
+	 * @return
+	 * 				The filtered ArrayList of recipes
+	 */
 	public ArrayList<Recipe> ingredientMatch(ArrayList<Recipe> recipes) {
 
 		ArrayList<Recipe> output = new ArrayList<Recipe>();
@@ -256,6 +342,14 @@ public class RecipeManager {
 		return output;
 	}
 	
+	/**
+	 * To filter a given ArrayList of recipes to return those which have at least one photo
+	 * 
+	 * @param recipes
+	 * 				The ArrayList of recipes to filter
+	 * @return
+	 * 				The filtered ArrayList of recipes
+	 */
 	public ArrayList<Recipe> photoCheck(ArrayList<Recipe> recipes) {
 
 		ArrayList<Recipe> output = new ArrayList<Recipe>();
@@ -269,6 +363,16 @@ public class RecipeManager {
 		return output;
 	}
 
+	/**
+	 * To generate a bitmap given a width and height
+	 * 
+	 * @param i
+	 * 				Is the width of the bitmap
+	 * @param j
+	 * 				Is the height of the bitmap
+	 * @return
+	 * 				The generated bitmap
+	 */
 	public Bitmap generateBitmap(int i, int j) {
 		Camera camera = new Camera();
 		return camera.generateBitmap(i, j);
