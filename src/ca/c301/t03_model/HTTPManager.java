@@ -1,12 +1,17 @@
 package ca.c301.t03_model;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -43,8 +48,9 @@ public class HTTPManager{
 	 */
 	public void addRecipe (Recipe recipe, String URL) throws IllegalStateException, IOException{
 
-		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/recipezzz/"+recipe.getId());
+		HttpPost httpPost = new HttpPost(URL+recipe.getId());
 		StringEntity stringEntity = null;
+		Log.i("ID", Integer.toString(recipe.getId()));
 		try {
 			stringEntity = new StringEntity(gson.toJson(recipe));
 		} catch (UnsupportedEncodingException e) {
@@ -53,11 +59,34 @@ public class HTTPManager{
 		httpPost.setHeader("Accept","application/json");
 
 		httpPost.setEntity(stringEntity);
-//		httpclient.execute(httpPost);
+		//		httpclient.execute(httpPost);
 		new SendRecipeTask().execute(httpPost);
 
 	}
 
+	public void addImages (Recipe recipe, String IMGURL) throws IllegalStateException, IOException{
+
+		ArrayList<RecipePhoto> photos = new ArrayList<RecipePhoto>(recipe.getRecipePhoto());
+		String encoded = null;
+		for(int i=0; i<photos.size(); i++){
+			encoded = fileToBase64(photos.get(i).getURI().getPath());
+			OnlineImage image = new OnlineImage(encoded, photos.get(i).getURI().getPath());
+			HttpPost httpPost = new HttpPost(IMGURL+recipe.getId()+"/"+i);
+			Log.i("ID", IMGURL+recipe.getId()+"/"+i);
+			StringEntity stringEntity = null;
+			try {
+				stringEntity = new StringEntity(gson.toJson(image));
+			} catch (UnsupportedEncodingException e) {
+				return;
+			}
+			httpPost.setHeader("Accept","application/json");
+
+			httpPost.setEntity(stringEntity);
+
+			new SendRecipeTask().execute(httpPost);
+		}
+
+	}
 	/**
 	 * Retrieves a specific ID recipe from the server
 	 * @param id Is the ID of the recipe to be retrieved
@@ -90,6 +119,39 @@ public class HTTPManager{
 			e.printStackTrace();
 		}
 		return recipe;
+	}
+
+	public void getImages(Recipe recipe, String IMGURL) {
+		
+		OnlineImage image;
+		
+		for(int i=0; i < recipe.getPhotoCount();i++){
+			try{
+				HttpGet getRequest = new HttpGet(IMGURL+recipe.getId()+"/"+i);
+
+				getRequest.addHeader("Accept","application/json");
+
+				HttpResponse response = httpclient.execute(getRequest);
+
+				String json = getEntityContent(response);
+
+
+				Type elasticSearchResponseType = new TypeToken<ElasticSearchResponse<OnlineImage>>(){}.getType();
+				ElasticSearchResponse<OnlineImage> esResponse = gson.fromJson(json, elasticSearchResponseType);
+				image = esResponse.getSource();
+				base64ToFile(image.getPath(), image.getImage());
+				
+				if(response.getEntity() != null){
+					response.getEntity().consumeContent();
+				}
+
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 	/**
@@ -135,7 +197,6 @@ public class HTTPManager{
 		BufferedReader br = new BufferedReader(
 				new InputStreamReader((response.getEntity().getContent())));
 		String output;
-		System.err.println("Output from Server -> ");
 		String json = "";
 		while ((output = br.readLine()) != null) {
 			System.err.println(output);
@@ -157,9 +218,55 @@ public class HTTPManager{
 			} catch (IOException e) {
 				Log.i("SendTask", "IOException");
 			}
+			Log.i("ID", response.getStatusLine().toString());
 			return response;
 		}
+	}
+	private class OnlineImage{
+		String path;
+		String image;
+		OnlineImage(String image, String path){
+			this.image = image;
+			this.path = path;
+		}
+		public String getImage(){
+			return this.image;
+		}
+		public String getPath(){
+			return this.path;
+		}
+	}
 
+
+	public static String fileToBase64(String path) throws IOException {
+		byte[] bytes = fileToByteArray(path);
+		return Base64.encodeBytes(bytes);
+	}
+
+	public static byte[] fileToByteArray(String path) throws IOException {
+		File imagefile = new File(path);
+		byte[] data = new byte[(int) imagefile.length()];
+		FileInputStream fis = new FileInputStream(imagefile);
+		fis.read(data);
+		fis.close();
+		return data;
+	}
+	public static void base64ToFile(String path, String strBase64)
+			throws IOException {
+		byte[] bytes = Base64.decode(strBase64);
+		byteArrayTofile(path, bytes);
+	}
+
+	public static void byteArrayTofile(String path, byte[] bytes)
+			throws IOException {
+		File imagefile = new File(path);
+		File dir = new File(imagefile.getParent());
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		FileOutputStream fos = new FileOutputStream(imagefile);
+		fos.write(bytes);
+		fos.close();
 	}
 }
 

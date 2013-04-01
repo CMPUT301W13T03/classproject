@@ -21,6 +21,9 @@ public class RecipePhoto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -2415081243980986524L;
+	public File getFile(){
+		return this.photoFile;
+	}
 	public Uri getURI() {
 		return Uri.fromFile(photoFile);
 	}

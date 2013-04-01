@@ -23,6 +23,13 @@ public class Recipe implements Serializable{
 	 * @uml.property  name="instructions"
 	 */
 	private String instructions;
+	
+	/**
+	 * @uml.property name="hasPhoto"
+	 */
+	private boolean hasPhoto;
+	
+	private int photoCount;
 
 	/**
 	 * Constructor with no given arguments, name and instructions will be empty strings
@@ -82,6 +89,10 @@ public class Recipe implements Serializable{
 	 */
 	public Ingredient getIngredient(int i) {
 		return this.ingredients.get(i);
+	}
+	
+	public int getPhotoCount(){
+		return this.photoCount;
 	}
 	
 	/**
@@ -198,11 +209,17 @@ public class Recipe implements Serializable{
 		this.id = id;
 	}
 	
+	public boolean hasPhoto(){
+		return hasPhoto;
+	}
+	
 	/**
 	 * To add a photo to a recipe
 	 * @param photo Is the photo to be added
 	 */
 	public void addPhoto(RecipePhoto photo) {
+		if(hasPhoto == false) hasPhoto = true;
+		this.photoCount = this.photoCount + 1;
 		recipePhoto.add(photo);
 		
 	}
