@@ -1,6 +1,7 @@
 package ca.c301.t03_recipes;
 
 import java.io.File;
+import java.io.IOException;
 
 import ca.c301.t03_exceptions.FullFileException;
 import ca.c301.t03_model.Camera;
@@ -10,6 +11,7 @@ import ca.c301.t03_model.Recipe;
 import ca.c301.t03_recipes.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -95,7 +97,45 @@ public class EditRecipeActivity extends Activity {
             			"Please fill in all fields and add at least one ingredient", Toast.LENGTH_LONG).show();
             }
         });
-        
+        Button savePublishButton = (Button) findViewById(R.id.button_save_publish);
+		savePublishButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+
+				if (!name.getText().toString().equals("") && !instructions.getText().toString().equals("") &&
+						!recipe.getIngredients().isEmpty()) {
+
+					recipe.setName(name.getText().toString());
+					recipe.setInstructions(instructions.getText().toString());
+
+					try {
+						((RecipeApplication) getApplication()).getRecipeManager().setRecipe(recipe);
+					} catch (FullFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					// ADD CODE TO POST RECIPE TO WEB HERE
+					try {
+						((RecipeApplication) getApplication()).getRecipeManager().publishRecipeToWeb(recipe);
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						Context context = getApplicationContext();
+						CharSequence text = "Unable to Access Internet";
+						int duration = Toast.LENGTH_LONG;
+
+						Toast toast = Toast.makeText(context, text, duration);
+						toast.show();
+					}
+					finish();
+				}
+				else
+					Toast.makeText(getApplicationContext(), 
+						"Please fill in all fields and add at least one ingredient", Toast.LENGTH_LONG).show();
+			}
+		});
         Button deleteButton = (Button) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(new OnClickListener() {
             @Override

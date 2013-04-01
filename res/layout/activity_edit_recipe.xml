@@ -5,22 +5,6 @@
     tools:context=".EditRecipeActivity" >
 
     <Button
-        android:id="@+id/button_delete"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Delete" />
-
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="Save" />
-
-    <Button
         android:id="@+id/button_add_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,9 +29,8 @@
         android:layout_above="@+id/button_add_ingredient"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView_name" >
-
     </ListView>
-
+
     <EditText
         android:id="@+id/editText_instructions"
         android:layout_width="wrap_content"
@@ -80,5 +63,30 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/textView_name"
         android:ems="10" />
+
+    <Button
+        android:id="@+id/button_save_publish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="Save and Publish" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_save_publish"
+        android:layout_alignParentRight="true"
+        android:text="Delete" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_save_publish"
+        android:layout_toLeftOf="@+id/button_delete"
+        android:text="Save" />
 
 </RelativeLayout>
