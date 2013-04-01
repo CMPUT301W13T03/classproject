@@ -377,5 +377,9 @@ public class RecipeManager {
 		Camera camera = new Camera();
 		return camera.generateBitmap(i, j);
 	}
+	
+	public int getCount(int id) {
+		return dataManager.getRecipeDatabase().getRecipeCount(id);
+	}
 
 }

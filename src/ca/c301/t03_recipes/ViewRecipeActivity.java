@@ -103,7 +103,13 @@ public class ViewRecipeActivity extends Activity {
             		try {
             			Log.i(TAG,"Before saving photo list size is: " + recipe.getRecipePhoto().size());
             			Toast.makeText(getApplicationContext(), "Recipe Downloaded", Toast.LENGTH_LONG).show();
-						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe);
+            			
+            			if (((RecipeApplication) getApplication()).getRecipeManager().getCount(recipe.getId()) == 0) {
+            				((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe);
+            			}
+            			else {
+            				((RecipeApplication) getApplication()).getRecipeManager().setRecipe(recipe);
+            			}
 						Log.i(TAG,"After saving photo list size is: " + recipe.getRecipePhoto().size());
 					} catch (FullFileException e) {
 						// TODO Auto-generated catch block

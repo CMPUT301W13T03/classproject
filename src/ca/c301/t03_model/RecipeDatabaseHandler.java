@@ -179,4 +179,16 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
     
+    public int getRecipeCount(int id) {
+        String countQuery = "SELECT  * FROM " + TABLE_RECIPES + " WHERE " + KEY_ID + " = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        
+        int count = cursor.getCount();
+        
+        cursor.close();
+        
+        return count;
+    }
+    
 }
