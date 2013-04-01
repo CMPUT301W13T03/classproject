@@ -24,28 +24,23 @@ public class PhotoTest extends  IntentCatchingTemplate{
     	super(MainActivity.class);
     }
 	
-	/*
-	
 	//Delete testfile before each test.
 	@Before
 	public void setUp() throws Exception{
-		//Delete any existing file.
-		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
-		
     	FakeActivity fakeActivity = new FakeActivity();
-    	RecipeManager manager = new RecipeManager(new DataManager(getActivity(),TEST_FILE_NAME));
+    	RecipeManager manager = new RecipeManager(getActivity());
     	Recipe recipe = new Recipe("Name", "Instructions");
     	try {
-			manager.saveRecipe(recipe, getActivity());
+			manager.saveRecipe(recipe);
 		} catch (FullFileException e) {
 			e.printStackTrace();
 			fail("Full file error.");
 		}
     	manager.takePhotoForRecipe(fakeActivity);
+    	
+    	manager.deleteLocallySavedRecipeById(recipe.getId());
 
 	}
-	
-	*/
 	
 	//Test to make sure the intent is sent when a photo is taken.
     @Test
