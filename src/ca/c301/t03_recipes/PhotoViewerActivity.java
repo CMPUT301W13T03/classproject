@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -44,8 +45,8 @@ public class PhotoViewerActivity extends Activity {
         setContentView(R.layout.activity_photo_viewer);
 /*        testImageView = (ImageView) findViewById(R.id.testImageView);
 */
-        int id = getIntent().getIntExtra("id",-1);
-        recipe = ((RecipeApplication)getApplication()).getRecipeManager().getLocallySavedRecipeById(id);
+        recipe = (Recipe)getIntent().getSerializableExtra("recipe");
+        
         
         getDrawablesList();
         setupUI();
@@ -165,7 +166,7 @@ public class PhotoViewerActivity extends Activity {
 
         drawables = new ArrayList<Drawable>();
         ArrayList<RecipePhoto> photos = (ArrayList<RecipePhoto>) recipe.getRecipePhoto();
-        
+        Log.i(TAG, "photo list size = " + photos.size());
         for(int i = 0; i < photos.size(); i++)
         {
         	drawables.add(photos.get(i).getDrawable());

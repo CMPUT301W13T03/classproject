@@ -83,7 +83,7 @@ public class ViewRecipeActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ViewRecipeActivity.this, PhotoViewerActivity.class);
-				intent.putExtra("id", id);
+				intent.putExtra("recipe", recipe);
 				
 				startActivity(intent);
 			}
@@ -111,7 +111,9 @@ public class ViewRecipeActivity extends Activity {
             		// PUT DOWNLOAD CODE HERE
             		//Actually saving code, its downloaded.
             		try {
+            			Log.i(TAG,"Before saving photo list size is: " + recipe.getRecipePhoto().size());
 						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe);
+						Log.i(TAG,"After saving photo list size is: " + recipe.getRecipePhoto().size());
 					} catch (FullFileException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
