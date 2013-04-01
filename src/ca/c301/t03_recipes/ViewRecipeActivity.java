@@ -102,6 +102,7 @@ public class ViewRecipeActivity extends Activity {
             		//Actually saving code, its downloaded.
             		try {
             			Log.i(TAG,"Before saving photo list size is: " + recipe.getRecipePhoto().size());
+            			Toast.makeText(getApplicationContext(), "Recipe Downloaded", Toast.LENGTH_LONG).show();
 						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe);
 						Log.i(TAG,"After saving photo list size is: " + recipe.getRecipePhoto().size());
 					} catch (FullFileException e) {

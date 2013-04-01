@@ -122,7 +122,14 @@ public class RecipeManager {
 	 * @throws FullFileException
 	 */
 	public void saveRecipe(Recipe recipe) throws FullFileException {
-		dataManager.getRecipeDatabase().addRecipe(recipe);
+		Recipe exist = null;
+		exist = dataManager.getRecipeDatabase().getRecipe(recipe.getId());
+		Log.i("save", "in");
+		Log.i("save", exist.getName());
+		if(exist.getName() == "") dataManager.getRecipeDatabase().addRecipe(recipe);
+		else{
+			setRecipe(recipe);
+		}
 	}
 
 	/**
@@ -203,7 +210,7 @@ public class RecipeManager {
 		Camera camera = new Camera();
 		return camera.takePhoto(a);
 	}
-	
+
 	/**
 	 * To attach the photo from a given file to a given recipe
 	 * 
@@ -227,7 +234,7 @@ public class RecipeManager {
 	public void addIngredient(Ingredient ingredient) {
 		dataManager.getIngredientDatabase().addIngredient(ingredient);
 	}
-	
+
 	/**
 	 * To get all of the ingredients in the Virtual Pantry
 	 * 
@@ -247,7 +254,7 @@ public class RecipeManager {
 	public void deleteIngredient(String name) {
 		dataManager.getIngredientDatabase().deleteIngredient(name);
 	}
-	
+
 	/**
 	 * To get the number of ingredients which match a given name from the Virtual Pantry
 	 * 
@@ -259,7 +266,7 @@ public class RecipeManager {
 	public int getIngredientCount(String name) {
 		return dataManager.getIngredientDatabase().getIngredientCount(name);
 	}
-	
+
 	/**
 	 * To update an ingredient in the Virtual Pantry
 	 * 
@@ -269,7 +276,7 @@ public class RecipeManager {
 	public void updateIngredient(Ingredient ingredient) {
 		dataManager.getIngredientDatabase().updateIngredient(ingredient);
 	}
-	
+
 	/**
 	 * To get the names of all ingredients in the Virtual Pantry
 	 * 
@@ -301,7 +308,7 @@ public class RecipeManager {
 	public ArrayList<Recipe> searchLocalKeyword(String keyword) {
 		return dataManager.getRecipeDatabase().searchRecipes(keyword);
 	}
-	
+
 	/**
 	 * To filter a given ArrayList of recipes to return those which only use ingredients from the Virtual Pantry
 	 * 
@@ -313,11 +320,11 @@ public class RecipeManager {
 	public ArrayList<Recipe> ingredientMatch(ArrayList<Recipe> recipes) {
 
 		ArrayList<Recipe> output = new ArrayList<Recipe>();
-		
+
 		for (int x = 0; x < recipes.size(); x++) {
 			ArrayList<Ingredient> ingredients = recipes.get(x).getIngredients();
 			ArrayList<String> pantry = this.getAllIngredientNames();
-			
+
 			boolean result = true;
 
 			for (int i = 0; i < ingredients.size(); i++) {
@@ -333,15 +340,15 @@ public class RecipeManager {
 					break;
 				}
 			}
-			
+
 			if (result) {
 				output.add(recipes.get(x));
 			}
 		}
-		
+
 		return output;
 	}
-	
+
 	/**
 	 * To filter a given ArrayList of recipes to return those which have at least one photo
 	 * 
@@ -353,13 +360,13 @@ public class RecipeManager {
 	public ArrayList<Recipe> photoCheck(ArrayList<Recipe> recipes) {
 
 		ArrayList<Recipe> output = new ArrayList<Recipe>();
-		
+
 		for (int i = 0; i < recipes.size(); i++) {
 			if (!recipes.get(i).getRecipePhoto().isEmpty()) {
 				output.add(recipes.get(i));
 			}
 		}
-		
+
 		return output;
 	}
 
