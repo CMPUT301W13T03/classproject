@@ -47,7 +47,7 @@ public class AddRecipeActivity extends Activity {
 
 	/**
 	 * Is responsible for creating the view of the activity,
-	 * Edit texts and buttons are set here
+	 * Buttons are set here
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,37 +60,57 @@ public class AddRecipeActivity extends Activity {
 		name = (EditText) findViewById(R.id.editText_name);
 		instructions = (EditText) findViewById(R.id.editText_instructions);
 		ingredientsList = (ListView) findViewById(R.id.listView_ingredients);
+		
+		initializeButtons();
+	}
 
-		Button saveButton = (Button) findViewById(R.id.button_save);
-		saveButton.setOnClickListener(new OnClickListener() {
+	/**
+	 * Initializes clickable buttons with their listeners.
+	 */
+	private void initializeButtons() {
+		initSaveButton();
+		initSavePublishButton();
+		initAddIngredientButton();
+		initAddPictureButton();
+	}
+
+	/**
+	 * Initializes button for adding a picture to the recipe.
+	 */
+	private void initAddPictureButton() {
+		Button addPictureButton = (Button) findViewById(R.id.button_add_picture);
+		addPictureButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-
-				if (!name.getText().toString().equals("") && !instructions.getText().toString().equals("") &&
-						!recipe.getIngredients().isEmpty()) {
-
-					recipe.setName(name.getText().toString());
-					recipe.setInstructions(instructions.getText().toString());
-
-					try {
-						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe);
-					} catch (FullFileException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					finish();
-				}
-				else {
-					Toast.makeText(getApplicationContext(), "Please fill in all fields and add at least one ingredient", Toast.LENGTH_LONG).show();
-				}
+				takePhoto();
 			}
 		});
+		
+	}
 
+	/**
+	 * Intializes a button for adding an ingredient to a recipe.
+	 */
+	private void initAddIngredientButton() {
+		Button addIngredientButton = (Button) findViewById(R.id.button_add_ingredient);
+		addIngredientButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(AddRecipeActivity.this, AddIngredientActivity.class);            	
+				startActivityForResult(intent, 1);
+			}
+		});
+		
+	}
+	/**
+	 * Initializes button for saving and publishing a recipe.
+	 */
+	private void initSavePublishButton() {
 		Button savePublishButton = (Button) findViewById(R.id.button_save_publish);
 		savePublishButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
+				saveRecipe();
 
 				if (!name.getText().toString().equals("") && !instructions.getText().toString().equals("") &&
 						!recipe.getIngredients().isEmpty()) {
@@ -125,24 +145,48 @@ public class AddRecipeActivity extends Activity {
 					Toast.makeText(getApplicationContext(), 
 						"Please fill in all fields and add at least one ingredient", Toast.LENGTH_LONG).show();
 			}
-		});
 
-		Button addIngredientButton = (Button) findViewById(R.id.button_add_ingredient);
-		addIngredientButton.setOnClickListener(new OnClickListener() {
+		});
+		
+	}
+
+	/**
+	 * Initializes button for saving recipes
+	 */
+	private void initSaveButton() {
+		Button saveButton = (Button) findViewById(R.id.button_save);
+		saveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(AddRecipeActivity.this, AddIngredientActivity.class);            	
-				startActivityForResult(intent, 1);
-			}
-		});
 
-		Button addPictureButton = (Button) findViewById(R.id.button_add_picture);
-		addPictureButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				takePhoto();
+				if (!name.getText().toString().equals("") && !instructions.getText().toString().equals("") &&
+						!recipe.getIngredients().isEmpty()) {
+
+					recipe.setName(name.getText().toString());
+					recipe.setInstructions(instructions.getText().toString());
+
+					try {
+						((RecipeApplication) getApplication()).getRecipeManager().saveRecipe(recipe);
+					} catch (FullFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					finish();
+				}
+				else {
+					Toast.makeText(getApplicationContext(), "Please fill in all fields and add at least one ingredient", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
+		
+	}
+	/**
+	 * Saves a recipe to db.
+	 */
+	private void saveRecipe() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
