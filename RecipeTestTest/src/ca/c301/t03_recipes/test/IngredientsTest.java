@@ -104,7 +104,7 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		}
 		assertNull(manager.getIngredient(ingredient.getName()));
 	}
-	//Test creating an ingredient and adding it to local storage.
+	//Test editing an ingredient.
 	@Test
 	public void testEditIngredient(){
 		Ingredient ingredient = new Ingredient();
@@ -135,7 +135,6 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient2.getUnitOfMeasurement());
 				
 		try {
-			manager.deleteIngredient(ingredient.getName());
 			manager.deleteIngredient(ingredient2.getName());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block

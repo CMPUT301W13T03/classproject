@@ -90,6 +90,35 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		}
 		assertNull(manager.getLocallySavedRecipeById(recipe.getId()));
 	}
+	//Test editing a recipe.
+		@Test
+		public void testEditRecipe() {
+			Recipe recipe = new Recipe("Name", "Instructions");
+			Recipe recipe2 = new Recipe("Name2", "Instructions2");
+			recipe2.setId(recipe.getId());
+			RecipeManager manager = new RecipeManager(getActivity());
+
+			try {
+				manager.saveRecipe(recipe);
+				manager.setRecipe(recipe2);
+			} catch (FullFileException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Recipe retrievedRecipe = manager.getLocallySavedRecipeById(recipe2.getId());
+
+			// Check same recipe is returned.
+			assertEquals(retrievedRecipe.getId(),recipe2.getId());
+			assertEquals(retrievedRecipe.getName(),recipe2.getName());
+			assertEquals(retrievedRecipe.getInstructions(),recipe2.getInstructions());
+			
+			try {
+				manager.deleteLocallySavedRecipeById(recipe2.getId());
+			} catch (FullFileException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	//Test to make sure multiple recipes can be saved and retrieved.
 	@Test
 	public void testSaveAndRetrieveFromMany(){
