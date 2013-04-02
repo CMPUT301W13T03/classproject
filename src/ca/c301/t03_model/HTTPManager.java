@@ -22,6 +22,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -35,8 +38,19 @@ import com.google.gson.reflect.TypeToken;
  * Contains functions that handle all web related functionality, most of the adding and searching of recipes is heavily based off of the ESDemo code.
  */
 public class HTTPManager{
+	/**
+	 * Sets up our HttpClient to have Acceptable timeouts.
+	 */
+	public HttpParams initialize () {
+		HttpParams httpParameters = new BasicHttpParams(); 
+		int timeoutConnection = 3000;
+		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+		int timeoutSocket = 3000;
+		HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+		return httpParameters;
+	}
 
-	private HttpClient httpclient = new DefaultHttpClient();
+	private HttpClient httpclient = new DefaultHttpClient(initialize());
 	private Gson gson = new Gson();
 
 	/**
@@ -151,9 +165,9 @@ public class HTTPManager{
 	 * 				Is the URL to retrieve from
 	 */
 	public void getImages(Recipe recipe, String IMGURL) {
-		
+
 		OnlineImage image;
-		
+
 		for(int i=0; i < recipe.getPhotoCount();i++){
 			try{
 				HttpGet getRequest = new HttpGet(IMGURL+recipe.getId()+"/"+i);
@@ -169,7 +183,7 @@ public class HTTPManager{
 				ElasticSearchResponse<OnlineImage> esResponse = gson.fromJson(json, elasticSearchResponseType);
 				image = esResponse.getSource();
 				base64ToFile(image.getPath(), image.getImage());
-				
+
 				if(response.getEntity() != null){
 					response.getEntity().consumeContent();
 				}
@@ -239,7 +253,10 @@ public class HTTPManager{
 		System.err.println("JSON:"+json);
 		return json;
 	}
-
+	/**
+	 * Asynchronously sends recipes to the server. Other Internet methods are not asynchronous as they would just
+	 * end up waiting on the asynchronous task anyway.
+	 */
 	private class SendRecipeTask extends AsyncTask<HttpPost, Integer, HttpResponse>{
 
 		@Override
@@ -256,7 +273,9 @@ public class HTTPManager{
 			return response;
 		}
 	}
-	
+	/**
+	 * A container built to store images online.
+	 */
 	private class OnlineImage{
 		String path;
 		String image;
@@ -303,7 +322,7 @@ public class HTTPManager{
 		fis.close();
 		return data;
 	}
-	
+
 	/**
 	 * To save a String in base 64 to a file
 	 * 

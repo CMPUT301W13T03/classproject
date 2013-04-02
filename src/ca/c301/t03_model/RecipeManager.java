@@ -24,11 +24,11 @@ import android.util.Log;
 public class RecipeManager {
 
 	private static final String TAG = "RecipeManager";
-	//	Our server URL: "http://cmput301.softwareprocess.es:8080/CMPUT301W13T03/recipes/"
+	//	Our server URL: "http://cmput301.softwareprocess.es:8080/cmput301w13t03/recipes/"
 	//  Testing Server URL: "http://cmput301.softwareprocess.es:8080/testing/recipezzz/"
 	//Our Prototype is still directed at the test server as we are still testing, swapping this to the server URL is just a switch of this line. 
-	public String URL = "http://cmput301.softwareprocess.es:8080/testing/recipezzz/";
-	public String IMGURL = "http://cmput301.softwareprocess.es:8080/testing/";
+	public String URL = "http://cmput301.softwareprocess.es:8080/cmput301w13t03/recipes/";
+	public String IMGURL = "http://cmput301.softwareprocess.es:8080/cmput301w13t03/";
 	/**
 	 * Constructor with a given context
 	 * 

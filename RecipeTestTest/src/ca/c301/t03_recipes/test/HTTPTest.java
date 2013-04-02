@@ -24,7 +24,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	public HTTPTest(){
 		super(MainActivity.class);
 	}
-	
+
 	//Test to make sure publishing and retrieving recipes from the web works correctly. Must be done all in
 	//one test.
 	@Test
@@ -35,20 +35,20 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		water.setUnitOfMeasurement("g");
 		water.setAmount(10);
 		recipe.addIngredient(water);
-		
+
 		RecipeManager manager = new RecipeManager(getActivity());
 
-		
+
 		manager.publishRecipeToWeb(recipe);
-		
-/*		Recipe recipe = new Recipe();
+
+		/*		Recipe recipe = new Recipe();
 		recipe.setName("Cup of Water");
 		Ingredient water = new Ingredient("Water");
 		recipe.addIngredient(water);
 		recipe.setInstructions("Put it in a cup, you idiot.");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe);*/
-		
+
 		//Added a rest because instantly grabbing a recipe without waiting for the storage of one throws an error.
 		try {
 			Thread.sleep(1000);
@@ -65,19 +65,23 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	// We were unable to figure out why this wasnt properly working, something to do with Async, given more time we
 	// would have implemented a timeout system on our Async, but it only ever factors into our testing.
 	@Test
-	public void testZBadConnection(){
-		/*Recipe recipe = new Recipe ("Burger", "Cook a Burger");
-		RecipeManager manager = new RecipeManager(getActivity());
-		manager.setURL("http://asdoiahspdsdfewdfssdfvcvergedfsljkl.softwareprocess.es:8080/testing/recipezzz/");
-		try {
-			manager.publishRecipeToWeb(recipe);
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			return;
-		}
-		*/
+	public void testBadConnection(){
+//		Recipe recipe = new Recipe ("Burger", "Cook a Burger");
+//		RecipeManager manager = new RecipeManager(getActivity());
+//		manager.setURL("http://asdoiahspdsdfewdfssdfvcvergedfsljkl.softwareprocess.es:8080/testing/recipezzz/");
+//		try {
+//			manager.publishRecipeToWeb(recipe);
+//			Thread.sleep(9000);
+//		} catch (IllegalStateException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			return;
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
 	}
 	//Test to make sure a recipe can be downloaded from the web and saved locally.
 	@Test
@@ -86,7 +90,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		RecipeManager manager = new RecipeManager(getActivity());
 
 		manager.publishRecipeToWeb(recipe);
-		
+
 		//Added a rest because instantly grabbing a recipe without waiting for the storage of one throws an error.
 		try {
 			Thread.sleep(1000);
@@ -94,25 +98,25 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		Recipe downloadedRecipe = manager.getSingleRecipe(recipe.getId());
-		
+
 		try {
 			manager.saveRecipe(downloadedRecipe);
 		} catch (FullFileException e) {
 			fail("Full file exception");
 			e.printStackTrace();
 		}
-		
+
 		Recipe savedRecipe = manager.getLocallySavedRecipeById(recipe.getId());
-		
+
 		try {
 			manager.deleteLocallySavedRecipeById(recipe.getId());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		assertNotNull(savedRecipe);
 		assertEquals(savedRecipe.getName(),"Name");
 		assertEquals(savedRecipe.getInstructions(),"Instructions");
@@ -123,7 +127,7 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	public void testSearchForRecipe() throws IllegalStateException, IOException, NullStringException{
 		Recipe recipe0 = new Recipe("Salad", "Put some vegetables in a bowl.");
 		Recipe recipe1 = new Recipe("Cookie", "Make a cookie");
-		Recipe recipe2 = new Recipe("Cookies", "Who makes one cookie? Idiot.");
+		Recipe recipe2 = new Recipe("Cookies", "Make some cookies");
 
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe1);
@@ -131,12 +135,13 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		manager.publishRecipeToWeb(recipe2);
 		//Added a rest because instantly grabbing a recipe without waiting for the storage of one throws an error.
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ArrayList<Recipe> results = manager.searchWebForRecipeByName("Cookie");
+		Log.i("Search", results.get(0).getName());
 		assertNotNull(results);
 		assertTrue(findRecipeInList(results, recipe1));
 
@@ -152,5 +157,5 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		}
 		return false;
 	}
-	
+
 }
