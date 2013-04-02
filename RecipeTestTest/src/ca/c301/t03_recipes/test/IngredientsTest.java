@@ -30,7 +30,7 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		Ingredient ingredient = new Ingredient();
 		RecipeManager manager = new RecipeManager(getActivity());
 
-		ingredient.setName("name");
+		ingredient.setName("TESTname");
 		ingredient.setAmount(1.0);
 		ingredient.setUnitOfMeasurement("g");
 		
@@ -59,7 +59,7 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		Ingredient ingredient = new Ingredient();
 		RecipeManager manager = new RecipeManager(getActivity());
 
-		ingredient.setName("name");
+		ingredient.setName("TESTname");
 		ingredient.setAmount(1.0);
 		ingredient.setUnitOfMeasurement("g");
 		
@@ -72,15 +72,15 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 			e.printStackTrace();
 		}
 		
-		ArrayList<Ingredient> retrievedIngredient = manager.getAllIngredients();
+		Ingredient retrievedIngredient = manager.getIngredient(ingredient.getName());
 
 		// Check same ingredient is returned.
-		assertEquals(retrievedIngredient.get(0).getName(),ingredient.getName());
-		assertEquals(retrievedIngredient.get(0).getAmount(),ingredient.getAmount());
-		assertEquals(retrievedIngredient.get(0).getUnitOfMeasurement(),ingredient.getUnitOfMeasurement());
+		assertEquals(retrievedIngredient.getName(),ingredient.getName());
+		assertEquals(retrievedIngredient.getAmount(),ingredient.getAmount());
+		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient.getUnitOfMeasurement());
 			
 		try {
-			manager.deleteIngredient(retrievedIngredient.get(0).getName());
+			manager.deleteIngredient(retrievedIngredient.getName());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,7 +92,7 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		Ingredient ingredient = new Ingredient();
 		RecipeManager manager = new RecipeManager(getActivity());
 
-		ingredient.setName("name");
+		ingredient.setName("TESTname");
 		ingredient.setAmount(1.0);
 		ingredient.setUnitOfMeasurement("g");
 		
@@ -102,7 +102,7 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		} catch (FullFileException e) {
 			e.printStackTrace();
 		}
-		assertEquals(manager.getIngredientCount(ingredient.getName()), 0);
+		assertNull(manager.getIngredient(ingredient.getName()));
 	}
 	//Test to make sure multiple ingredients can be saved and retrieved.
 	@Test
@@ -111,17 +111,17 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		Ingredient ingredient1 = new Ingredient();
 		Ingredient ingredient2 = new Ingredient();
 		
-		ingredient0.setName("ingredient0");
+		ingredient0.setName("TESTingredient0");
 		ingredient0.setAmount(0.0);
 		ingredient0.setUnitOfMeasurement("g");
 		
-		ingredient0.setName("ingredient1");
-		ingredient0.setAmount(1.0);
-		ingredient0.setUnitOfMeasurement("g");
+		ingredient1.setName("TESTingredient1");
+		ingredient1.setAmount(1.0);
+		ingredient1.setUnitOfMeasurement("g");
 		
-		ingredient0.setName("ingredient2");
-		ingredient0.setAmount(2.0);
-		ingredient0.setUnitOfMeasurement("g");
+		ingredient2.setName("TESTingredient2");
+		ingredient2.setAmount(2.0);
+		ingredient2.setUnitOfMeasurement("g");
 			
 		RecipeManager manager = new RecipeManager(getActivity());
 
@@ -133,11 +133,12 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 			e.printStackTrace();
 		}
 
-		ArrayList<Ingredient> retrievedIngredient = manager.getAllIngredients();
-			
-		assertEquals(retrievedIngredient.get(1).getName(),ingredient1.getName());
-		assertEquals(retrievedIngredient.get(1).getAmount(),ingredient1.getAmount());
-		assertEquals(retrievedIngredient.get(1).getUnitOfMeasurement(),ingredient1.getUnitOfMeasurement());
+		Ingredient retrievedIngredient = manager.getIngredient(ingredient1.getName());
+
+		// Check same ingredient is returned.
+		assertEquals(retrievedIngredient.getName(),ingredient1.getName());
+		assertEquals(retrievedIngredient.getAmount(),ingredient1.getAmount());
+		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient1.getUnitOfMeasurement());
 			
 		try {
 			manager.deleteIngredient(ingredient0.getName());

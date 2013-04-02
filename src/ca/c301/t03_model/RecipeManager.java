@@ -214,6 +214,10 @@ public class RecipeManager {
 		dataManager.getIngredientDatabase().addIngredient(ingredient);
 	}
 
+	public Ingredient getIngredient(String name) {
+		return dataManager.getIngredientDatabase().getIngredient(name);
+	}
+	
 	/**
 	 * To get all of the ingredients in the Virtual Pantry
 	 * 

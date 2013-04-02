@@ -89,9 +89,6 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			e.printStackTrace();
 		}
 		assertNull(manager.getLocallySavedRecipeById(recipe.getId()));
-		
-
-
 	}
 	//Test to make sure multiple recipes can be saved and retrieved.
 	@Test
