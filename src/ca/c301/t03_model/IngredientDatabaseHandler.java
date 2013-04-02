@@ -70,8 +70,9 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
     public void addIngredient(Ingredient ingredient) {
     	SQLiteDatabase db = this.getWritableDatabase();
     	
-    	String sql                      =   "INSERT INTO " + TABLE_INGREDIENTS + " (" + KEY_NAME + "," + INGREDIENT + ") VALUES(?,?)";
-        SQLiteStatement insertStmt      =   db.compileStatement(sql);
+    	String sql = "INSERT INTO " + TABLE_INGREDIENTS + 
+    			" (" + KEY_NAME + "," + INGREDIENT + ") VALUES(?,?)";
+        SQLiteStatement insertStmt = db.compileStatement(sql);
         insertStmt.clearBindings();
         insertStmt.bindString(1, ingredient.getName());
         insertStmt.bindBlob(2, SerializeHandler.serializeObject(ingredient));
@@ -91,7 +92,8 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
     	
     	Ingredient ingredient = new Ingredient();
     	
-        String selectQuery = "SELECT " + INGREDIENT + " FROM " + TABLE_INGREDIENTS + " WHERE " + KEY_NAME + " LIKE '" + name + "'";
+        String selectQuery = "SELECT " + INGREDIENT + " FROM " + TABLE_INGREDIENTS + 
+        		" WHERE " + KEY_NAME + " LIKE '" + name + "'";
      
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -122,7 +124,8 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
      
         if (cursor.moveToFirst()) {
             do {
-                Ingredient ingredient = (Ingredient) SerializeHandler.deserializeObject(cursor.getBlob(0));
+                Ingredient ingredient = (Ingredient) 
+                		SerializeHandler.deserializeObject(cursor.getBlob(0));
                 ingredientList.add(ingredient);
             } while (cursor.moveToNext());
         }
@@ -163,7 +166,8 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
      * 				The number of ingredients matching the given name
      */
     public int getIngredientCount(String name) {
-        String countQuery = "SELECT  * FROM " + TABLE_INGREDIENTS + " WHERE " + KEY_NAME + " LIKE '" + name + "'";
+        String countQuery = "SELECT  * FROM " + TABLE_INGREDIENTS + 
+        		" WHERE " + KEY_NAME + " LIKE '" + name + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         

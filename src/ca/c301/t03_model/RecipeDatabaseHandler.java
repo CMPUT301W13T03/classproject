@@ -68,8 +68,9 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
     public void addRecipe(Recipe recipe) {
     	SQLiteDatabase db = this.getWritableDatabase();
     	 
-    	String sql                      =   "INSERT INTO " + TABLE_RECIPES + " (" + KEY_ID + "," + NAME + "," + RECIPE + ") VALUES(?,?,?)";
-        SQLiteStatement insertStmt      =   db.compileStatement(sql);
+    	String sql = "INSERT INTO " + TABLE_RECIPES + 
+    			" (" + KEY_ID + "," + NAME + "," + RECIPE + ") VALUES(?,?,?)";
+        SQLiteStatement insertStmt = db.compileStatement(sql);
         insertStmt.clearBindings();
         insertStmt.bindString(1, Integer.toString(recipe.getId()));
         insertStmt.bindString(2, recipe.getName());
@@ -90,7 +91,8 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
     	
     	Recipe recipe = new Recipe();
     	
-        String selectQuery = "SELECT RECIPE FROM " + TABLE_RECIPES + " WHERE " + KEY_ID + " = " + Integer.toString(id);
+        String selectQuery = "SELECT RECIPE FROM " + TABLE_RECIPES + 
+        		" WHERE " + KEY_ID + " = " + Integer.toString(id);
      
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -116,14 +118,16 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
     public ArrayList<Recipe> searchRecipes(String keyword) {
 	 	ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
     	
-        String selectQuery = "SELECT " + RECIPE + " FROM " + TABLE_RECIPES + " WHERE " + NAME + " LIKE '%" + keyword + "%'";
+        String selectQuery = "SELECT " + RECIPE + " FROM " + TABLE_RECIPES + 
+        		" WHERE " + NAME + " LIKE '%" + keyword + "%'";
      
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
      
         if (cursor.moveToFirst()) {
             do {
-                Recipe recipe = (Recipe) SerializeHandler.deserializeObject(cursor.getBlob(0));
+                Recipe recipe = (Recipe) 
+                		SerializeHandler.deserializeObject(cursor.getBlob(0));
                 recipeList.add(recipe);
             } while (cursor.moveToNext());
         }
@@ -147,7 +151,8 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
      
         if (cursor.moveToFirst()) {
             do {
-                Recipe recipe = (Recipe) SerializeHandler.deserializeObject(cursor.getBlob(0));
+                Recipe recipe = (Recipe) 
+                		SerializeHandler.deserializeObject(cursor.getBlob(0));
                 recipeList.add(recipe);
             } while (cursor.moveToNext());
         }
@@ -188,7 +193,8 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
      * 				The count of recipes
      */
     public int getRecipeCount(int id) {
-        String countQuery = "SELECT  * FROM " + TABLE_RECIPES + " WHERE " + KEY_ID + " = " + id;
+        String countQuery = "SELECT  * FROM " + TABLE_RECIPES + 
+        		" WHERE " + KEY_ID + " = " + id;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         
