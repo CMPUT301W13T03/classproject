@@ -75,7 +75,7 @@ public class SearchActivity extends Activity {
 						toast.show();
 					} catch (NullStringException e) {
 						Context context = getApplicationContext();
-						CharSequence text = "You must input a Search String";
+						CharSequence text = "You must input a Search String for online search";
 						int duration = Toast.LENGTH_LONG;
 
 						Toast toast = Toast.makeText(context, text, duration);
@@ -90,6 +90,8 @@ public class SearchActivity extends Activity {
 						recipes = ((RecipeApplication) getApplication()).getRecipeManager().getAllLocalRecipes();
 
 					}
+					
+					// If search field is left blank, all local recipes are displayed
 					else {
 						recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
 					}
@@ -132,7 +134,7 @@ public class SearchActivity extends Activity {
 				toast.show();
 			}	catch (NullStringException e) {
 				Context context = getApplicationContext();
-				CharSequence text = "You must input a Search String";
+				CharSequence text = "You must input a Search String for online search";
 				int duration = Toast.LENGTH_LONG;
 
 				Toast toast = Toast.makeText(context, text, duration);
@@ -147,6 +149,7 @@ public class SearchActivity extends Activity {
 				recipes = ((RecipeApplication) getApplication()).getRecipeManager().getAllLocalRecipes();
 			}
 
+			// If search field is left blank, all local recipes are displayed
 			else {
 				recipes = ((RecipeApplication) getApplication()).getRecipeManager().searchLocalKeyword(keyword.getText().toString());
 			}
