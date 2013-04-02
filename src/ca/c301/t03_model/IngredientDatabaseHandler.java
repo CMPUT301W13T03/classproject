@@ -78,7 +78,26 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
         insertStmt.executeInsert();
         db.close();
     }
+    
+    public Ingredient getIngredient(String name) {
+    	
+    	Ingredient ingredient = new Ingredient();
+    	
+        String selectQuery = "SELECT " + INGREDIENT + " FROM " + TABLE_INGREDIENTS + " WHERE " + KEY_NAME + " LIKE '" + name + "'";
      
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+     
+        if (cursor.moveToFirst()) {
+        	ingredient = (Ingredient) SerializeHandler.deserializeObject(cursor.getBlob(0));
+        }
+        else {
+        	return null;
+        }
+     
+        return ingredient;
+	}
+    
     /**
      * To get all ingredients in the Virtual Pantry
      * 
@@ -90,7 +109,7 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
     	
         String selectQuery = "SELECT " + INGREDIENT + " FROM " + TABLE_INGREDIENTS;
      
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
      
         if (cursor.moveToFirst()) {
@@ -114,7 +133,7 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
     	
         String selectQuery = "SELECT " + KEY_NAME + " FROM " + TABLE_INGREDIENTS;
      
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
      
         if (cursor.moveToFirst()) {
