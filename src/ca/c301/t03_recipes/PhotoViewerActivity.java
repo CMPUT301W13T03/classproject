@@ -21,6 +21,7 @@ import ca.c301.t03_model.RecipePhoto;
 
 /**
  * Activity used to view a recipe's photos
+ * Source: http://mobisoftinfotech.com/android-gallery-widget-example-and-tutorial/
  */
 public class PhotoViewerActivity extends Activity {
 
