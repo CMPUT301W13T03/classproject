@@ -36,13 +36,19 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	//one test.
 	@Test
 	public void testPublishRecipe() throws IllegalStateException, IOException{
-		Recipe recipe = new Recipe();
+		Recipe recipe = new Recipe("Name","Instructions");
+		recipe.addIngredient(new Ingredient("Ingredient"));
+		RecipeManager manager = new RecipeManager(getActivity());
+
+		manager.publishRecipeToWeb(recipe);
+/*		Recipe recipe = new Recipe();
 		recipe.setName("Cup of Water");
 		Ingredient water = new Ingredient("Water");
 		recipe.addIngredient(water);
 		recipe.setInstructions("Put it in a cup, you idiot.");
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe);
+		*/
 		//Added a rest because instantly grabbing a recipe without waiting for the storage of one throws an error.
 		try {
 			Thread.sleep(1000);
