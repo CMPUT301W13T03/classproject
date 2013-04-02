@@ -300,5 +300,11 @@ public class Recipe implements Serializable{
 		recipePhoto.add(photo);
 		
 	}
+	/**
+	 * Only used for testing
+	 */
+	public void setHasPhoto () {
+		hasPhoto = true;
+	}
 
 }

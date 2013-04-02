@@ -366,7 +366,7 @@ public class RecipeManager {
 		ArrayList<Recipe> output = new ArrayList<Recipe>();
 
 		for (int i = 0; i < recipes.size(); i++) {
-			if (!recipes.get(i).getRecipePhoto().isEmpty()) {
+			if (recipes.get(i).hasPhoto()) {
 				output.add(recipes.get(i));
 			}
 		}
