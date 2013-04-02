@@ -2,6 +2,7 @@ package ca.c301.t03_recipes;
 
 import java.util.ArrayList;
 
+import ca.c301.t03_exceptions.FullFileException;
 import ca.c301.t03_model.Camera;
 import ca.c301.t03_model.Ingredient;
 import ca.c301.t03_model.DisplayConverter;
@@ -103,7 +104,12 @@ public class IngredientListActivity extends Activity {
 			if(resultCode == RESULT_OK){
 
 				if (data.getIntExtra("del", 0) == 1) {
-					((RecipeApplication) getApplication()).getRecipeManager().deleteIngredient(data.getStringExtra("name"));
+					try {
+						((RecipeApplication) getApplication()).getRecipeManager().deleteIngredient(data.getStringExtra("name"));
+					} catch (FullFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				else {			        
 			        Ingredient ingredient = new Ingredient();
@@ -114,10 +120,20 @@ public class IngredientListActivity extends Activity {
 			        if (((RecipeApplication) getApplication()).getRecipeManager().getIngredientCount(ingredient.getName()) == 0) {
 			        
 			        	if (data.getIntExtra("type", 0) == 0) {
-			        		((RecipeApplication) getApplication()).getRecipeManager().addIngredient(ingredient);
+			        		try {
+								((RecipeApplication) getApplication()).getRecipeManager().addIngredient(ingredient);
+							} catch (FullFileException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 			        	}
 			        	else {
-			        		((RecipeApplication) getApplication()).getRecipeManager().updateIngredient(ingredient);
+			        		try {
+								((RecipeApplication) getApplication()).getRecipeManager().updateIngredient(ingredient);
+							} catch (FullFileException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 			        	}
 			        }
 			        else {

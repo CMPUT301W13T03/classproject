@@ -1,6 +1,7 @@
 package ca.c301.t03_recipes.test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,114 +18,131 @@ import ca.c301.t03_recipes.MainActivity;
  * Tests dealing specifically with Ingredients.
  */
 public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivity>{
-	private final static String TEST_FILE_NAME = "ingredients_test_file";
-
-	DataManager dataManager;
-	RecipeManager manager;
-	Ingredient ingredient;	
 	
 	public IngredientsTest()
 	{
 		super(MainActivity.class);
 	}
 	
-	//Test creating a recipe and adding it to local storage.
+	//Test creating an ingredient and adding it to local storage.
 	@Test
 	public void testCreateIngredient(){
-		Recipe recipe = new Recipe("Name", "Instructions");
+		Ingredient ingredient = new Ingredient();
 		RecipeManager manager = new RecipeManager(getActivity());
 
-		int count = manager.getCount(recipe.getId());
+		ingredient.setName("name");
+		ingredient.setAmount(1.0);
+		ingredient.setUnitOfMeasurement("g");
+		
+		int count = manager.getIngredientCount(ingredient.getName());
 			
 		try {
-			manager.saveRecipe(recipe);
+			manager.addIngredient(ingredient);
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		assertEquals(count + 1,manager.getCount(recipe.getId()));
+		assertEquals(count + 1,manager.getIngredientCount(ingredient.getName()));
 			
 		try {
-			manager.deleteLocallySavedRecipeById(recipe.getId());
+			manager.deleteIngredient(ingredient.getName());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 		
-	//Test retrieving a recipe already in local storage.
+	//Test retrieving an ingredient already in local storage.
 	@Test
-	public void testRetrieveRecipe() {
-		Recipe recipe = new Recipe("Name", "Instructions");
+	public void testRetrieveIngredient() {
+		Ingredient ingredient = new Ingredient();
 		RecipeManager manager = new RecipeManager(getActivity());
 
+		ingredient.setName("name");
+		ingredient.setAmount(1.0);
+		ingredient.setUnitOfMeasurement("g");
+		
+		int count = manager.getIngredientCount(ingredient.getName());
+			
 		try {
-			manager.saveRecipe(recipe);
+			manager.addIngredient(ingredient);
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Recipe retrievedRecipe = manager.getLocallySavedRecipeById(recipe.getId());
+		
+		ArrayList<Ingredient> retrievedIngredient = manager.getAllIngredients();
 
-		// Check same recipe is returned.
-		assertEquals(retrievedRecipe.getId(),recipe.getId());
-		assertEquals(retrievedRecipe.getName(),recipe.getName());
-		assertEquals(retrievedRecipe.getInstructions(),recipe.getInstructions());
+		// Check same ingredient is returned.
+		assertEquals(retrievedIngredient.get(0).getName(),ingredient.getName());
+		assertEquals(retrievedIngredient.get(0).getAmount(),ingredient.getAmount());
+		assertEquals(retrievedIngredient.get(0).getUnitOfMeasurement(),ingredient.getUnitOfMeasurement());
 			
 		try {
-			manager.deleteLocallySavedRecipeById(retrievedRecipe.getId());
+			manager.deleteIngredient(retrievedIngredient.get(0).getName());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	//Test to make sure a recipe can be deleted from local storage.
+	//Test to make sure an ingredient can be deleted from local storage.
 	@Test
-	public void testDeleteRecipe() throws IllegalStateException, IOException{
-		Recipe recipe = new Recipe("Name","Instructions");
-
+	public void testDeleteIngredient() throws IllegalStateException, IOException{
+		Ingredient ingredient = new Ingredient();
 		RecipeManager manager = new RecipeManager(getActivity());
+
+		ingredient.setName("name");
+		ingredient.setAmount(1.0);
+		ingredient.setUnitOfMeasurement("g");
+		
 		try {
-			manager.saveRecipe(recipe);
-			manager.deleteLocallySavedRecipeById(recipe.getId());
+			manager.addIngredient(ingredient);
+			manager.deleteIngredient(ingredient.getName());
 		} catch (FullFileException e) {
 			e.printStackTrace();
 		}
-		assertNull(manager.getLocallySavedRecipeById(recipe.getId()));
-			
-
-
+		assertEquals(manager.getIngredientCount(ingredient.getName()), 0);
 	}
-	//Test to make sure multiple recipes can be saved and retrieved.
+	//Test to make sure multiple ingredients can be saved and retrieved.
 	@Test
 	public void testSaveAndRetrieveFromMany(){
-		Recipe recipe0 = new Recipe("Name0", "Instructions0");
-		Recipe recipe1 = new Recipe("Name1", "Instructions1");
-		recipe1.setId(recipe1.getId() + 5);
-		Recipe recipe2 = new Recipe("Name2", "Instructions2");
-		recipe2.setId(recipe2.getId() + 10);
+		Ingredient ingredient0 = new Ingredient();
+		Ingredient ingredient1 = new Ingredient();
+		Ingredient ingredient2 = new Ingredient();
+		
+		ingredient0.setName("ingredient0");
+		ingredient0.setAmount(0.0);
+		ingredient0.setUnitOfMeasurement("g");
+		
+		ingredient0.setName("ingredient1");
+		ingredient0.setAmount(1.0);
+		ingredient0.setUnitOfMeasurement("g");
+		
+		ingredient0.setName("ingredient2");
+		ingredient0.setAmount(2.0);
+		ingredient0.setUnitOfMeasurement("g");
 			
 		RecipeManager manager = new RecipeManager(getActivity());
 
 		try {
-			manager.saveRecipe(recipe0);
-			manager.saveRecipe(recipe1);
-			manager.saveRecipe(recipe2);
+			manager.addIngredient(ingredient0);
+			manager.addIngredient(ingredient1);
+			manager.addIngredient(ingredient2);
 		} catch (FullFileException e) {
 			e.printStackTrace();
 		}
 
-		Recipe retrievedRecipe = manager.getLocallySavedRecipeById(recipe1.getId());
+		ArrayList<Ingredient> retrievedIngredient = manager.getAllIngredients();
 			
-		assertEquals(retrievedRecipe.getId(),recipe1.getId());
-		assertEquals(retrievedRecipe.getName(),recipe1.getName());
-		assertEquals(retrievedRecipe.getInstructions(),recipe1.getInstructions());
+		assertEquals(retrievedIngredient.get(1).getName(),ingredient1.getName());
+		assertEquals(retrievedIngredient.get(1).getAmount(),ingredient1.getAmount());
+		assertEquals(retrievedIngredient.get(1).getUnitOfMeasurement(),ingredient1.getUnitOfMeasurement());
 			
 		try {
-			manager.deleteLocallySavedRecipeById(recipe0.getId());
-			manager.deleteLocallySavedRecipeById(recipe1.getId());
-			manager.deleteLocallySavedRecipeById(recipe2.getId());
+			manager.deleteIngredient(ingredient0.getName());
+			manager.deleteIngredient(ingredient1.getName());
+			manager.deleteIngredient(ingredient2.getName());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

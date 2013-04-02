@@ -210,7 +210,7 @@ public class RecipeManager {
 	 * @param ingredient
 	 * 				Is the ingredient to add
 	 */
-	public void addIngredient(Ingredient ingredient) {
+	public void addIngredient(Ingredient ingredient) throws FullFileException {
 		dataManager.getIngredientDatabase().addIngredient(ingredient);
 	}
 
@@ -230,7 +230,7 @@ public class RecipeManager {
 	 * @param name
 	 * 				Is the name of the ingredient to delete
 	 */
-	public void deleteIngredient(String name) {
+	public void deleteIngredient(String name) throws FullFileException {
 		dataManager.getIngredientDatabase().deleteIngredient(name);
 	}
 
@@ -252,7 +252,7 @@ public class RecipeManager {
 	 * @param ingredient
 	 * 				The ingredient to update
 	 */
-	public void updateIngredient(Ingredient ingredient) {
+	public void updateIngredient(Ingredient ingredient) throws FullFileException {
 		dataManager.getIngredientDatabase().updateIngredient(ingredient);
 	}
 
