@@ -103,11 +103,8 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 			fail("Full file exception");
 			e.printStackTrace();
 		}
-
+		
 		Recipe savedRecipe = manager.getLocallySavedRecipeById(recipe.getId());
-		assertNotNull(savedRecipe);
-		assertEquals(savedRecipe.getName(),"Name");
-		assertEquals(savedRecipe.getInstructions(),"Instructions");
 		
 		try {
 			manager.deleteLocallySavedRecipeById(recipe.getId());
@@ -115,6 +112,10 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		assertNotNull(savedRecipe);
+		assertEquals(savedRecipe.getName(),"Name");
+		assertEquals(savedRecipe.getInstructions(),"Instructions");
 
 	}
 	//Test to see if a web recipe can be retrieved by its name.

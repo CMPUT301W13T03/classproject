@@ -40,7 +40,7 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			e.printStackTrace();
 		}
 
-		assertEquals(count + 1,manager.getCount(recipe.getId()));
+		int finalCount = manager.getCount(recipe.getId());
 		
 		try {
 			manager.deleteLocallySavedRecipeById(recipe.getId());
@@ -48,6 +48,8 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		assertEquals(count + 1,finalCount);
 	}
 	
 	//Test retrieving a recipe already in local storage.
@@ -64,17 +66,17 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		}
 		Recipe retrievedRecipe = manager.getLocallySavedRecipeById(recipe.getId());
 
-		// Check same recipe is returned.
-		assertEquals(retrievedRecipe.getId(),recipe.getId());
-		assertEquals(retrievedRecipe.getName(),recipe.getName());
-		assertEquals(retrievedRecipe.getInstructions(),recipe.getInstructions());
-		
 		try {
 			manager.deleteLocallySavedRecipeById(retrievedRecipe.getId());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Check same recipe is returned.
+		assertEquals(retrievedRecipe.getId(),recipe.getId());
+		assertEquals(retrievedRecipe.getName(),recipe.getName());
+		assertEquals(retrievedRecipe.getInstructions(),recipe.getInstructions());
 	}
 	//Test to make sure a recipe can be deleted from local storage.
 	@Test
@@ -107,17 +109,17 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			}
 			Recipe retrievedRecipe = manager.getLocallySavedRecipeById(recipe2.getId());
 
-			// Check same recipe is returned.
-			assertEquals(retrievedRecipe.getId(),recipe2.getId());
-			assertEquals(retrievedRecipe.getName(),recipe2.getName());
-			assertEquals(retrievedRecipe.getInstructions(),recipe2.getInstructions());
-			
 			try {
 				manager.deleteLocallySavedRecipeById(recipe2.getId());
 			} catch (FullFileException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			// Check same recipe is returned.
+			assertEquals(retrievedRecipe.getId(),recipe2.getId());
+			assertEquals(retrievedRecipe.getName(),recipe2.getName());
+			assertEquals(retrievedRecipe.getInstructions(),recipe2.getInstructions());
 		}
 	//Test to make sure multiple recipes can be saved and retrieved.
 	@Test
@@ -140,10 +142,6 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 
 		Recipe retrievedRecipe = manager.getLocallySavedRecipeById(recipe1.getId());
 		
-		assertEquals(retrievedRecipe.getId(),recipe1.getId());
-		assertEquals(retrievedRecipe.getName(),recipe1.getName());
-		assertEquals(retrievedRecipe.getInstructions(),recipe1.getInstructions());
-		
 		try {
 			manager.deleteLocallySavedRecipeById(recipe0.getId());
 			manager.deleteLocallySavedRecipeById(recipe1.getId());
@@ -152,6 +150,10 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		assertEquals(retrievedRecipe.getId(),recipe1.getId());
+		assertEquals(retrievedRecipe.getName(),recipe1.getName());
+		assertEquals(retrievedRecipe.getInstructions(),recipe1.getInstructions());
 	}
 	
 }

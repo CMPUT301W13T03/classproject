@@ -43,14 +43,16 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 			e.printStackTrace();
 		}
 
-		assertEquals(count + 1,manager.getIngredientCount(ingredient.getName()));
-			
+		int finalCount = manager.getIngredientCount(ingredient.getName());
+		
 		try {
 			manager.deleteIngredient(ingredient.getName());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		assertEquals(count + 1,finalCount);
 	}
 		
 	//Test retrieving an ingredient already in local storage.
@@ -74,17 +76,17 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		
 		Ingredient retrievedIngredient = manager.getIngredient(ingredient.getName());
 
-		// Check same ingredient is returned.
-		assertEquals(retrievedIngredient.getName(),ingredient.getName());
-		assertEquals(retrievedIngredient.getAmount(),ingredient.getAmount());
-		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient.getUnitOfMeasurement());
-			
 		try {
 			manager.deleteIngredient(retrievedIngredient.getName());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Check same ingredient is returned.
+		assertEquals(retrievedIngredient.getName(),ingredient.getName());
+		assertEquals(retrievedIngredient.getAmount(),ingredient.getAmount());
+		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient.getUnitOfMeasurement());
 	}
 	//Test to make sure an ingredient can be deleted from local storage.
 	@Test
@@ -130,16 +132,16 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		}
 		Ingredient retrievedIngredient = manager.getIngredient(ingredient2.getName());
 
-		assertEquals(retrievedIngredient.getName(),ingredient2.getName());
-		assertEquals(retrievedIngredient.getAmount(),ingredient2.getAmount());
-		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient2.getUnitOfMeasurement());
-				
 		try {
-			manager.deleteIngredient(ingredient2.getName());
+			manager.deleteIngredient(retrievedIngredient.getName());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		assertEquals(retrievedIngredient.getName(),ingredient2.getName());
+		assertEquals(retrievedIngredient.getAmount(),ingredient2.getAmount());
+		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient2.getUnitOfMeasurement());
 	}
 	//Test to make sure multiple ingredients can be saved and retrieved.
 	@Test
@@ -172,11 +174,6 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 
 		Ingredient retrievedIngredient = manager.getIngredient(ingredient1.getName());
 
-		// Check same ingredient is returned.
-		assertEquals(retrievedIngredient.getName(),ingredient1.getName());
-		assertEquals(retrievedIngredient.getAmount(),ingredient1.getAmount());
-		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient1.getUnitOfMeasurement());
-			
 		try {
 			manager.deleteIngredient(ingredient0.getName());
 			manager.deleteIngredient(ingredient1.getName());
@@ -185,6 +182,11 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Check same ingredient is returned.
+		assertEquals(retrievedIngredient.getName(),ingredient1.getName());
+		assertEquals(retrievedIngredient.getAmount(),ingredient1.getAmount());
+		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient1.getUnitOfMeasurement());
 	}
 	
 }
