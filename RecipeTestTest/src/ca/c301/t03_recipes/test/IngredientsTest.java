@@ -104,6 +104,44 @@ public class IngredientsTest extends ActivityInstrumentationTestCase2<MainActivi
 		}
 		assertNull(manager.getIngredient(ingredient.getName()));
 	}
+	//Test creating an ingredient and adding it to local storage.
+	@Test
+	public void testEditIngredient(){
+		Ingredient ingredient = new Ingredient();
+		Ingredient ingredient2 = new Ingredient();
+		RecipeManager manager = new RecipeManager(getActivity());
+
+		ingredient.setName("TESTname");
+		ingredient.setAmount(1.0);
+		ingredient.setUnitOfMeasurement("g");
+		
+		ingredient2.setName("TESTname2");
+		ingredient2.setAmount(2.0);
+		ingredient2.setUnitOfMeasurement("mg");
+			
+		int count = manager.getIngredientCount(ingredient.getName());
+				
+		try {
+			manager.addIngredient(ingredient);
+			manager.updateIngredient(ingredient2, ingredient.getName());
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Ingredient retrievedIngredient = manager.getIngredient(ingredient2.getName());
+
+		assertEquals(retrievedIngredient.getName(),ingredient2.getName());
+		assertEquals(retrievedIngredient.getAmount(),ingredient2.getAmount());
+		assertEquals(retrievedIngredient.getUnitOfMeasurement(),ingredient2.getUnitOfMeasurement());
+				
+		try {
+			manager.deleteIngredient(ingredient.getName());
+			manager.deleteIngredient(ingredient2.getName());
+		} catch (FullFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	//Test to make sure multiple ingredients can be saved and retrieved.
 	@Test
 	public void testSaveAndRetrieveFromMany(){

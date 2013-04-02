@@ -129,7 +129,7 @@ public class IngredientListActivity extends Activity {
 			        	}
 			        	else {
 			        		try {
-								((RecipeApplication) getApplication()).getRecipeManager().updateIngredient(ingredient);
+								((RecipeApplication) getApplication()).getRecipeManager().updateIngredient(ingredient, ingredients.get(data.getIntExtra("index", 0)).getName());
 							} catch (FullFileException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

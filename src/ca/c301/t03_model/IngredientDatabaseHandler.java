@@ -172,8 +172,8 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
      * @param ingredient
      * 				The ingredient to update
      */
-    public void updateIngredient(Ingredient ingredient) {
-    	deleteIngredient(ingredient.getName());
+    public void updateIngredient(Ingredient ingredient, String name) {
+    	deleteIngredient(name);
     	addIngredient(ingredient);
 	}
     

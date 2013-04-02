@@ -256,8 +256,8 @@ public class RecipeManager {
 	 * @param ingredient
 	 * 				The ingredient to update
 	 */
-	public void updateIngredient(Ingredient ingredient) throws FullFileException {
-		dataManager.getIngredientDatabase().updateIngredient(ingredient);
+	public void updateIngredient(Ingredient ingredient, String name) throws FullFileException {
+		dataManager.getIngredientDatabase().updateIngredient(ingredient, name);
 	}
 
 	/**
