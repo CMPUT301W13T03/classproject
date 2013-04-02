@@ -37,9 +37,15 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	@Test
 	public void testPublishRecipe() throws IllegalStateException, IOException{
 		Recipe recipe = new Recipe("Name","Instructions");
-		recipe.addIngredient(new Ingredient("Ingredient"));
+		Ingredient water = new Ingredient("Water");
+		water.setId(0);
+		water.setUnitOfMeasurement("g");
+		water.setAmount(10);
+		recipe.addIngredient(water);
+		
 		RecipeManager manager = new RecipeManager(getActivity());
 
+		
 		manager.publishRecipeToWeb(recipe);
 /*		Recipe recipe = new Recipe();
 		recipe.setName("Cup of Water");
