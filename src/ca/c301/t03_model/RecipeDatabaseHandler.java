@@ -156,7 +156,7 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
 	}
 
     /**
-     * To update a recipe in the database, it first deletes it, then readds it
+     * To update a recipe in the database, it first deletes it, then re-adds it
      * 
      * @param recipe
      * 					Is the recipe to update
@@ -179,6 +179,14 @@ public class RecipeDatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
     
+    /**
+     * To get a count of the number of recipes in the database which have a given ID
+     * 
+     * @param id
+     * 				The ID of the recipe to count
+     * @return
+     * 				The count of recipes
+     */
     public int getRecipeCount(int id) {
         String countQuery = "SELECT  * FROM " + TABLE_RECIPES + " WHERE " + KEY_ID + " = " + id;
         SQLiteDatabase db = this.getReadableDatabase();

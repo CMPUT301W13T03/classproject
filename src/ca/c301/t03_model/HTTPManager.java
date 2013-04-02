@@ -105,6 +105,8 @@ public class HTTPManager{
 	 * 
 	 * @param id
 	 * 				Is the ID of the recipe to be retrieved
+	 * @param URL
+	 * 				Is the URL where the recipe is to be retrieved from
 	 * @return
 	 * 				The recipe which has the given ID
 	 */
@@ -143,6 +145,8 @@ public class HTTPManager{
 	 * 
 	 * @param recipe
 	 * 				Is the recipe to get the images
+	 * @param IMGURL
+	 * 				Is the URL used for retrieving the images
 	 * @param IMGURL
 	 * 				Is the URL to retrieve from
 	 */
@@ -184,6 +188,8 @@ public class HTTPManager{
 	 * 
 	 * @param str
 	 * 				Provided keyword for search
+	 * @param URL
+	 * 				Is the URL where searching occurs
 	 * @return
 	 * 				Matching recipes stored in an ArrayList of recipes
 	 * @throws ClientProtocolException

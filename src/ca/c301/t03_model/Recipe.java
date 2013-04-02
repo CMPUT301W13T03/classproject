@@ -60,18 +60,21 @@ public class Recipe implements Serializable{
 	}
 	
 	/**
-	 * To generate an ID for a recipe based on the current time
+	 * To generate an ID for a recipe based on current time, returns it as an int
 	 * 
 	 * @return
-	 * 				The ID based on current time
+	 * 				The ID based on current time as an int
 	 */
 	private int generateID() {
 		String tempID = generateIDString();
 		return Integer.parseInt(tempID);
 	}
+	
 	/**
-	 * Generates an ID for a recipe as a String.
-	 * @return ID as a string
+	 * To generate an ID for a recipe based on current time, returns it as a String
+	 * 
+	 * @return
+	 * 				The ID based on current time as a String
 	 */
 	private String generateIDString(){
 		String tempID = "";
@@ -82,10 +85,10 @@ public class Recipe implements Serializable{
 		tempID = tempID.concat(Integer.toString(cal.get(Calendar.MILLISECOND)));
 		return tempID;
 	}
+	
 	/**
 	 * To attach the photo from a given file to a given recipe
 	 * 
-
 	 * @param f
 	 * 				The file which contains the photo to attach
 	 */

@@ -79,6 +79,14 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
     
+    /**
+     * To return an ingredient with a given name from the Virtual Pantry, returns null if not found
+     * 
+     * @param name
+     * 				Is the ingredient name to find
+     * @return
+     * 				The ingredient if found, or null otherwise
+     */
     public Ingredient getIngredient(String name) {
     	
     	Ingredient ingredient = new Ingredient();
@@ -171,6 +179,8 @@ public class IngredientDatabaseHandler extends SQLiteOpenHelper {
      * 
      * @param ingredient
      * 				The ingredient to update
+     * @param name
+     * 				The name of the ingredient
      */
     public void updateIngredient(Ingredient ingredient, String name) {
     	deleteIngredient(name);

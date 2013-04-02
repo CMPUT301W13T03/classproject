@@ -49,7 +49,7 @@ public class RecipeManager {
 		this.dataManager = dataManager;
 	}
 
-	/**
+	/*
 	 * Constructor that doesn't initialize dataManager, this
 	 * should probably only be used for testing.
 	 */
@@ -67,7 +67,8 @@ public class RecipeManager {
 	// like that, since we don't
 	// want to pull the entire list every time ideally. Need to look closer at
 	// the webservice stuff
-	/**
+	
+	/*
 	 * Getter of web recipes - NOT IMPLEMENTED
 	 * @return
 	 */
@@ -118,7 +119,6 @@ public class RecipeManager {
 	 * 
 	 * @param recipe
 	 * 				Is the recipe to be saved
-	 * @param c Is the Android context
 	 * @throws FullFileException
 	 */
 	public void saveRecipe(Recipe recipe) throws FullFileException {
@@ -126,14 +126,10 @@ public class RecipeManager {
 	}
 
 	/**
-	 * To set a given recipe with a given ID
+	 * To update a given recipe in the database
 	 * 
-	 * @param id
-	 * 				Is the ID that new recipe is to be set at
 	 * @param recipe
 	 * 				Is the recipe to be set
-	 * @param c
-	 * 				Is the application context
 	 * @throws FullFileException
 	 */
 	public void setRecipe(Recipe recipe) throws FullFileException {
@@ -147,6 +143,8 @@ public class RecipeManager {
 	 * 				Is the email address to send the recipe to
 	 * @param recipe
 	 * 				Is the recipe to be emailed
+	 * @param c
+	 * 				Is the Android context
 	 */
 	public void emailRecipe(String emailAddress, Recipe recipe, Context c) {
 		EmailHandler emailer = new EmailHandler();
@@ -156,6 +154,8 @@ public class RecipeManager {
 	/**
 	 * To get a locally saved recipe with a given id
 	 * 
+	 * @param id
+	 * 				The ID of the recipe to retrieve
 	 * @return
 	 * 				The local recipe with the given id
 	 */
@@ -198,6 +198,11 @@ public class RecipeManager {
 
 	/**
 	 * To take a photo for a recipe with a given id
+	 * 
+	 * @param a
+	 * 				Is the activity where the photo is being taken
+	 * @return
+	 * 				The file where the photo is saved
 	 */
 	public File takePhotoForRecipe(Activity a) {
 		Camera camera = new Camera();
@@ -214,6 +219,14 @@ public class RecipeManager {
 		dataManager.getIngredientDatabase().addIngredient(ingredient);
 	}
 
+	/**
+	 * To get an ingredient from the Virtual Pantry by a given name
+	 * 
+	 * @param name
+	 * 				The name of the ingredient to retrieve
+	 * @return
+	 * 				The ingredient from the Virtual Pantry
+	 */
 	public Ingredient getIngredient(String name) {
 		return dataManager.getIngredientDatabase().getIngredient(name);
 	}
@@ -255,6 +268,8 @@ public class RecipeManager {
 	 * 
 	 * @param ingredient
 	 * 				The ingredient to update
+	 * @param name
+	 * 				The name of the ingredient to update
 	 */
 	public void updateIngredient(Ingredient ingredient, String name) throws FullFileException {
 		dataManager.getIngredientDatabase().updateIngredient(ingredient, name);
@@ -320,9 +335,12 @@ public class RecipeManager {
 		return output;
 	}
 	/**
-	 * Checks to see if the ingredient is in the pantry.
+	 * Checks to see if the ingredient is in the Virtual Pantry
+	 * 
 	 * @param ingredient
-	 * @return true if the ingredient is in the pantry.
+	 * 				The ingredient to check in the Virtual Pantry
+	 * @return
+	 * 				Boolean, true if the ingredient is in the pantry
 	 */
 	private boolean isInPantry(Ingredient ingredient)
 	{
@@ -371,6 +389,14 @@ public class RecipeManager {
 		return camera.generateBitmap(i, j);
 	}
 	
+	/**
+	 * To get a count of the number of recipes with a given ID in the recipe database
+	 * 
+	 * @param id
+	 * 				The ID of the recipe to get a count for
+	 * @return
+	 * 				The number of recipes in the database
+	 */
 	public int getCount(int id) {
 		return dataManager.getRecipeDatabase().getRecipeCount(id);
 	}
