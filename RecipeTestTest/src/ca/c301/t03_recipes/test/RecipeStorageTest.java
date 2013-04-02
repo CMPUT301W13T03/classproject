@@ -20,7 +20,6 @@ import ca.c301.t03_recipes.MainActivity;
  */
 public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
-	private final static String TEST_FILE_NAME = "recipe_test_file";
 	public RecipeStorageTest() {
 		super(MainActivity.class);
 		// TODO Auto-generated constructor stub
@@ -32,20 +31,19 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 		Recipe recipe = new Recipe("Name", "Instructions");
 		RecipeManager manager = new RecipeManager(getActivity());
 
+		int count = manager.getCount(recipe.getId());
+		
 		try {
 			manager.saveRecipe(recipe);
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Recipe savedRecipe = manager.getLocallySavedRecipeById(recipe.getId());
 
-		assertEquals(savedRecipe.getId(),recipe.getId());
-		assertEquals(savedRecipe.getName(),recipe.getName());
-		assertEquals(savedRecipe.getInstructions(),recipe.getInstructions());
+		assertEquals(count + 1,manager.getCount(recipe.getId()));
 		
 		try {
-			manager.deleteLocallySavedRecipeById(savedRecipe.getId());
+			manager.deleteLocallySavedRecipeById(recipe.getId());
 		} catch (FullFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,40 +127,5 @@ public class RecipeStorageTest extends ActivityInstrumentationTestCase2<MainActi
 			e.printStackTrace();
 		}
 	}
-	
-	/*
-	
-	//Test to make sure that exception that is thrown when there is no room to save is thrown correctly.
-	@Test
-	public void testFullFile(){
-		boolean exceptionCaught = false;
-		Recipe recipe = new Recipe("Name", "Instructions");
-		FullDataManager dataManager = new FullDataManager(getActivity(),TEST_FILE_NAME);
-		RecipeManager manager = new RecipeManager(dataManager);
-		try {
-			manager.saveRecipe(recipe, getActivity());
-		} catch (FullFileException e) {
-			exceptionCaught = true;
-		}
-		assertTrue(exceptionCaught);
-	}
-	//Mock object for faking a full file exception.
-	class FullDataManager extends DataManager{
-		public FullDataManager(Context c) {
-			super(c);
-		}
-		public FullDataManager(MainActivity activity, String testFileName) {
-			super(activity,testFileName);
-		}
-		private static final long serialVersionUID = 3710965338088278651L;
-		@Override
-		protected boolean exceptionIsFullFile(IOException e)
-		{
-			return true;
-		}
-
-	}
-
-	*/
 	
 }
