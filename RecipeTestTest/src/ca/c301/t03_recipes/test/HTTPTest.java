@@ -24,13 +24,6 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 	public HTTPTest(){
 		super(MainActivity.class);
 	}
-
-	//Delete testfile before each test.
-	@Before
-	public void setUp() throws Exception{
-		//Delete any existing file.
-		getActivity().getFileStreamPath(TEST_FILE_NAME).delete();
-	}
 	
 	//Test to make sure publishing and retrieving recipes from the web works correctly. Must be done all in
 	//one test.
@@ -47,14 +40,15 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
 		
 		manager.publishRecipeToWeb(recipe);
+		
 /*		Recipe recipe = new Recipe();
 		recipe.setName("Cup of Water");
 		Ingredient water = new Ingredient("Water");
 		recipe.addIngredient(water);
 		recipe.setInstructions("Put it in a cup, you idiot.");
 		RecipeManager manager = new RecipeManager(getActivity());
-		manager.publishRecipeToWeb(recipe);
-		*/
+		manager.publishRecipeToWeb(recipe);*/
+		
 		//Added a rest because instantly grabbing a recipe without waiting for the storage of one throws an error.
 		try {
 			Thread.sleep(1000);
@@ -68,10 +62,9 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		assertEquals(webRecipe.getIngredient(0).getAmount(), recipe.getIngredient(0).getAmount());
 	}
 	// Test to make sure error where the application is unable to connect to the internet is handled properly.
-	public void testBadConnection(){
-		//TODO Need more implementation info (mock object?)
+	@Test
+	public void testZBadConnection(){
 		Recipe recipe = new Recipe ("Burger", "Cook a Burger");
-		recipe.setId(93732);
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.setURL("http://asdoiahspdsdfewdfssdfvcvergedfsljkl.softwareprocess.es:8080/testing/recipezzz/");
 		try {
@@ -90,7 +83,17 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		RecipeManager manager = new RecipeManager(getActivity());
 
 		manager.publishRecipeToWeb(recipe);
+		
+		//Added a rest because instantly grabbing a recipe without waiting for the storage of one throws an error.
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Recipe downloadedRecipe = manager.getSingleRecipe(recipe.getId());
+		
 		try {
 			manager.saveRecipe(downloadedRecipe);
 		} catch (FullFileException e) {
@@ -117,13 +120,18 @@ public class HTTPTest extends ActivityInstrumentationTestCase2<MainActivity>{
 		Recipe recipe0 = new Recipe("Salad", "Put some vegetables in a bowl.");
 		Recipe recipe1 = new Recipe("Cookie", "Make a cookie");
 		Recipe recipe2 = new Recipe("Cookies", "Who makes one cookie? Idiot.");
-		recipe0.setId(0);
-		recipe1.setId(1);
-		recipe2.setId(2);
+
 		RecipeManager manager = new RecipeManager(getActivity());
 		manager.publishRecipeToWeb(recipe1);
 		manager.publishRecipeToWeb(recipe0);
 		manager.publishRecipeToWeb(recipe2);
+		//Added a rest because instantly grabbing a recipe without waiting for the storage of one throws an error.
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Recipe> results = manager.searchWebForRecipeByName("Cookie");
 		assertNotNull(results);
 		assertTrue(findRecipeInList(results, recipe1));
